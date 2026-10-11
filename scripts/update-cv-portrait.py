@@ -3,20 +3,22 @@
 
 Requires pypdf[image] and Pillow. All paths and output encoding options are CLI
 arguments. The original portrait is copied unchanged; WebP only resamples and
-encodes it. The PDF image keeps its existing square size and circular clip.
+encodes it. The PDF image keeps its existing pixel frame, position and clip,
+and every other object keeps the exact bytes its producer wrote.
 """
 
 import argparse
 import hashlib
 import io
 import json
+import re
 import shutil
 from pathlib import Path
 
 import PIL
 import pypdf
 from PIL import Image, ImageOps, ImageStat
-from pypdf import PdfReader, PdfWriter
+from pypdf import PdfReader
 
 
 def digest(data):
@@ -66,6 +68,45 @@ def document_snapshot(reader):
     }
 
 
+def splice_stream(pdf, reader, reference, data):
+    """Swap one stream's data and move the cross-reference offsets after it.
+
+    A full rewrite re-serializes every string, which escapes the link
+    destinations that tests/contact.test.mjs reads from the raw bytes.
+    """
+    table = int(re.search(rb"startxref\s+(\d+)\s+%%EOF\s*$", pdf).group(1))
+    if reader.xref_objStm or pdf[table : table + 4] != b"xref":
+        raise ValueError("Expected a classic cross-reference table")
+    offset = reader.xref[reference.generation][reference.idnum]
+    header = re.compile(
+        rb"\d+ \d+ obj\s*<<.*?/Length (\d+)\b.*?>>\s*stream\r?\n", re.DOTALL
+    ).match(pdf, offset, offset + 2048)
+    if header is None:
+        raise ValueError("Expected a stream with a direct /Length")
+    end = header.end() + int(header.group(1))
+    if re.match(rb"\s*endstream", pdf[end : end + 16]) is None:
+        raise ValueError("Stream /Length does not reach its endstream")
+    body = (
+        pdf[: header.start(1)]
+        + str(len(data)).encode()
+        + pdf[header.end(1) : header.end()]
+        + data
+        + pdf[end:table]
+    )
+    shift = len(body) - table
+
+    def moved(entry):
+        position = int(entry.group())
+        return b"%010d" % (position + shift if position > offset else position)
+
+    trailer = pdf.index(b"trailer", table)
+    entries = re.sub(rb"\d{10}(?= \d{5} n)", moved, pdf[table:trailer])
+    tail = re.sub(
+        rb"startxref\s+\d+", b"startxref\n%d" % (table + shift), pdf[trailer:]
+    )
+    return body + entries + tail
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--portrait", type=Path, required=True)
@@ -95,17 +136,15 @@ def main():
     with Image.open(io.BytesIO(source_bytes)) as opened:
         portrait = ImageOps.exif_transpose(opened).convert("RGB")
 
-    writer = PdfWriter(clone_from=reader)
-    writer.pdf_header = reader.pdf_header
-    current_image = writer.pages[args.image_page - 1].images[args.image_index]
+    current_image = reader.pages[args.image_page - 1].images[args.image_index]
     current_size = current_image.image.size
-    if current_size[0] != current_size[1]:
-        raise ValueError(
-            "Expected a square CV portrait; refusing to distort its geometry"
-        )
+    stored = current_image.indirect_reference.get_object()
+    if stored.get("/Filter") != "/DCTDecode" or current_image.image.mode != "RGB":
+        raise ValueError("Expected an RGB JPEG portrait; refusing another encoding")
 
-    # Fit the entire source inside the existing square. Sample the source's
-    # corner for technical side padding; no face, hair, lighting or color edits.
+    # Fit the entire source inside the existing frame, whatever its proportions,
+    # so the page draws it at the same place under the same clip. Sample the
+    # source's corner for technical padding; no face, hair, lighting or color edits.
     corner_size = max(1, min(portrait.size) // 20)
     background = tuple(
         round(channel)
@@ -120,15 +159,20 @@ def main():
         color=background,
         centering=(0.5, 0.5),
     )
-    current_image.replace(replacement, quality=args.pdf_quality, subsampling=0)
-    result = io.BytesIO()
-    writer.write(result)
-    new_pdf = result.getvalue()
-    after = document_snapshot(PdfReader(io.BytesIO(new_pdf)))
+    encoded = io.BytesIO()
+    replacement.save(encoded, format="JPEG", quality=args.pdf_quality, subsampling=0)
+    new_pdf = splice_stream(
+        original_pdf, reader, current_image.indirect_reference, encoded.getvalue()
+    )
+    rebuilt = PdfReader(io.BytesIO(new_pdf))
+    after = document_snapshot(rebuilt)
     if before != after:
         raise ValueError(
             "PDF text, page streams, geometry, annotations or metadata changed"
         )
+    embedded = rebuilt.pages[args.image_page - 1].images[args.image_index].image
+    if embedded.size != current_size:
+        raise ValueError("The embedded portrait no longer fills its frame")
 
     outputs = {}
     if args.original_copy:

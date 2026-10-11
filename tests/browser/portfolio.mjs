@@ -40,7 +40,7 @@ try {
       assert.equal(await page.locator('html').getAttribute('lang'), locale)
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)
       assert.equal(overflow, false, `No page overflow at ${width}px`)
-      assert.match(await page.locator('#top img').getAttribute('src'), /anthony-paquet-pitch\.jpg/)
+      assert.match(await page.locator('#top img').getAttribute('src'), /anthony-paquet-portrait\.webp/)
       assert.equal(await page.locator('#top img').evaluate(img => img.complete && img.naturalWidth > 0), true)
       // Personal-project names belong to #personal-projects only. The company
       // "Nota" legitimately heads #experience, so match its project card name.

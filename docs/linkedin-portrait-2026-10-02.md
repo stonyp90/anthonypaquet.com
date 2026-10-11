@@ -1,5 +1,8 @@
 # LinkedIn portrait framing — October 2, 2026
 
+> Superseded on October 11, 2026: the portrait of record is now the t-shirt
+> photograph, uploaded as is. See `portrait-evidence-2026-10-11.md`.
+
 Owner confirmed the request concerns LinkedIn's circular profile photograph.
 The output is a separate upload file; the website, CV and LinkedIn profile are
 not changed by this export.

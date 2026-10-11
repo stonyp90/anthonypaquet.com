@@ -1,5 +1,9 @@
 # Portrait du pitch et CV - preuves du 2 octobre 2026
 
+> Remplacé le 11 octobre 2026 : le portrait de référence est maintenant la photo
+> en t-shirt. Voir `portrait-evidence-2026-10-11.md`. Les fichiers nommés ici ont
+> été retirés du dépôt.
+
 ## Décision et provenance
 
 Le propriétaire demande de réutiliser la photo de son pitch deck, avec le teint

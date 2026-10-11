@@ -8,8 +8,8 @@ import { parseArgs } from 'node:util'
 import sharp from 'sharp'
 
 const { values } = parseArgs({ options: {
-  portrait: { type: 'string', default: 'public/images/anthony-paquet-pitch.jpg' },
-  mask: { type: 'string', default: 'public/images/anthony-paquet-cutout-mask.webp' },
+  portrait: { type: 'string', default: 'public/images/anthony-paquet-portrait.webp' },
+  mask: { type: 'string', default: 'public/images/anthony-paquet-portrait-mask.webp' },
   tokens: { type: 'string', default: 'app/globals.css' },
   'background-token': { type: 'string', default: '--color-paper' },
   side: { type: 'string', default: '1280' },

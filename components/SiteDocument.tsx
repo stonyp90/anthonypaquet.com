@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Playfair_Display, JetBrains_Mono } from 'next/font/google'
 import '@/app/globals.css'
+import { personalInfo, siteUrl } from '@/lib/data'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap', preload: true })
 const playfair = Playfair_Display({
@@ -156,6 +157,9 @@ export const metadata: Metadata = {
   classification: 'Professional Services',
 }
 
+// Structured data shows the hero portrait, so the site has one portrait of record.
+const portraitUrl = `${siteUrl}${personalInfo.photo}`
+
 // Person Schema - for knowledge graph
 const personSchema = {
   '@context': 'https://schema.org',
@@ -163,7 +167,7 @@ const personSchema = {
   '@id': 'https://www.anthonypaquet.com/#person',
   name: 'Anthony Paquet',
   url: 'https://www.anthonypaquet.com',
-  image: 'https://www.anthonypaquet.com/images/anthony-paquet-pitch.webp',
+  image: portraitUrl,
   jobTitle: 'AI & Cloud Security Architect',
   description: 'Independent AI & Cloud Architect specializing in FinOps (30 to 60% cost reduction), compliance (SOC 2, HIPAA, PCI-DSS), infrastructure security, and disaster recovery for Series A AI labs and growth-stage companies. Currently engaged with Bespoke Labs (Series A RL lab) and founder of Tablix Inc., a Quebec SaaS for legal-document extraction.',
   sameAs: [
@@ -261,7 +265,7 @@ const serviceSchema = {
   name: 'Anthony Paquet Cloud Consulting',
   description: 'Cloud security, FinOps, and compliance consulting for growth-stage companies. From 0→1 to enterprise scale.',
   url: 'https://www.anthonypaquet.com',
-  image: 'https://www.anthonypaquet.com/images/anthony-paquet-pitch.webp',
+  image: portraitUrl,
   areaServed: {
     '@type': 'Place',
     name: 'Worldwide (Remote)',

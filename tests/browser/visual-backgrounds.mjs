@@ -36,7 +36,7 @@ try {
       mask.src = getComputedStyle(el).maskImage.match(/url\("?(.*?)"?\)/)[1]
       await mask.decode()
     })
-    assert.match(await portrait.getAttribute('src'), /anthony-paquet-pitch\.jpg$/, 'The actual face uses the unchanged original photograph')
+    assert.match(await portrait.getAttribute('src'), /anthony-paquet-portrait\.webp$/, 'The actual face uses the unchanged original photograph')
     assert.equal(await page.locator('.hero-portrait-frame').count(), 0, 'No arch or photo frame')
     assert.match(await page.locator('.project-card--tablix img').getAttribute('src'), /\.svg$/, 'Tablix uses a transparent native SVG')
     await page.screenshot({ path: `tmp/browser/fr-${width}-transparent-hero.png` })
