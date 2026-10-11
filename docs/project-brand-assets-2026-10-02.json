@@ -92,6 +92,20 @@
         "transparentPixels": 32206,
         "opaquePixels": 76126
       }
+    },
+    {
+      "checkedAt": "2026-10-11",
+      "source": "Authored for this site, since no Lunorive logo file was available to copy. Glyph outlines come from Playfair Display Version 1.203 (SIL Open Font License 1.1), the site's display face, as next/font downloads it for this build: .next/static/media/eaead17c7dbfcd5d-s.p.woff2",
+      "output": "public/images/logos/lunorive-wordmark.svg",
+      "transformation": "Typographic wordmark: the product name set in Playfair Display instanced at wght 700 with fontTools 4.65.0, kerned with the font's own GPOS pairs (i+v -4, v+e -15 units) and tracked -0.01em like the site's brand name, converted to outlines in ink #1b1714 with a terminal period in accent #d4831f. Not the storefront's own lettering, and no product imagery",
+      "width": 517,
+      "height": 100,
+      "alpha": true,
+      "usage": "Active personal-project symbol",
+      "sourceSha256": "5d91eb5d522a03081946c44c8ca17c902230dfed5f0f9b5014262135d47b15b2",
+      "outputSha256": "0d54fe8e6345fe62bf9f2394fb0b5307062cfa91604e9b405d040d06aa06272f",
+      "sourceBytes": 38460,
+      "outputBytes": 5871
     }
   ]
 }

@@ -83,6 +83,16 @@ PLAYWRIGHT_MODULE=/Users/tony/Github/nota/node_modules/playwright/index.mjs \
 node scripts/grid-shot.mjs   # tmp/live/{en,fr}-projects-grid.png
 ```
 
+## Lunorive, October 11, 2026
+
+Owner instruction: show Lunorive, his newest product, as an output of the agent loop. Its card follows the shared pattern (a mark on the light card, a description, a signature line) with one difference: no outbound link, because no public URL for Lunorive is confirmed yet. `url` is optional in the catalog for that case, the adapter renders the link tile only when a URL exists, and `tests/projects.test.mjs` pins Lunorive's destination as absent so a guessed link cannot slip in. Add the official URL there once the domain exists.
+
+No Lunorive logo file was available to copy, so `public/images/logos/lunorive-wordmark.svg` is authored for this site, and the manifest says so: the product name set in Playfair Display Bold (the site's own display face) and converted to outlines, with the terminal period in the site's accent, like the site's brand name. It is a typographic stand-in, not the product's own lettering, and it shows no product imagery. Outlines rather than `<text>` because an `<img>` cannot use the page's web fonts. One sizing rule, `.project-card--lunorive .project-logo`, sets its height, and nothing re-themes the card.
+
+The signature line, "Keep the world close." / « Le monde, près de vous. », is the storefront's own tagline.
+
+Every index entry now carries its project id as an anchor, and a link to that anchor opens the entry: How I Work links to `#lunorive`. Side by side, the whole index scrolls into view so the details beside it are visible. Stacked, the entry itself does. The browser suite opens each entry before checking its mark, since the index shows one project at a time, and checks that the How I Work link opens Lunorive.
+
 ## Official guidance checked
 
 Actual installed versions: Next.js **15.5.9**, React **19.2.3**, TypeScript **5.9.3**, Node.js **22.16.0**, Sharp **0.34.5**. Existing package ranges remain unchanged by this feature.
@@ -99,4 +109,4 @@ Actual installed versions: Next.js **15.5.9**, React **19.2.3**, TypeScript **5.
 
 `node --test tests/projects.test.mjs` first failed with exit 1 before `lib/projects.ts` existed. Re-run that command for the current tally rather than trusting a number frozen here; a test added by a later change would make any count in this document stale. The suite covers both locale catalogs, official destinations, distinct IDs, the exact Ursly signature, localized descriptions and categories, readable local assets with positive dimensions, and the card parity rule recorded below. TypeScript transpilation in the test executes the data module; integrated type checking, lint, build and browser checks are separate release evidence.
 
-`npm run check` (lint, typecheck, unit tests, static export plus the sitemap postbuild) and `node tests/browser/portfolio.mjs` were both green for the October 2 feature and are green again for the October 6 card parity revision. The browser suite's pass criterion is its own `"failures": []` report; it covers the four-project count in JavaScript-disabled HTML and the absence of horizontal overflow at 1440, 390 and 320 px in both locales.
+`npm run check` (lint, typecheck, unit tests, static export plus the sitemap postbuild) and `node tests/browser/portfolio.mjs` were both green for the October 2 feature, again for the October 6 card parity revision, and again for the October 11 Lunorive card. The browser suite's pass criterion is its own `"failures": []` report; it covers the five-project count in JavaScript-disabled HTML and the absence of horizontal overflow at 1440, 390 and 320 px in both locales.

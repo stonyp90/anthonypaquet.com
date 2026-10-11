@@ -19,7 +19,7 @@ try {
     assert.equal(await staticPage.locator('#about > div').evaluate(el => getComputedStyle(el).opacity), '1', 'About must remain readable without JavaScript')
     const hiddenServices = await staticPage.locator('#services [style]').evaluateAll(elements => elements.filter(el => getComputedStyle(el).opacity === '0').length)
     assert.equal(hiddenServices, 0, 'Services must remain readable without JavaScript')
-    assert.equal(await staticPage.locator('.project-card').count(), 4, 'All four projects must be in exported HTML')
+    assert.equal(await staticPage.locator('.project-card').count(), 5, 'All five projects must be in exported HTML')
     assert.equal(await staticPage.locator('#personal-projects').count(), 1, 'One independent projects section')
     // Contact is by email. The exported document must carry the inbox and no
     // third-party booking page.
@@ -44,30 +44,49 @@ try {
       assert.equal(await page.locator('#top img').evaluate(img => img.complete && img.naturalWidth > 0), true)
       // Personal-project names belong to #personal-projects only. The company
       // "Nota" legitimately heads #experience, so match its project card name.
-      assert.doesNotMatch(await page.locator('#experience').textContent(), /GoNota|Tablix|Ursly|ScaleForged/)
+      assert.doesNotMatch(await page.locator('#experience').textContent(), /GoNota|Tablix|Ursly|ScaleForged|Lunorive/)
+      // How I Work names the product the loop shipped, and its link opens that
+      // project in the index, side by side or stacked.
+      await page.locator('#how-i-work a[href="#lunorive"]').click()
+      await page.waitForFunction(() => document.querySelector('#lunorive button')?.getAttribute('aria-expanded') === 'true')
+      assert.equal(await page.locator('.project-card--lunorive').isVisible(), true, 'The loop output link opens Lunorive')
       await page.locator('.site-nav a[href="#personal-projects"]').click()
       await page.locator('#personal-projects').scrollIntoViewIfNeeded()
       assert.equal(await page.locator('#personal-projects').evaluate(el => getComputedStyle(el.parentElement).opacity), '1')
+      // Every project with a public URL links out. Lunorive has none yet.
       assert.equal(await page.locator('.project-card a').count(), 4)
-      // Card images are lazy loaded, so each one must enter the viewport and
-      // finish its fetch before naturalWidth is meaningful.
-      for (const image of await page.locator('.project-card img').all()) {
+      // The index shows one project at a time, so open each entry, then wait
+      // for its mark to finish loading before naturalWidth is meaningful.
+      const projectTriggers = page.locator('#personal-projects .reveal-trigger')
+      const panels = page.locator('#personal-projects .project-card')
+      for (let index = 0; index < await projectTriggers.count(); index += 1) {
+        const trigger = projectTriggers.nth(index)
+        if (await trigger.getAttribute('aria-expanded') !== 'true') await trigger.click()
+        const image = panels.nth(index).locator('img')
         await image.scrollIntoViewIfNeeded()
         const loaded = await image.evaluate(async (img) => {
           try { await img.decode() } catch { /* measured below */ }
           return img.complete && img.naturalWidth > 0
         })
         assert.equal(loaded, true, `Brand image loaded: ${await image.getAttribute('src')}`)
+        const id = (await panels.nth(index).getAttribute('class')).match(/project-card--([\w-]+)/)[1]
+        await panels.nth(index).screenshot({ path: `${artifactDir}/${locale}-${width}-${id}.png` })
       }
       await page.screenshot({ path: `${artifactDir}/${locale}-${width}-projects.png` })
-      await page.locator('.project-card--ursly').screenshot({ path: `${artifactDir}/${locale}-${width}-ursly.png` })
       await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }))
       await page.screenshot({ path: `${artifactDir}/${locale}-${width}-hero.png` })
-      const toggle = page.locator('#experience button[aria-expanded]').first()
-      await toggle.focus()
-      const previous = await toggle.getAttribute('aria-expanded')
-      await toggle.press('Enter')
-      assert.notEqual(await toggle.getAttribute('aria-expanded'), previous, 'Experience works with keyboard')
+      // Side by side, the arrow keys move through the index and reveal as they
+      // go. Stacked, Enter opens and closes an entry in place.
+      const roles = page.locator('#experience .reveal-trigger')
+      await roles.first().focus()
+      if (width >= 1024) {
+        await roles.first().press('ArrowDown')
+        assert.equal(await roles.nth(1).getAttribute('aria-expanded'), 'true', 'Experience follows the arrow keys')
+      } else {
+        const previous = await roles.first().getAttribute('aria-expanded')
+        await roles.first().press('Enter')
+        assert.notEqual(await roles.first().getAttribute('aria-expanded'), previous, 'Experience works with keyboard')
+      }
       assert.equal(errors.length, 0, errors.join('\n'))
       checks.push(`${locale}: ${width}px, reduced motion, project links/images, keyboard, no console errors`)
       await context.close()

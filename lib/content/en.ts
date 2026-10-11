@@ -87,7 +87,7 @@ export const en = {
         businessTitle: 'The business runs in the loop too',
         business: [
           { title: 'Targeting', blurb: 'Agents post in communities and on social media to reach the right customers.' },
-          { title: 'Payment', blurb: 'Checkout and payments run on their own. A sale never waits on a person.' },
+          { title: 'Payment', blurb: 'The loop fully integrates Stripe into every product I sell. Checkout and payments run on their own. A sale never waits on a person.' },
           { title: 'Behavior', blurb: 'Every visit teaches the agent what makes people buy.' },
           { title: 'Improvement', blurb: 'Offers, pages, and spend keep adjusting so acquiring a customer costs less than the sale.' },
         ],
@@ -97,6 +97,18 @@ export const en = {
           { title: 'Hexagonal architecture', blurb: 'Ports and adapters keep every domain free of technology choices.' },
           { title: 'Tested domain by domain', blurb: 'Every business domain is covered by unit tests and behavior tests (BDD).' },
         ],
+        reviewTitle: 'The loop reviews itself',
+        review: [
+          { title: 'Scheduled tasks', blurb: 'I hand the work to models as scheduled tasks.' },
+          { title: 'Cross-validation', blurb: 'A hook starts another scheduled task, on a different model, to cross-validate each result.' },
+          { title: 'Dynamic review', blurb: 'Reviews run on their own, with no human intervention.' },
+        ],
+        output: {
+          title: 'Made by the loop',
+          name: 'Lunorive',
+          blurb: 'My newest product, created in this loop without human interaction: framed art prints of the places people love.',
+          cta: 'See Lunorive in my projects',
+        },
       },
     },
 

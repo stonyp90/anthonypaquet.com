@@ -431,7 +431,7 @@ export const fr: SiteContent = {
         businessTitle: 'L’entreprise aussi est dans la boucle',
         business: [
           { title: 'Targeting', blurb: 'Les agents publient dans les communautés et sur les réseaux sociaux pour rejoindre les bons clients.' },
-          { title: 'Paiement', blurb: 'Le checkout et les paiements roulent seuls. Une vente n’attend jamais un humain.' },
+          { title: 'Paiement', blurb: 'La boucle intègre entièrement Stripe à chaque produit que je vends. Le checkout et les paiements roulent seuls. Une vente n’attend jamais un humain.' },
           { title: 'Comportement', blurb: 'Chaque visite montre à l’agent ce qui pousse à l’achat.' },
           { title: 'Amélioration', blurb: 'Les offres, les pages et les dépenses s’ajustent sans cesse pour que l’acquisition d’un client coûte moins cher que la vente.' },
         ],
@@ -441,6 +441,18 @@ export const fr: SiteContent = {
           { title: 'Architecture hexagonale', blurb: 'Les ports and adapters isolent chaque domaine des choix technologiques.' },
           { title: 'Testé domaine par domaine', blurb: 'Chaque domaine d’affaires est couvert par des tests unitaires et des tests de comportement (BDD).' },
         ],
+        reviewTitle: 'La boucle se révise elle-même',
+        review: [
+          { title: 'Tâches planifiées', blurb: 'Je confie le travail aux modèles sous forme de tâches planifiées.' },
+          { title: 'Validation croisée', blurb: 'Un hook lance une deuxième tâche planifiée, sur un autre modèle, pour la validation croisée de chaque résultat.' },
+          { title: 'Révision dynamique', blurb: 'Les révisions se font d’elles-mêmes, sans intervention humaine.' },
+        ],
+        output: {
+          title: 'Fait par la boucle',
+          name: 'Lunorive',
+          blurb: 'Mon plus récent produit, créé dans cette boucle sans intervention humaine : des œuvres encadrées des lieux qu’on aime.',
+          cta: 'Voir Lunorive dans mes projets',
+        },
       },
     },
 

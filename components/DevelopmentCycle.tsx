@@ -11,6 +11,10 @@
 import { Mic, LockOpen, Repeat, Rocket } from 'lucide-react'
 import { IterationLoopSection, type LoopPhase } from '@/components/IterationLoop'
 import { useContent } from '@/components/LocaleProvider'
+import type { PersonalProject } from '@/lib/projects'
+
+/* The product the loop shipped. Its Personal projects entry opens from #lunorive. */
+const LOOP_OUTPUT: PersonalProject['id'] = 'lunorive'
 
 export default function DevelopmentCycle() {
   const c = useContent()
@@ -48,14 +52,36 @@ export default function DevelopmentCycle() {
 
 type Foundations = ReturnType<typeof useContent>['ui']['work']['foundations']
 
-/* What else runs in the loop (the business itself) and how it is built. */
+/* What else runs in the loop (the business itself), how it is built, how it
+   reviews itself, and what it has shipped. */
 function LoopFoundations({ foundations }: { foundations: Foundations }) {
   return (
     <div className="mt-16 border-t border-[var(--color-border)] pt-12 lg:mt-20">
       <p className="editorial-lead mb-10 max-w-3xl">{foundations.intro}</p>
-      <div className="grid gap-10 lg:grid-cols-2 lg:gap-20">
+      <div className="grid gap-10 lg:grid-cols-2 lg:gap-x-20 lg:gap-y-14">
         <FoundationList title={foundations.businessTitle} items={foundations.business} />
         <FoundationList title={foundations.buildTitle} items={foundations.build} />
+        <FoundationList title={foundations.reviewTitle} items={foundations.review} />
+        <LoopOutput output={foundations.output} />
+      </div>
+    </div>
+  )
+}
+
+function LoopOutput({ output }: { output: Foundations['output'] }) {
+  return (
+    <div>
+      <h3 className="editorial-eyebrow mb-4">{output.title}</h3>
+      <div className="stat-block loop-output">
+        <p className="v">
+          {output.name}
+          <span className="accent-text">.</span>
+        </p>
+        <p className="loop-output-blurb">{output.blurb}</p>
+        <a href={`#${LOOP_OUTPUT}`} className="link-arrow loop-output-link">
+          {output.cta}
+          <span aria-hidden="true">↓</span>
+        </a>
       </div>
     </div>
   )

@@ -1,9 +1,10 @@
 import type { Locale } from '@/lib/content'
 
 export type PersonalProject = {
-  id: 'gonota' | 'tablix' | 'ursly' | 'scaleforged'
+  id: 'gonota' | 'tablix' | 'ursly' | 'scaleforged' | 'lunorive'
   name: string
-  url: `https://${string}`
+  /** Official destination. Absent until the product has a confirmed public URL. */
+  url?: `https://${string}`
   category: string
   description: string
   slogan?: readonly string[]
@@ -44,6 +45,7 @@ const visuals = {
   tablix: { src: '/images/logos/tablix-personal.svg', width: 330, height: 330 },
   ursly: { src: '/images/logos/ursly-mark.svg', width: 240, height: 240 },
   scaleforged: { src: '/images/logos/scaleforged.svg', width: 24, height: 24 },
+  lunorive: { src: '/images/logos/lunorive-wordmark.svg', width: 517, height: 100 },
 } as const
 
 /** Independent product data; presentation and external navigation stay in adapters. */
@@ -74,6 +76,13 @@ const projects: Record<Locale, readonly PersonalProject[]> = {
       description: 'An independent studio building vertical SaaS platforms on a shared technical foundation.',
       visual: visuals.scaleforged,
     },
+    {
+      id: 'lunorive', name: 'Lunorive',
+      category: 'Art prints made by the agent loop',
+      description: 'Framed art prints of the places people love, from bridges and mountains to lakes and coastlines, drawn from real data. My agent loop creates the shop without human interaction, with checkout hosted by Stripe.',
+      slogan: ['Keep the world close.'],
+      visual: visuals.lunorive,
+    },
   ],
   fr: [
     {
@@ -100,6 +109,13 @@ const projects: Record<Locale, readonly PersonalProject[]> = {
       category: 'Studio venture indépendant',
       description: 'Un studio indépendant qui construit des plateformes SaaS verticales sur un socle technique commun.',
       visual: visuals.scaleforged,
+    },
+    {
+      id: 'lunorive', name: 'Lunorive',
+      category: 'Œuvres d’art créées par la boucle d’agents',
+      description: 'Des œuvres encadrées des lieux qu’on aime, des ponts et des montagnes aux lacs et aux côtes, tracées à partir de vraies données. Ma boucle d’agents crée la boutique sans intervention humaine, avec un paiement hébergé par Stripe.',
+      slogan: ['Le monde, près de vous.'],
+      visual: visuals.lunorive,
     },
   ],
 }

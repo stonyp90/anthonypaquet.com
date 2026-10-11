@@ -6,7 +6,8 @@ import { RevealIndex, Tile, type RevealEntry } from '@/components/RevealIndex'
 import { getPersonalProjects, personalProjectCopy } from '@/lib/projects'
 
 /* Ventures as an index: point at a project, focus it, or move with the arrow
-   keys, and its mark, story and link reveal one after another. */
+   keys, and its mark, story and link reveal one after another. A project
+   without a confirmed public URL shows no link. #<id> opens a project. */
 export default function PersonalProjects() {
   const locale = useLocale()
   const copy = personalProjectCopy[locale]
@@ -14,6 +15,7 @@ export default function PersonalProjects() {
 
   const entries: RevealEntry[] = projects.map((project) => ({
     key: project.id,
+    anchor: project.id,
     panelClassName: `project-card project-card--${project.id}`,
     head: (
       <span className="reveal-head-text">
@@ -44,18 +46,20 @@ export default function PersonalProjects() {
             ))}
           </Tile>
         )}
-        <Tile order={3}>
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="project-link"
-            aria-label={`${copy.visit} ${project.name}, ${copy.newTab}`}
-          >
-            {copy.visit}
-            <span aria-hidden="true">↗</span>
-          </a>
-        </Tile>
+        {project.url && (
+          <Tile order={3}>
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="project-link"
+              aria-label={`${copy.visit} ${project.name}, ${copy.newTab}`}
+            >
+              {copy.visit}
+              <span aria-hidden="true">↗</span>
+            </a>
+          </Tile>
+        )}
       </>
     ),
   }))

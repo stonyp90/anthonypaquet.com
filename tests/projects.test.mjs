@@ -12,14 +12,16 @@ const { getPersonalProjects, personalProjectCopy } = await import(
   `data:text/javascript;base64,${Buffer.from(compiled).toString('base64')}`
 )
 
-test('each locale exposes the four personal projects with their official destinations', () => {
+// Lunorive has no confirmed public URL yet, so it ships without a link rather
+// than a guessed one. Give it its official destination once the domain exists.
+test('each locale exposes the five personal projects with their official destinations', () => {
   for (const locale of ['en', 'fr']) {
     const projects = getPersonalProjects(locale)
-    assert.deepEqual(projects.map(({ name }) => name), ['GoNota', 'Tablix', 'Ursly', 'ScaleForged'])
+    assert.deepEqual(projects.map(({ name }) => name), ['GoNota', 'Tablix', 'Ursly', 'ScaleForged', 'Lunorive'])
     assert.deepEqual(projects.map(({ url }) => url), [
-      'https://gonota.ca', 'https://tablix.ca', 'https://ursly.io', 'https://scaleforged.io',
+      'https://gonota.ca', 'https://tablix.ca', 'https://ursly.io', 'https://scaleforged.io', undefined,
     ])
-    assert.equal(new Set(projects.map(({ id }) => id)).size, 4)
+    assert.equal(new Set(projects.map(({ id }) => id)).size, 5)
     assert.ok(personalProjectCopy[locale].heading)
   }
 })

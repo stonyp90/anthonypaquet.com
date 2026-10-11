@@ -6,7 +6,8 @@
    stay in view on the right. Pointing at an entry, focusing it, or moving with
    the arrow keys reveals it, and its tiles come in one after another.
    Narrow screens: the same markup reads as an accordion that opens in place.
-   Every entry and its details stay in the exported HTML.
+   Every entry and its details stay in the exported HTML. An entry with an
+   anchor also opens from a link to it elsewhere on the page (#lunorive).
    ========================================================================== */
 
 import {
@@ -23,6 +24,8 @@ import {
 
 export type RevealEntry = {
   key: string
+  /** Fragment that opens this entry from a link, without the leading #. */
+  anchor?: string
   /** What the index shows for the entry. */
   head: ReactNode
   /** The details, usually built from Tile elements. */
@@ -65,6 +68,7 @@ export function RevealIndex({
   const baseId = useId()
   const [active, setActive] = useState<number | null>(initial)
   const [wide, setWide] = useState(false)
+  const root = useRef<HTMLDivElement>(null)
   const triggers = useRef<(HTMLButtonElement | null)[]>([])
   const intent = useRef<number | undefined>(undefined)
   const pending = useRef<number | null>(null)
@@ -80,6 +84,28 @@ export function RevealIndex({
       window.clearTimeout(intent.current)
     }
   }, [])
+
+  // A link to an entry's anchor opens it, on arrival or from elsewhere on the page.
+  const anchors = entries.map((entry) => entry.anchor ?? '').join(' ')
+  useEffect(() => {
+    const list = anchors.split(' ')
+    const openFromHash = () => {
+      const target = window.location.hash.slice(1)
+      const index = target ? list.indexOf(target) : -1
+      if (index < 0) return
+      setActive(index)
+      // Side by side, show the whole index so the details beside it are in view
+      // (the sticky details cannot sit beside the last row). Stacked, the entry
+      // that closes above can move this one, so bring it back.
+      window.requestAnimationFrame(() => {
+        const element = window.matchMedia(WIDE).matches ? root.current : triggers.current[index]
+        element?.scrollIntoView({ block: 'start' })
+      })
+    }
+    openFromHash()
+    window.addEventListener('hashchange', openFromHash)
+    return () => window.removeEventListener('hashchange', openFromHash)
+  }, [anchors])
 
   // Side by side, one entry is always on show. Stacked, everything can close.
   const shown = wide ? (active ?? initial) : active
@@ -137,6 +163,7 @@ export function RevealIndex({
 
   return (
     <div
+      ref={root}
       className={`reveal-index ${className}`}
       style={{ '--count': entries.length } as CSSProperties}
     >
@@ -146,7 +173,7 @@ export function RevealIndex({
         const panelId = `${baseId}-details-${index}`
         return (
           <Fragment key={entry.key}>
-            <h3 className="reveal-head" style={{ '--row': index + 1 } as CSSProperties}>
+            <h3 id={entry.anchor} className="reveal-head" style={{ '--row': index + 1 } as CSSProperties}>
               <button
                 ref={(node) => {
                   triggers.current[index] = node

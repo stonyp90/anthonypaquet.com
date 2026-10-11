@@ -417,6 +417,11 @@ section { position: relative; z-index: 1; }
 }
 @keyframes reveal-tile { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
+/* How I Work: the product the loop shipped */
+.loop-output { padding: 1rem 1.25rem 1.25rem; }
+.loop-output-blurb { margin-top: 0.5rem; max-width: 34rem; font-size: 0.95rem; line-height: 1.55; color: var(--color-ink-soft); text-wrap: pretty; }
+.loop-output-link { margin-top: 1rem; }
+
 /* Experience details */
 .role-intro { margin-bottom: 1rem; }
 @media (max-width: 1023px) { .role-title { display: none; } }
@@ -447,6 +452,7 @@ section { position: relative; z-index: 1; }
 .project-visual { display: flex; align-items: center; justify-content: center; height: 13rem; padding: 2rem; border: 1px solid var(--color-border); border-radius: 0.5rem; background: var(--color-paper-soft); }
 .project-logo { width: auto; max-width: 70%; height: auto; max-height: 5rem; object-fit: contain; }
 .project-card--tablix .project-logo, .project-card--scaleforged .project-logo, .project-card--ursly .project-logo { height: 4.5rem; }
+.project-card--lunorive .project-logo { height: 2.5rem; }
 .project-description { max-width: 60ch; margin: 1.5rem 0 0; color: var(--color-ink-soft); font-size: 1.05rem; line-height: 1.65; }
 .project-slogan { display: flex; flex-wrap: wrap; gap: 0.35rem 1rem; margin: 1rem 0 0; font-size: 1rem; font-weight: 500; color: var(--color-ink); }
 .project-link { display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 1.5rem; padding: 0.5rem 0; font-size: 0.9rem; font-weight: 500; border-bottom: 1px solid var(--color-border-strong); color: var(--color-accent-text); transition: color 200ms var(--ease-smooth), border-color 200ms var(--ease-smooth); }
