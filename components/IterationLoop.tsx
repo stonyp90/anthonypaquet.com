@@ -53,6 +53,8 @@ type IterationLoopSectionProps = {
   loopHint: string;
   /** One-line affordance shown until the user interacts, e.g. "Explorez chaque étape". */
   interactHint: string;
+  /** Optional content rendered under the loop, inside the same section. */
+  footer?: ReactNode;
 };
 
 /* ----------------------------- Ring geometry ------------------------------ */
@@ -137,6 +139,7 @@ export function IterationLoopSection({
   centerLabel,
   loopHint,
   interactHint,
+  footer,
 }: IterationLoopSectionProps) {
   const reduce = useMotionPreference();
   const sectionRef = useRef<HTMLElement>(null);
@@ -386,6 +389,7 @@ export function IterationLoopSection({
             )}
           </div>
         </div>
+        {footer}
       </div>
     </section>
   );

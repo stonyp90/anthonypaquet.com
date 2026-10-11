@@ -426,6 +426,22 @@ export const fr: SiteContent = {
       centerLabel: 'Résultats d’affaires',
       loopHint: 'boucle la plus courte',
       interactHint: 'Survolez ou touchez une étape',
+      foundations: {
+        intro: 'La technologie est prête : la boucle couvre toute l’entreprise, pas seulement le code.',
+        businessTitle: 'L’entreprise aussi est dans la boucle',
+        business: [
+          { title: 'Targeting', blurb: 'Les agents publient dans les communautés et sur les réseaux sociaux pour rejoindre les bons clients.' },
+          { title: 'Paiement', blurb: 'Le checkout et les paiements roulent seuls. Une vente n’attend jamais un humain.' },
+          { title: 'Comportement', blurb: 'Chaque visite montre à l’agent ce qui pousse à l’achat.' },
+          { title: 'Amélioration', blurb: 'Les offres, les pages et les dépenses s’ajustent sans cesse pour que l’acquisition d’un client coûte moins cher que la vente.' },
+        ],
+        buildTitle: 'Bâti sur le domaine d’affaires, pas sur les outils',
+        build: [
+          { title: 'Agnostique de la technologie', blurb: 'Le domaine d’affaires mène. Chaque outil, modèle ou cloud est remplaçable.' },
+          { title: 'Architecture hexagonale', blurb: 'Les ports and adapters isolent chaque domaine des choix technologiques.' },
+          { title: 'Testé domaine par domaine', blurb: 'Chaque domaine d’affaires est couvert par des tests unitaires et des tests de comportement (BDD).' },
+        ],
+      },
     },
 
     services: {

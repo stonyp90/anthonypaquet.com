@@ -41,6 +41,37 @@ export default function DevelopmentCycle() {
       centerLabel={c.ui.work.centerLabel}
       loopHint={c.ui.work.loopHint}
       interactHint={c.ui.work.interactHint}
+      footer={<LoopFoundations foundations={c.ui.work.foundations} />}
     />
+  )
+}
+
+type Foundations = ReturnType<typeof useContent>['ui']['work']['foundations']
+
+/* What else runs in the loop (the business itself) and how it is built. */
+function LoopFoundations({ foundations }: { foundations: Foundations }) {
+  return (
+    <div className="mt-16 border-t border-[var(--color-border)] pt-12 lg:mt-20">
+      <p className="editorial-lead mb-10 max-w-3xl">{foundations.intro}</p>
+      <div className="grid gap-10 lg:grid-cols-2 lg:gap-20">
+        <FoundationList title={foundations.businessTitle} items={foundations.business} />
+        <FoundationList title={foundations.buildTitle} items={foundations.build} />
+      </div>
+    </div>
+  )
+}
+
+function FoundationList({ title, items }: { title: string; items: Foundations['business'] }) {
+  return (
+    <div>
+      <h3 className="editorial-eyebrow mb-4">{title}</h3>
+      <ul className="clean-list">
+        {items.map((item) => (
+          <li key={item.title}>
+            <strong>{item.title}</strong>. {item.blurb}
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }

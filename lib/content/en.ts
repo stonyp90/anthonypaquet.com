@@ -82,6 +82,22 @@ export const en = {
       centerLabel: 'Business outcomes',
       loopHint: 'shortest loop',
       interactHint: 'Hover or tap a step',
+      foundations: {
+        intro: 'The technology is ready, so the loop runs the whole business, not only the code.',
+        businessTitle: 'The business runs in the loop too',
+        business: [
+          { title: 'Targeting', blurb: 'Agents post in communities and on social media to reach the right customers.' },
+          { title: 'Payment', blurb: 'Checkout and payments run on their own. A sale never waits on a person.' },
+          { title: 'Behavior', blurb: 'Every visit teaches the agent what makes people buy.' },
+          { title: 'Improvement', blurb: 'Offers, pages, and spend keep adjusting so acquiring a customer costs less than the sale.' },
+        ],
+        buildTitle: 'Built on the business, not the tools',
+        build: [
+          { title: 'Technology agnostic', blurb: 'The business domain leads. Any tool, model, or cloud can be swapped.' },
+          { title: 'Hexagonal architecture', blurb: 'Ports and adapters keep every domain free of technology choices.' },
+          { title: 'Tested domain by domain', blurb: 'Every business domain is covered by unit tests and behavior tests (BDD).' },
+        ],
+      },
     },
 
     services: {
