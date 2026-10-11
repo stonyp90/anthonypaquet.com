@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useContent } from '@/components/LocaleProvider'
+import { rememberLocale } from '@/lib/localeCookie'
 
 export default function SiteNavigation() {
   const c = useContent()
@@ -18,7 +19,13 @@ export default function SiteNavigation() {
         </nav>
         <div className="locale-switch">
           <span aria-current="true">{locale.label}</span>
-          <Link href={locale.otherPath} aria-label={locale.switchTo}>{locale.otherLabel}</Link>
+          <Link
+            href={locale.otherPath}
+            aria-label={locale.switchTo}
+            onClick={() => rememberLocale(locale.code === 'en' ? 'fr' : 'en')}
+          >
+            {locale.otherLabel}
+          </Link>
         </div>
       </div>
     </header>
