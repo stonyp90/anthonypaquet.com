@@ -20,14 +20,14 @@ const serviceFr: Record<string, { name: string; outcome: string }> = {
       'Un cadre complet de gouvernance des coûts avec des contrôles automatisés, qui livre généralement de 30 à 60 % d’économies et une réduction marquée des dépenses annuelles.',
   },
   'compute-cost-engineering': {
-    name: 'Optimisation des coûts de calcul',
+    name: 'Optimisation des coûts de compute',
     outcome:
-      'Réduisez de 35 à 55 % le coût des charges GPU, HPC et de calcul intensif, sans sacrifier la performance ni la vélocité des équipes.',
+      'Réduisez de 35 à 55 % le coût des workloads GPU, HPC et compute intensif, sans sacrifier la performance ni la vélocité des équipes.',
   },
   'compliance-acceleration': {
     name: 'Accélération de la conformité',
     outcome:
-      'Prêt pour l’audit en semaines, pas en mois. Contrôles techniques en place pour SOC 2, ISO 27001, HIPAA ou PCI-DSS, avec surveillance continue.',
+      'Prêt pour l’audit en semaines, pas en mois. Contrôles techniques en place pour SOC 2, ISO 27001, HIPAA ou PCI-DSS, avec monitoring continu.',
   },
   'data-security-governance': {
     name: 'Sécurité et gouvernance des données',
@@ -40,19 +40,19 @@ const serviceFr: Record<string, { name: string; outcome: string }> = {
       'Renforcez votre infrastructure cloud avec une architecture Zero Trust, un accès réseau sécurisé et une défense en profondeur qui protège vos actifs des menaces actuelles.',
   },
   'ai-infrastructure': {
-    name: 'Infrastructure IA et plateformes d’évaluation',
+    name: 'Infrastructure IA et plateformes d’évals',
     outcome:
-      'Une infrastructure prête pour la production destinée aux agents IA et à l’évaluation de modèles. Bacs à sable isolés, contrôle des coûts GPU et l’ingénierie de plateforme derrière des produits d’IA fiables.',
+      'Une infrastructure prête pour la production destinée aux agents IA et aux évals de modèles. Sandboxes isolés, contrôle des coûts GPU et l’ingénierie de plateforme derrière des produits d’IA fiables.',
   },
   'ai-llm-security': {
     name: 'Sécurité et gouvernance IA / LLM',
     outcome:
-      'Livrez l’IA en production en toute sécurité avec des passerelles LLM, la protection des renseignements personnels, des contrôles d’injection de requêtes et les pistes d’audit qui passent SOC 2.',
+      'Livrez l’IA en production en toute sécurité avec des gateways LLM, la protection des renseignements personnels, des protections contre le prompt injection et les pistes d’audit qui passent SOC 2.',
   },
   'ai-adoption': {
     name: 'Adoption de l’IA et ingénierie d’agents',
     outcome:
-      'Transformez l’IA d’une démo en un système fiable grâce à la conception d’agents, aux évaluations et à l’outillage qui font bouger de vrais résultats d’affaires.',
+      'Transformez l’IA d’une démo en un système fiable grâce à la conception d’agents, aux évals et à l’outillage qui font bouger de vrais résultats d’affaires.',
   },
   'platform-foundation': {
     name: 'Fondation de plateforme cloud',
@@ -137,7 +137,7 @@ const expFr: ExpFr[] = [
       'Bâti et dirigé une équipe de 10 ingénieurs SRE, DevOps et Full-Stack séniors pour déployer des solutions cloud de calibre entreprise.',
       'Obtenu les certifications SOC 2 Type II et TPN Gold en 6 mois en mettant en place des workflows d’automatisation de la conformité assistés par l’IA.',
       'Optimisé les opérations multicloud, réduisant les coûts de 60 % sur AWS, GCP et Azure grâce aux pratiques FinOps et à des améliorations d’architecture.',
-      'Mis en place des flux camera-to-cloud, améliorant l’ingestion de contenu et la collaboration de plus de 50 équipes créatives réparties.',
+      'Mis en place des workflows camera-to-cloud, améliorant l’ingestion de contenu et la collaboration de plus de 50 équipes créatives réparties.',
       'Accéléré la vitesse d’itération de 40 %, renforcé la sécurité des systèmes et accru la résilience en adoptant l’IA et les pratiques DevSecOps.',
     ],
   },
@@ -146,13 +146,13 @@ const expFr: ExpFr[] = [
     position: 'Ingénieur cloud DevOps sénior',
     location: 'Québec, Canada',
     description:
-      'Dirigé le DevOps pour les sites web et la diffusion en continu. Déployé des outils, analysé des métriques, mis en place une infrastructure évolutive et renforcé la sécurité, assurant résilience et fiabilité.',
+      'Dirigé le DevOps pour les sites web et le streaming. Déployé des outils, analysé des métriques, mis en place une infrastructure évolutive et renforcé la sécurité, assurant résilience et fiabilité.',
     outcomes: [
-      { metric: 'Streaming', description: 'Diffusion web et en continu' },
+      { metric: 'Streaming', description: 'Web et streaming' },
       { metric: 'Sécurité', description: 'Infrastructure renforcée et résiliente' },
     ],
     achievements: [
-      'Dirigé le DevOps des sites web et des plateformes de diffusion de Vidéotron.',
+      'Dirigé le DevOps des sites web et des plateformes de streaming de Vidéotron.',
       'Déployé des outils et analysé des métriques pour améliorer la livraison et la fiabilité.',
       'Mis en place une infrastructure évolutive et renforcé la sécurité pour la résilience.',
     ],
@@ -208,13 +208,13 @@ const expFr: ExpFr[] = [
     position: 'Développeur logiciel cloud',
     location: 'Québec, Canada',
     description:
-      'Développé le PAX Divesting Assistant, une application libre-service qui améliore l’efficacité aux points de contrôle d’aéroport en laissant les passagers gérer eux-mêmes le dévestiaire. Cela réduit la dépendance aux agents et augmente l’automatisation, améliorant la sécurité et les opérations.',
+      'Développé le PAX Divesting Assistant, une application libre-service qui améliore l’efficacité aux points de contrôle d’aéroport en laissant les passagers gérer eux-mêmes le divesting. Cela réduit la dépendance aux agents et augmente l’automatisation, améliorant la sécurité et les opérations.',
     outcomes: [
       { metric: 'Libre-service', description: 'PAX Divesting Assistant' },
       { metric: 'Aéroports', description: 'Efficacité aux points de contrôle' },
     ],
     achievements: [
-      'Développé le PAX Divesting Assistant, une application libre-service qui laisse les passagers gérer eux-mêmes le dévestiaire.',
+      'Développé le PAX Divesting Assistant, une application libre-service qui laisse les passagers gérer eux-mêmes le divesting.',
       'Réduit la dépendance aux agents et accru l’automatisation, améliorant la sécurité et les opérations aux points de contrôle.',
     ],
   },
@@ -264,7 +264,7 @@ const expFr: ExpFr[] = [
   },
   {
     key: 'Logicale::Co-Founder and CTO',
-    position: 'Cofondateur et directeur technique',
+    position: 'Cofondateur et CTO',
     location: 'Québec, Canada',
     description: 'Entreprise de logiciels concevant et développant des applications web sur mesure.',
     outcomes: [{ metric: 'Cofondateur', description: 'Applications web sur mesure' }],
@@ -277,6 +277,39 @@ const expFr: ExpFr[] = [
 
 const expFrByKey = new Map(expFr.map((e) => [e.key, e]))
 
+/* Tags: plain words are translated, industry terms stay as the industry says
+   them (FinOps, DevOps, Streaming, Disaster Recovery, Developer Experience…). */
+const tagFr: Record<string, string> = {
+  Quebec: 'Québec',
+  Founder: 'Fondateur',
+  'AI Agents': 'Agents IA',
+  'Series A': 'Série A',
+  'RL Lab': 'Labo RL',
+  'Cloud Security': 'Sécurité cloud',
+  'Media Security': 'Sécurité média',
+  Telecommunications: 'Télécommunications',
+  Security: 'Sécurité',
+  'Financial Services': 'Services financiers',
+  'Multi-Region': 'Multirégion',
+  'Real-time Data': 'Données en temps réel',
+  Integrations: 'Intégrations',
+  'Smart Access': 'Accès intelligent',
+  'Airport Systems': 'Systèmes aéroportuaires',
+  Automation: 'Automatisation',
+  'Distributed Systems': 'Systèmes distribués',
+  'Global Deployment': 'Déploiement mondial',
+  Healthcare: 'Santé',
+  'Real-time': 'Temps réel',
+  Defense: 'Défense',
+  Government: 'Gouvernement',
+  'Secure Delivery': 'Livraison sécurisée',
+  'Web Development': 'Développement web',
+}
+
+const viaFr: Record<string, string> = {
+  'a.team (contract)': 'a.team (contractuel)',
+}
+
 const experiences = en.experiences.map((e) => {
   const key = `${e.company}::${e.position}`
   const fr = expFrByKey.get(key)
@@ -285,13 +318,15 @@ const experiences = en.experiences.map((e) => {
   }
   return {
     ...e,
+    ...(e.via ? { via: viaFr[e.via] ?? e.via } : {}),
     position: fr.position,
     location: fr.location,
     description: fr.description,
     outcomes: fr.outcomes,
     achievements: fr.achievements,
+    tags: e.tags.map((tag) => tagFr[tag] ?? tag),
   }
-})
+}) as typeof en.experiences
 
 const staleOverrides = expFr.filter(
   (fr) => !en.experiences.some((e) => `${e.company}::${e.position}` === fr.key),
@@ -308,7 +343,7 @@ const personalInfo = {
   title: 'Architecte IA et Cloud | Leader en ingénierie',
   subtitle: 'FinOps • Sécurité et conformité • De 0→1 à l’échelle',
   tagline:
-    'J’aide les CTO et les leaders techniques à réduire leurs coûts cloud de 30 à 60 %, à réussir les audits SOC 2 et HIPAA en quelques semaines, et à bâtir une infrastructure qui évolue sans ralentir leur feuille de route.',
+    'J’aide les CTO et les leaders techniques à réduire leurs coûts cloud de 30 à 60 %, à réussir les audits SOC 2 et HIPAA en quelques semaines, et à bâtir une infrastructure qui évolue sans ralentir leur roadmap.',
   summary:
     'Je conçois et fais évoluer des systèmes cloud sécurisés et économiques, et je mène les produits de 0→1 jusqu’à l’échelle entreprise. Un travail FinOps approfondi réduit les coûts cloud, et une approche DevSecOps aide les équipes à livrer plus vite sans sacrifier la sécurité. Résultat, une infrastructure résiliente qui tient sous une charge réelle et garde les coûts bas.',
   philosophy:
@@ -377,19 +412,19 @@ export const fr: SiteContent = {
 
     work: {
       sectionName: 'Ma façon de travailler',
-      headingLead: 'Des résultats par',
-      headingAccent: 'courtes boucles',
-      lead: 'Je livre d’abord une première version simple et utile, puis je mesure comment elle est utilisée dans la vraie vie. J’écoute le client, je retire ce qui rate et j’affine ce qui fonctionne. Chaque boucle rapproche le travail du résultat dont vous avez réellement besoin.',
-      pull: 'Le client écrit la feuille de route.',
+      headingLead: 'L’agent dans la',
+      headingAccent: 'boucle',
+      lead: 'Je conçois le cycle de développement (SDLC) pour que l’agent itère par lui-même. Je retire tous les bloqueurs pour que chaque itération soit la plus courte possible, et l’agent lance ses propres sous-boucles quand une tâche le demande. Le travail part de ma voix, sur mon téléphone, et s’exécute sur des ressources cloud. Les autres sens suivront. Même approche pour le go-to-market, l’ingénierie et l’infrastructure.',
+      pull: 'S’asseoir pour taper un prompt, c’est déjà une étape de trop.',
       phases: [
-        { tag: '01', title: 'Livrer', blurb: 'Mettre vite une première version simple et utile entre de vraies mains.' },
-        { tag: '02', title: 'Mesurer', blurb: 'Observer l’usage réel et les chiffres qui comptent.' },
-        { tag: '03', title: 'Écouter', blurb: 'S’asseoir avec le client et comprendre ce qui aide vraiment.' },
-        { tag: '04', title: 'Itérer', blurb: 'Retirer ce qui rate, affiner ce qui fonctionne, livrer de nouveau.' },
+        { tag: '01', title: 'Dicter', blurb: 'Une note vocale sur mon téléphone lance le travail. Pas de bureau, pas de prompt manuel.' },
+        { tag: '02', title: 'Débloquer', blurb: 'Accès, tests et previews sont branchés pour que rien n’attende un humain.' },
+        { tag: '03', title: 'Itérer', blurb: 'L’agent bâtit, teste et corrige par lui-même, et lance des sous-boucles au besoin.' },
+        { tag: '04', title: 'Livrer', blurb: 'Livrer, mesurer l’usage réel et repartir avec une boucle encore plus courte.' },
       ],
       centerEyebrow: 'La cible',
-      centerLabel: 'Adéquation produit-marché',
-      loopHint: 'boucle continue',
+      centerLabel: 'Résultats d’affaires',
+      loopHint: 'boucle la plus courte',
       interactHint: 'Survolez ou touchez une étape',
     },
 
@@ -402,15 +437,15 @@ export const fr: SiteContent = {
       categories: {
         ai: {
           title: 'IA',
-          subtitle: 'Infrastructure IA • Sécurité LLM • Agents et évaluations',
+          subtitle: 'Infrastructure IA • Sécurité LLM • Agents et évals',
           description:
-            'Faites passer l’IA du prototype au fiable. Infrastructure, sécurité, évaluations et ingénierie d’agents pour les équipes qui livrent de vrais produits d’IA.',
+            'Faites passer l’IA du prototype au fiable. Infrastructure, sécurité, évals et ingénierie d’agents pour les équipes qui livrent de vrais produits d’IA.',
         },
         architecture: {
           title: 'Architecture',
           subtitle: 'Modernisation • Plateforme • DevSecOps',
           description:
-            'Du legacy au moderne. Bâtir des fondations évolutives, éliminer la dette technique et accélérer votre feuille de route.',
+            'Du legacy au moderne. Bâtir des fondations évolutives, éliminer la dette technique et accélérer votre roadmap.',
         },
         finops: {
           title: 'FinOps',

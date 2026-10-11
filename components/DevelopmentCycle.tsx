@@ -4,10 +4,11 @@
    DEVELOPMENT CYCLE — how Anthony delivers, animated.
    Renders the EXACT ScaleForged iteration-loop animation
    (components/IterationLoop.tsx, copied verbatim) with this site's English
-   content. Phase icons match ScaleForged (lucide-react).
+   content. Phase icons (lucide-react) follow the agent loop: speak, unblock,
+   iterate, ship.
    ========================================================================== */
 
-import { Rocket, Gauge, MessageSquare, Repeat } from 'lucide-react'
+import { Mic, LockOpen, Repeat, Rocket } from 'lucide-react'
 import { IterationLoopSection, type LoopPhase } from '@/components/IterationLoop'
 import { useContent } from '@/components/LocaleProvider'
 
@@ -15,7 +16,7 @@ export default function DevelopmentCycle() {
   const c = useContent()
 
   /* Exactly four phases, ordered clockwise starting at the top. */
-  const phaseIcons = [Rocket, Gauge, MessageSquare, Repeat]
+  const phaseIcons = [Mic, LockOpen, Repeat, Rocket]
   const PHASES = phaseIcons.map((icon, i) => ({
     tag: c.ui.work.phases[i].tag,
     title: c.ui.work.phases[i].title,
