@@ -94,7 +94,7 @@ const expFr: ExpFr[] = [
     position: 'Fondateur et orchestrateur IA',
     location: 'Québec, Canada',
     description:
-      'Nota est une place de marché pour les actes notariés au Québec. Le client publie son acte, sa date et son prix, et les notaires retiennent les demandes qui leur conviennent.',
+      'Nota est une place de marché pour les actes notariés partout au Québec. Le client publie l’acte dont il a besoin, la date de signature voulue et le prix qu’il offre. Chaque demande apparaît sur un calendrier public, et les notaires retiennent celles qui cadrent avec leur horaire. Gratuit pour les clients.',
     outcomes: [
       { metric: '17 agents IA', description: 'Marketing, développement, infrastructure et go-to-market' },
       { metric: 'Opérateur solo', description: 'Chaque fonction, orchestrée avec l’IA' },

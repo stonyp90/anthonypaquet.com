@@ -226,6 +226,8 @@ section { position: relative; z-index: 1; }
   position: relative;
   isolation: isolate;
   overflow: hidden;
+  /* clip, unlike hidden, keeps sticky children (the reveal index) working. */
+  overflow: clip;
   background-color: var(--color-section-alt);
 }
 /* Slowly drifting graph-paper lines, painted behind section content. */
@@ -386,23 +388,68 @@ section { position: relative; z-index: 1; }
 [data-reveal] { transition: opacity var(--motion-duration) var(--ease-smooth), transform var(--motion-duration) var(--ease-smooth); }
 [data-reveal].reveal-pending { opacity: 0; transform: translateY(var(--motion-distance)); }
 
+/* ---- Reveal index: Experience and Personal projects ---------------------
+   An index of entries. From 1024px the index sits on the left and the active
+   entry's details stay in view on the right. Below that, the same markup opens
+   in place like an accordion. Details come in one tile after another. */
+.reveal-index { border-top: 1px solid var(--color-border); }
+.reveal-head { margin: 0; font-size: inherit; font-weight: inherit; }
+.reveal-trigger { position: relative; display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.05rem 0.25rem 1.05rem 1.35rem; text-align: left; background: none; border: 0; border-bottom: 1px solid var(--color-border); color: var(--color-gray); cursor: pointer; transition: color 200ms var(--ease-smooth); }
+.reveal-trigger::before { content: ""; position: absolute; left: 0; top: 0.95rem; bottom: 0.95rem; width: 3px; border-radius: 3px; background: var(--color-accent); transform: scaleY(0); transform-origin: 50% 0; transition: transform 320ms var(--ease-smooth); }
+.reveal-trigger:hover, .reveal-trigger[aria-expanded="true"] { color: var(--color-ink); }
+.reveal-trigger[aria-expanded="true"]::before { transform: scaleY(1); }
+.reveal-trigger:focus-visible { outline: 2px solid var(--color-accent); outline-offset: -2px; border-radius: 3px; }
+.reveal-head-text { min-width: 0; }
+.reveal-title { display: block; font-family: var(--font-display); font-weight: 700; font-size: clamp(1.2rem, 2vw, 1.5rem); line-height: 1.2; }
+.reveal-sub { display: block; margin-top: 0.3rem; font-size: 0.875rem; line-height: 1.4; color: var(--color-ink-soft); }
+.reveal-flag { flex-shrink: 0; display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.8rem; font-weight: 500; color: var(--color-accent-text); }
+.reveal-flag::before { content: ""; width: 0.45rem; height: 0.45rem; border-radius: 50%; background: var(--color-accent); }
+.reveal-panel { padding: 1.5rem 0.25rem 2.25rem 1.35rem; border-bottom: 1px solid var(--color-border); }
+.reveal-panel[hidden] { display: none; }
+@media (min-width: 1024px) {
+  .reveal-index { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); grid-template-rows: repeat(var(--count), min-content) 1fr; column-gap: clamp(2.5rem, 5vw, 4.5rem); align-items: start; border-top: 0; }
+  .reveal-head { grid-column: 1; grid-row: var(--row); }
+  .reveal-head:first-of-type .reveal-trigger { border-top: 1px solid var(--color-border); }
+  .reveal-panel { grid-column: 2; grid-row: 1 / -1; position: sticky; top: 6.5rem; max-height: calc(100vh - 8rem); overflow-y: auto; scrollbar-width: thin; padding: 0.35rem 0.5rem 0.5rem clamp(2rem, 4vw, 3rem); border-bottom: 0; border-left: 1px solid var(--color-border); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-panel:not([hidden]) .reveal-tile { animation: reveal-tile 520ms var(--ease-smooth) both; animation-delay: calc(var(--i, 0) * 60ms); }
+}
+@keyframes reveal-tile { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+/* Experience details */
+.role-intro { margin-bottom: 1rem; }
+@media (max-width: 1023px) { .role-title { display: none; } }
+.role-title { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.35rem, 2.1vw, 1.7rem); line-height: 1.2; color: var(--color-ink); }
+.role-company { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.35rem 0.9rem; margin-top: 0.45rem; font-weight: 600; color: var(--color-accent-text); }
+.role-company a { display: inline-flex; align-items: center; gap: 0.35rem; color: inherit; text-decoration: underline; text-decoration-color: var(--color-border-strong); text-underline-offset: 0.25em; transition: color 200ms var(--ease-smooth); }
+.role-company a:hover { color: var(--color-ink); text-decoration-color: currentColor; }
+.role-via { font-weight: 400; font-size: 0.875rem; color: var(--color-gray); }
+.role-location { margin-top: 0.2rem; font-size: 0.875rem; color: var(--color-gray); }
+.role-description { max-width: 62ch; color: var(--color-ink-soft); font-size: 0.98rem; line-height: 1.6; }
+.role-outcomes { display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: 1rem 1.5rem; margin: 1.4rem 0 0.25rem; }
+.role-outcome { display: flex; flex-direction: column; gap: 0.3rem; padding-top: 0.75rem; border-top: 2px solid var(--color-accent); }
+.role-metric { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.4rem, 2.3vw, 1.8rem); line-height: 1.1; color: var(--color-ink); }
+.role-metric-label { font-size: 0.85rem; line-height: 1.4; color: var(--color-ink-soft); }
+.role-highlights { display: grid; gap: 0.6rem; margin: 1.25rem 0 0; padding: 0; list-style: none; }
+.role-highlights li { position: relative; padding-left: 1.35rem; color: var(--color-ink-soft); font-size: 0.94rem; line-height: 1.55; }
+.role-highlights li::before { content: ""; position: absolute; left: 0; top: 0.8em; width: 0.7rem; height: 1.5px; background: var(--color-accent); }
+.role-tags { display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem; margin-top: 1.25rem; font-size: 0.8rem; color: var(--color-gray); }
+
+/* Personal projects */
 .personal-projects { padding: 5rem 0 7rem; background: var(--color-paper); border-top: 1px solid var(--color-border); }
-.projects-heading, .projects-grid { max-width: 1152px; margin: auto; padding: 0 clamp(1.5rem, 4vw, 3rem); }
+.projects-heading, .projects-body { max-width: 1152px; margin: auto; padding: 0 clamp(1.5rem, 4vw, 3rem); }
 .projects-heading { margin-bottom: 2.5rem; }
 .projects-heading h2 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); line-height: 1.15; margin: 1.5rem 0 1rem; font-weight: 700; }
 .projects-heading > p { max-width: 42rem; color: var(--color-ink-soft); font-size: 1.05rem; }
-.projects-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
-.project-card { display: flex; flex-direction: column; min-width: 0; border: 1px solid var(--color-border); border-radius: 0.4rem; background: var(--color-paper); overflow: hidden; transition: border-color 250ms var(--ease-smooth), box-shadow 250ms var(--ease-smooth), transform 250ms var(--ease-smooth); }
-.project-card:hover, .project-card:focus-within { border-color: var(--color-border-strong); box-shadow: var(--shadow-card-hover); transform: translateY(-4px); }
-.project-visual { height: 12rem; display: flex; align-items: center; justify-content: center; padding: 2rem; background: var(--color-paper-soft); border-bottom: 1px solid var(--color-border); }
-.project-logo { width: auto; max-width: 76%; height: auto; max-height: 5rem; object-fit: contain; }
+.projects-index .reveal-trigger { padding-top: 1.35rem; padding-bottom: 1.35rem; }
+.projects-index .reveal-title { font-size: clamp(1.6rem, 3.2vw, 2.5rem); letter-spacing: -0.01em; }
+.project-visual { display: flex; align-items: center; justify-content: center; height: 13rem; padding: 2rem; border: 1px solid var(--color-border); border-radius: 0.5rem; background: var(--color-paper-soft); }
+.project-logo { width: auto; max-width: 70%; height: auto; max-height: 5rem; object-fit: contain; }
 .project-card--tablix .project-logo, .project-card--scaleforged .project-logo, .project-card--ursly .project-logo { height: 4.5rem; }
-.project-copy { padding: 1.75rem; display: flex; flex-direction: column; flex: 1; }
-.project-category { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.75rem; color: var(--color-accent-text); margin-bottom: 0.5rem; }
-.project-name { font-family: var(--font-display); font-size: 1.75rem; line-height: 1.2; font-weight: 700; }
-.project-description { color: var(--color-ink-soft); font-size: 1rem; line-height: 1.65; margin: 1rem 0 1.5rem; }
-.project-slogan { display: flex; flex-wrap: wrap; gap: 0.35rem 1rem; margin: 1rem 0 1.5rem; font-size: 1rem; font-weight: 500; }
-.project-link { align-self: flex-start; display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.875rem; font-weight: 500; padding: 0.6rem 0; border-bottom: 1px solid var(--color-border-strong); margin-top: auto; color: var(--color-accent-text); transition: color 200ms var(--ease-smooth), border-color 200ms var(--ease-smooth); }
+.project-description { max-width: 60ch; margin: 1.5rem 0 0; color: var(--color-ink-soft); font-size: 1.05rem; line-height: 1.65; }
+.project-slogan { display: flex; flex-wrap: wrap; gap: 0.35rem 1rem; margin: 1rem 0 0; font-size: 1rem; font-weight: 500; color: var(--color-ink); }
+.project-link { display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 1.5rem; padding: 0.5rem 0; font-size: 0.9rem; font-weight: 500; border-bottom: 1px solid var(--color-border-strong); color: var(--color-accent-text); transition: color 200ms var(--ease-smooth), border-color 200ms var(--ease-smooth); }
 .project-link:hover { color: var(--color-ink); border-color: var(--color-ink); }
 
 /* Keep decoration still; interaction and section transitions provide motion. */
@@ -435,12 +482,9 @@ body { overflow-x: clip; }
   .hero-headline { font-size: clamp(2rem, 8vw, 2.6rem); }
   .hero-actions .btn-primary { width: 100%; max-width: none; justify-content: center; }
   .hero-actions .btn-ghost { flex: 1; justify-content: center; }
-  .projects-grid { grid-template-columns: minmax(0, 1fr); }
-  .project-copy { padding: 1.5rem; }
   .project-visual { height: 11rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   [data-reveal].reveal-pending { opacity: 1; transform: none; }
   .hero-copy, .hero-portrait { animation: none; }
-  .project-card:hover, .project-card:focus-within { transform: none; }
 }

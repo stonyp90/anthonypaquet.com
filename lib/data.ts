@@ -329,7 +329,7 @@ export const experiences = [
     position: 'Founder & AI Orchestrator',
     location: 'Quebec, Canada',
     period: 'Current',
-    description: 'Nota is a marketplace for notarial acts in Québec. Clients post their act, date and price, and notaries take the requests that suit them.',
+    description: 'Nota is a marketplace for notarial acts across Québec. Clients post the act they need, the date they want to sign and the price they offer. Every request appears on a public calendar, and notaries take the ones that fit their schedule. Free for clients.',
     outcomes: [
       { metric: '17 AI agents', description: 'Marketing, development, infrastructure and go-to-market' },
       { metric: 'Solo operator', description: 'Every function, orchestrated with AI' },

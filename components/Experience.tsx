@@ -1,211 +1,105 @@
 'use client'
 
-import { m } from 'framer-motion'
-import { useRef, useState } from 'react'
-import { FaBriefcase, FaMapMarkerAlt, FaChevronDown, FaTrophy, FaExternalLinkAlt } from 'react-icons/fa'
 import { useContent } from '@/components/LocaleProvider'
+import { RevealIndex, Tile, type RevealEntry } from '@/components/RevealIndex'
 
+type Role = ReturnType<typeof useContent>['experiences'][number]
+type Labels = ReturnType<typeof useContent>['ui']['experience']
+
+/* The track record as an index of roles: point at a role, focus it, or move
+   with the arrow keys, and its details reveal one tile after another. */
 export default function Experience() {
   const c = useContent()
-  const ref = useRef(null)
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(0)
+  const labels = c.ui.experience
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.5,
-        ease: [0.4, 0, 0.2, 1] as const,
-      },
-    },
-  }
+  const entries: RevealEntry[] = c.experiences.map((role, index) => ({
+    key: `${role.company}::${role.position}::${index}`,
+    head: <RoleHead role={role} labels={labels} />,
+    panel: <RoleDetails role={role} labels={labels} />,
+  }))
 
   return (
-    <section ref={ref} className="section-grid py-20 lg:py-28" id="experience">
-      <m.div
-        variants={containerVariants}
-        initial={false}
-        animate="visible"
-        className="mx-auto max-w-6xl px-6 lg:px-12"
-      >
-        {/* Section Title */}
-        <m.div variants={itemVariants} className="mb-12">
+    <section className="section-grid py-20 lg:py-28" id="experience">
+      <div className="mx-auto max-w-6xl px-6 lg:px-12">
+        <div className="mb-12">
           <div className="section-label mb-8">
             <span className="num">04</span>
-            <span className="name">{c.ui.experience.label}</span>
+            <span className="name">{labels.label}</span>
           </div>
-          <h2 className="editorial-h2 text-3xl lg:text-4xl mb-4">
-            {c.ui.experience.heading}
-          </h2>
-          <p className="editorial-lead max-w-xl">
-            {c.ui.experience.lead}
-          </p>
-        </m.div>
-
-        {/* Timeline - centered with max width for readability */}
-        <div className="relative max-w-4xl">
-          {/* Vertical line — single thin accent rule */}
-          <div className="absolute left-[7px] sm:left-4 md:left-8 top-0 bottom-0 w-px bg-[var(--color-border-strong)]" />
-
-          {/* Experience items */}
-          <div className="space-y-4 sm:space-y-5 md:space-y-6">
-            {c.experiences.map((exp, index) => {
-              const isCurrent = exp.period === 'Current'
-              const isFounded = exp.period === 'Founded'
-              const isExpanded = expandedIndex === index
-
-              return (
-                <m.div
-                  key={index}
-                  variants={itemVariants}
-                  className="relative pl-6 sm:pl-12 md:pl-20"
-                >
-                  {/* Timeline dot — filled accent for current, ink outline otherwise */}
-                  <div
-                    className={`absolute left-[7px] sm:left-4 md:left-8 top-4 sm:top-5 md:top-6 w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-3.5 md:h-3.5 -translate-x-[5px] sm:-translate-x-[6px] md:-translate-x-[7px] rounded-full border-2 border-cream ${
-                      isCurrent ? 'bg-accent' : 'bg-paper ring-1 ring-[var(--color-border-strong)]'
-                    }`}
-                  />
-
-                  {/* Content card — bordered paper */}
-                  <m.div
-                    className={`group rounded-sm p-4 sm:p-5 md:p-6 bg-paper border transition-[border-color,transform,box-shadow] duration-300 ease-smooth shadow-[var(--shadow-card)] hover:-translate-y-0.5 hover:shadow-[var(--shadow-card-hover)] ${
-                      isExpanded
-                        ? 'border-accent'
-                        : 'border-[var(--color-border)] hover:border-[var(--color-border-strong)]'
-                    } active:scale-[0.99]`}
-                  >
-                    {/* Header - stacked on mobile */}
-                    <div className="flex items-start justify-between gap-2 sm:gap-3 mb-2 sm:mb-3 md:mb-4">
-                      <div className="flex-1 min-w-0">
-                        {/* Position with badge */}
-                        <div className="flex items-start sm:items-center gap-1.5 sm:gap-2.5 flex-wrap mb-1.5">
-                          <h3 className="font-display font-bold text-ink text-lg sm:text-xl md:text-2xl flex items-center gap-2 leading-snug">
-                            <FaBriefcase className="text-ink-soft text-sm sm:text-base flex-shrink-0" />
-                            <span>{exp.position}</span>
-                          </h3>
-                          {isCurrent && <span className="status-live">{c.ui.experience.current}</span>}
-                          {isFounded && <span className="status-beta">{c.ui.experience.founder}</span>}
-                        </div>
-                        {/* Company name */}
-                        <h4 className="font-display text-base sm:text-lg md:text-xl text-accent-text font-bold mb-1">
-                          {(exp as { url?: string }).url ? (
-                            <a
-                              href={(exp as { url?: string }).url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              onClick={(e) => e.stopPropagation()}
-                              className="group/link inline-flex items-center gap-1.5 hover:text-ink transition-colors duration-200"
-                            >
-                              {exp.company}
-                              <FaExternalLinkAlt className="text-[0.6rem] sm:text-xs opacity-70 transition-transform duration-200 ease-smooth group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" aria-hidden="true" />
-                            </a>
-                          ) : (
-                            exp.company
-                          )}
-                        </h4>
-                        {(exp as { via?: string }).via && (
-                          <p className="font-mono text-[10px] sm:text-xs text-gray-warm mb-1 sm:mb-1.5">
-                            {c.ui.experience.via} {(exp as { via?: string }).via}
-                          </p>
-                        )}
-                        {/* Location */}
-                        <div className="flex flex-wrap gap-1.5 sm:gap-3 font-mono text-[10px] sm:text-xs text-ink-soft">
-                          <span className="flex items-center gap-1.5">
-                            <FaMapMarkerAlt className="text-ink-soft text-[10px] sm:text-xs" />
-                            {exp.location}
-                          </span>
-                        </div>
-                      </div>
-                      {/* Expand icon */}
-                      <m.button
-                        type="button"
-                        aria-expanded={isExpanded}
-                        aria-controls={`experience-details-${index}`}
-                        aria-label={`${exp.position}, ${exp.company}`}
-                        onClick={() => setExpandedIndex(isExpanded ? null : index)}
-                        animate={{ rotate: isExpanded ? 180 : 0 }}
-                        transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-                        className="flex-shrink-0 p-3 text-ink-soft group-hover:text-accent-text transition-colors"
-                      >
-                        <FaChevronDown className="text-sm sm:text-base md:text-lg" aria-hidden="true" />
-                      </m.button>
-                    </div>
-
-                    {/* Description */}
-                    <p className="text-ink-soft mb-3 sm:mb-4 text-sm sm:text-base leading-relaxed">
-                      {exp.description}
-                    </p>
-
-                    {/* Key Outcomes — editorial stat blocks */}
-                    {exp.outcomes && exp.outcomes.length > 0 && (
-                      <div className="grid grid-cols-1 xs:flex xs:flex-wrap gap-2 sm:gap-3 mb-2 sm:mb-3">
-                        {exp.outcomes.slice(0, 3).map((outcome, idx) => (
-                          <div key={idx} className="stat-block rounded-sm flex-1 xs:flex-initial min-w-[8rem]">
-                            <div className="v text-lg sm:text-xl md:text-2xl whitespace-nowrap">
-                              {outcome.metric}
-                            </div>
-                            <div className="l">{outcome.description}</div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    {/* Expanded content */}
-                    <m.div
-                      id={`experience-details-${index}`}
-                      aria-hidden={!isExpanded}
-                      inert={!isExpanded}
-                      initial={false}
-                      animate={{
-                        height: isExpanded ? 'auto' : 0,
-                        opacity: isExpanded ? 1 : 0,
-                      }}
-                      transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-                      className="overflow-hidden"
-                    >
-                      <div className="pt-3 sm:pt-4 mt-1 border-t border-[var(--color-border)]">
-                        <h5 className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.08em] font-semibold mb-2 sm:mb-3 text-ink-soft flex items-center gap-2">
-                          <FaTrophy className="text-accent text-xs sm:text-sm" />
-                          {c.ui.experience.keyAchievements}
-                        </h5>
-                        <ul className="clean-list mb-3 sm:mb-4">
-                          {exp.achievements.map((achievement, idx) => (
-                            <li key={idx} className="text-sm sm:text-base">
-                              {achievement}
-                            </li>
-                          ))}
-                        </ul>
-
-                        {/* Tags */}
-                        <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                          {exp.tags.map((tag, idx) => (
-                            <span key={idx} className="tech-tag">
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </m.div>
-                  </m.div>
-                </m.div>
-              )
-            })}
-          </div>
+          <h2 className="editorial-h2 text-3xl lg:text-4xl mb-4">{labels.heading}</h2>
+          <p className="editorial-lead max-w-xl">{labels.lead}</p>
         </div>
-      </m.div>
+
+        <RevealIndex entries={entries} className="experience-index" />
+      </div>
     </section>
+  )
+}
+
+function RoleHead({ role, labels }: { role: Role; labels: Labels }) {
+  const flag = role.period === 'Current' ? labels.current : role.period === 'Founded' ? labels.founder : null
+  return (
+    <>
+      <span className="reveal-head-text">
+        <span className="reveal-title">{role.company}</span>
+        <span className="reveal-sub">{role.position}</span>
+      </span>
+      {flag && <span className="reveal-flag">{flag}</span>}
+    </>
+  )
+}
+
+function RoleDetails({ role, labels }: { role: Role; labels: Labels }) {
+  const { url, via } = role as { url?: string; via?: string }
+  const outcomes = role.outcomes ?? []
+  const firstHighlight = 2 + outcomes.length
+
+  return (
+    <>
+      <Tile order={0} className="role-intro">
+        <p className="role-title">{role.position}</p>
+        <p className="role-company">
+          {url ? (
+            <a href={url} target="_blank" rel="noopener noreferrer">
+              {role.company}
+              <span aria-hidden="true">↗</span>
+            </a>
+          ) : (
+            role.company
+          )}
+          {via && <span className="role-via">{labels.via} {via}</span>}
+        </p>
+        <p className="role-location">{role.location}</p>
+      </Tile>
+
+      <Tile order={1} as="p" className="role-description">
+        {role.description}
+      </Tile>
+
+      {outcomes.length > 0 && (
+        <div className="role-outcomes">
+          {outcomes.slice(0, 3).map((outcome, index) => (
+            <Tile key={outcome.metric} order={2 + index} className="role-outcome">
+              <span className="role-metric">{outcome.metric}</span>
+              <span className="role-metric-label">{outcome.description}</span>
+            </Tile>
+          ))}
+        </div>
+      )}
+
+      <ul className="role-highlights" aria-label={labels.keyAchievements}>
+        {role.achievements.map((achievement, index) => (
+          <Tile key={achievement} order={firstHighlight + index} as="li">
+            {achievement}
+          </Tile>
+        ))}
+      </ul>
+
+      <Tile order={firstHighlight + role.achievements.length} className="role-tags">
+        {role.tags.map((tag) => (
+          <span key={tag}>{tag}</span>
+        ))}
+      </Tile>
+    </>
   )
 }

@@ -52,7 +52,7 @@ const projects: Record<Locale, readonly PersonalProject[]> = {
     {
       id: 'gonota', name: 'GoNota', url: 'https://gonota.ca',
       category: 'Notarial technology',
-      description: 'A modern notarial experience designed around notaries and their clients in Québec.',
+      description: 'A public calendar where clients across Québec post their notarial act, date and price, and notaries pick the requests that fit.',
       visual: visuals.gonota,
     },
     {
@@ -79,7 +79,7 @@ const projects: Record<Locale, readonly PersonalProject[]> = {
     {
       id: 'gonota', name: 'GoNota', url: 'https://gonota.ca',
       category: 'Technologie notariale',
-      description: 'Une expérience notariale moderne, conçue pour les notaires et leurs clients au Québec.',
+      description: 'Un calendrier public où les clients de partout au Québec publient leur acte notarié, leur date et leur prix, et où les notaires choisissent les demandes qui leur conviennent.',
       visual: visuals.gonota,
     },
     {
