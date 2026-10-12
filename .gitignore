@@ -41,3 +41,6 @@ next-env.d.ts
 # Local generated assets and Python caches
 /output/
 __pycache__/
+
+# Git worktrees created by agents live inside the repo
+/.claude/worktrees/
