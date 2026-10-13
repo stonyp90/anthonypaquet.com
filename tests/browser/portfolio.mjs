@@ -100,7 +100,7 @@ try {
   assert.equal(await page.locator('.reveal-pending #personal-projects').count(), 0)
   await page.emulateMedia({ reducedMotion: 'reduce' })
   await page.waitForFunction(() => document.querySelectorAll('.reveal-pending').length === 0)
-  await page.waitForFunction(() => document.querySelector('#how-i-work ul') !== null)
+  await page.waitForFunction(() => document.querySelector('#how-i-work ol') !== null)
   await context.close()
   checks.push('normal motion: scroll reveal and live reduced-motion change')
 } catch (error) { failures.push(error.message) }

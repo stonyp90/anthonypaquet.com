@@ -2,8 +2,8 @@
 
 Source of the Gmail signature for me@anthonypaquet.com.
 
-- `signature.en.html`: tagline "Builder · Leader · AI & Cloud Specialist"
-- `signature.fr.html`: tagline "Bâtisseur · Leader · Spécialiste IA & Cloud"
+- `signature.en.html`: tagline "Builder · Leader · AI & Cloud Specialist" plus a link to "Agent in the loop"
+- `signature.fr.html`: tagline "Bâtisseur · Leader · Spécialiste IA & Cloud" plus a link to "L’agent dans la boucle"
 
 The images are served by the site, so they must stay at these paths once a signature has been sent:
 

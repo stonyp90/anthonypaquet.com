@@ -417,6 +417,52 @@ section { position: relative; z-index: 1; }
 }
 @keyframes reveal-tile { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
+/* How I Work: the loop. Steps sit on the ring (--x / --y are each station's
+   offset from the centre) and, from sm up, their titles point outward. */
+.loop-stage { position: relative; max-width: 31rem; margin-inline: auto; padding: clamp(0.75rem, 2vw, 1.25rem); border: 1px solid var(--color-border); background: var(--color-paper-soft); box-shadow: var(--shadow-card); }
+.loop-stage-meta { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0 0.25rem 0.6rem; font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.13em; line-height: 1; text-transform: uppercase; color: var(--color-accent-text); }
+.loop-stage-count { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--color-gray); }
+.loop-stage-pulse { width: 0.42rem; height: 0.42rem; border-radius: 50%; background: var(--color-accent); box-shadow: 0 0 0 0 var(--color-accent-soft); animation: loop-pulse 2.2s var(--ease-smooth) infinite; }
+.loop-orbit { position: relative; z-index: 1; aspect-ratio: 1; width: 100%; max-width: 18rem; margin-inline: auto; }
+.loop-orbit::before, .loop-orbit::after { content: ""; position: absolute; inset: 3%; z-index: 0; pointer-events: none; border-radius: 50%; }
+.loop-orbit::before { border: 1px dashed var(--color-border-strong); opacity: 0.6; animation: loop-orbit-spin 28s linear infinite; }
+.loop-orbit::after { inset: 7%; background: conic-gradient(from 0deg, transparent 0 76%, var(--color-accent-soft) 83%, var(--color-accent) 88%, transparent 94%); opacity: 0.7; -webkit-mask: radial-gradient(transparent calc(100% - 1px), var(--color-mask) calc(100% - 1px)); mask: radial-gradient(transparent calc(100% - 1px), var(--color-mask) calc(100% - 1px)); animation: loop-orbit-spin 18s linear infinite reverse; }
+.loop-glow { position: absolute; left: 50%; top: 50%; z-index: 0; width: 60%; height: 60%; transform: translate(-50%, -50%); border-radius: 50%; background-image: radial-gradient(circle, var(--color-accent-bg), transparent 70%); }
+.loop-orbit > svg { z-index: 1; }
+.loop-station { position: absolute; left: calc(50% + var(--x) * 100%); top: calc(50% - var(--y) * 100%); transform: translate(-50%, -50%); }
+.loop-label { display: none; position: absolute; white-space: nowrap; font-family: var(--font-display); font-size: 0.8125rem; font-weight: 700; line-height: 1; transition: color 300ms var(--ease-smooth); }
+.loop-console { margin-top: 1rem; }
+.loop-console-card { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: start; gap: 0.85rem; min-height: 6.8rem; padding: 1rem 1.05rem; border: 1px solid var(--color-border-strong); background: var(--color-paper); }
+.loop-console-icon { display: inline-flex; align-items: center; justify-content: center; width: 2.15rem; height: 2.15rem; border: 1px solid var(--color-accent); border-radius: 50%; color: var(--color-paper); background: var(--color-accent); box-shadow: 0 0 0 0.35rem var(--color-accent-bg); }
+.loop-console-copy { display: flex; min-width: 0; flex-wrap: wrap; align-items: baseline; column-gap: 0.5rem; row-gap: 0.25rem; line-height: 1.35; }
+.loop-console-tag { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.14em; color: var(--color-accent-text); }
+.loop-console-copy strong { font-family: var(--font-display); font-size: 1.15rem; color: var(--color-ink); }
+.loop-console-blurb { flex-basis: 100%; color: var(--color-ink-soft); font-size: 0.86rem; line-height: 1.5; text-wrap: pretty; }
+.loop-console-progress { height: 2px; margin: 0.6rem 0.1rem 0; overflow: hidden; background: var(--color-border); }
+.loop-console-progress span { display: block; width: 100%; height: 100%; transform-origin: left center; background: var(--color-accent); }
+@media (min-width: 640px) {
+  .loop-orbit { margin-block: 1.5rem; }
+  .loop-label { display: block; }
+  .loop-label--top { bottom: 100%; left: 50%; transform: translateX(-50%); }
+  .loop-label--bottom { top: 100%; left: 50%; transform: translateX(-50%); }
+  .loop-label--right { left: 100%; top: 50%; transform: translateY(-50%); }
+  .loop-label--left { right: 100%; top: 50%; transform: translateY(-50%); }
+}
+@media (min-width: 1280px) { .loop-orbit { max-width: 20rem; } }
+
+@keyframes loop-pulse { 0%, 100% { box-shadow: 0 0 0 0 var(--color-accent-soft); } 50% { box-shadow: 0 0 0 0.28rem transparent; } }
+@keyframes loop-orbit-spin { to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .loop-stage-pulse, .loop-orbit::before, .loop-orbit::after { animation: none; }
+}
+
+/* How I Work: every step at once, for reduced motion */
+.loop-steps { margin-top: 3.5rem; }
+.loop-steps li { break-inside: avoid; }
+.loop-step-tag { margin-right: 0.5rem; font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.14em; color: var(--color-accent-text); }
+@media (min-width: 1024px) { .loop-steps { columns: 2; column-gap: 5rem; } }
+
 /* How I Work: the product the loop shipped */
 .loop-output { padding: 1rem 1.25rem 1.25rem; }
 .loop-output-blurb { margin-top: 0.5rem; max-width: 34rem; font-size: 0.95rem; line-height: 1.55; color: var(--color-ink-soft); text-wrap: pretty; }

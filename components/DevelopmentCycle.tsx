@@ -2,31 +2,53 @@
 
 /* ==========================================================================
    DEVELOPMENT CYCLE — how Anthony delivers, animated.
-   Renders the EXACT ScaleForged iteration-loop animation
-   (components/IterationLoop.tsx, copied verbatim) with this site's English
-   content. Phase icons (lucide-react) follow the agent loop: speak, unblock,
-   iterate, ship.
+   Renders the iteration-loop animation (components/IterationLoop.tsx) with
+   this site's content: one ring that runs the whole lifecycle, from the voice
+   note through engineering to the sale and back.
    ========================================================================== */
 
-import { Mic, LockOpen, Repeat, Rocket } from 'lucide-react'
-import { IterationLoopSection, type LoopPhase } from '@/components/IterationLoop'
+import {
+  Mic,
+  ListChecks,
+  LockOpen,
+  Hexagon,
+  Hammer,
+  Repeat,
+  FlaskConical,
+  GitCompareArrows,
+  Rocket,
+  Eye,
+  TrendingUp,
+  RotateCcw,
+} from 'lucide-react'
+import { IterationLoopSection } from '@/components/IterationLoop'
 import { useContent } from '@/components/LocaleProvider'
 import type { PersonalProject } from '@/lib/projects'
 
 /* The product the loop shipped. Its Personal projects entry opens from #lunorive. */
 const LOOP_OUTPUT: PersonalProject['id'] = 'lunorive'
 
+/* One icon per step, in the order of c.ui.work.phases. Keeping this mapping
+   local to the adapter lets the content remain data-only in both locales. */
+const PHASE_ICONS = [
+  Mic,
+  ListChecks,
+  LockOpen,
+  Hexagon,
+  Hammer,
+  Repeat,
+  FlaskConical,
+  GitCompareArrows,
+  Rocket,
+  Eye,
+  TrendingUp,
+  RotateCcw,
+]
+
 export default function DevelopmentCycle() {
   const c = useContent()
 
-  /* Exactly four phases, ordered clockwise starting at the top. */
-  const phaseIcons = [Mic, LockOpen, Repeat, Rocket]
-  const PHASES = phaseIcons.map((icon, i) => ({
-    tag: c.ui.work.phases[i].tag,
-    title: c.ui.work.phases[i].title,
-    icon,
-    blurb: c.ui.work.phases[i].blurb,
-  })) as [LoopPhase, LoopPhase, LoopPhase, LoopPhase]
+  const phases = c.ui.work.phases.map((phase, i) => ({ ...phase, icon: PHASE_ICONS[i] }))
 
   return (
     <IterationLoopSection
@@ -40,64 +62,37 @@ export default function DevelopmentCycle() {
       }
       lead={c.ui.work.lead}
       pull={c.ui.work.pull}
-      phases={PHASES}
+      phases={phases}
       centerEyebrow={c.ui.work.centerEyebrow}
       centerLabel={c.ui.work.centerLabel}
       loopHint={c.ui.work.loopHint}
       interactHint={c.ui.work.interactHint}
-      footer={<LoopFoundations foundations={c.ui.work.foundations} />}
+      footer={<LoopProof proof={c.ui.work.proof} />}
     />
   )
 }
 
-type Foundations = ReturnType<typeof useContent>['ui']['work']['foundations']
+type Proof = ReturnType<typeof useContent>['ui']['work']['proof']
 
-/* What else runs in the loop (the business itself), how it is built, how it
-   reviews itself, and what it has shipped. */
-function LoopFoundations({ foundations }: { foundations: Foundations }) {
+/* What the loop reaches beyond the code, and the product it shipped. */
+function LoopProof({ proof }: { proof: Proof }) {
   return (
-    <div className="mt-16 border-t border-[var(--color-border)] pt-12 lg:mt-20">
-      <p className="editorial-lead mb-10 max-w-3xl">{foundations.intro}</p>
-      <div className="grid gap-10 lg:grid-cols-2 lg:gap-x-20 lg:gap-y-14">
-        <FoundationList title={foundations.businessTitle} items={foundations.business} />
-        <FoundationList title={foundations.buildTitle} items={foundations.build} />
-        <FoundationList title={foundations.reviewTitle} items={foundations.review} />
-        <LoopOutput output={foundations.output} />
+    <div className="mt-16 grid items-center gap-10 border-t border-[var(--color-border)] pt-12 lg:mt-20 lg:grid-cols-2 lg:gap-20">
+      <p className="editorial-lead max-w-xl">{proof.intro}</p>
+      <div>
+        <h3 className="editorial-eyebrow mb-4">{proof.title}</h3>
+        <div className="stat-block loop-output">
+          <p className="v">
+            {proof.name}
+            <span className="accent-text">.</span>
+          </p>
+          <p className="loop-output-blurb">{proof.blurb}</p>
+          <a href={`#${LOOP_OUTPUT}`} className="link-arrow loop-output-link">
+            {proof.cta}
+            <span aria-hidden="true">↓</span>
+          </a>
+        </div>
       </div>
-    </div>
-  )
-}
-
-function LoopOutput({ output }: { output: Foundations['output'] }) {
-  return (
-    <div>
-      <h3 className="editorial-eyebrow mb-4">{output.title}</h3>
-      <div className="stat-block loop-output">
-        <p className="v">
-          {output.name}
-          <span className="accent-text">.</span>
-        </p>
-        <p className="loop-output-blurb">{output.blurb}</p>
-        <a href={`#${LOOP_OUTPUT}`} className="link-arrow loop-output-link">
-          {output.cta}
-          <span aria-hidden="true">↓</span>
-        </a>
-      </div>
-    </div>
-  )
-}
-
-function FoundationList({ title, items }: { title: string; items: Foundations['business'] }) {
-  return (
-    <div>
-      <h3 className="editorial-eyebrow mb-4">{title}</h3>
-      <ul className="clean-list">
-        {items.map((item) => (
-          <li key={item.title}>
-            <strong>{item.title}</strong>. {item.blurb}
-          </li>
-        ))}
-      </ul>
     </div>
   )
 }
