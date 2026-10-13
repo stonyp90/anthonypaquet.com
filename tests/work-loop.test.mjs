@@ -72,6 +72,11 @@ test('the animated loop exposes a live active-step console', async () => {
   assert.match(source, /aria-live="polite"/)
 })
 
+test('the agent loop stays focused on the loop itself', async () => {
+  const source = await readFile(new URL('../components/DevelopmentCycle.tsx', import.meta.url), 'utf8')
+  assert.doesNotMatch(source, /LoopProof|loop-output|proof=/, 'the retired output block is not rendered here')
+})
+
 test('the component holds one icon per step', async () => {
   const source = await parse('components/DevelopmentCycle.tsx')
   const icons = find(source, (node) => ts.isVariableDeclaration(node) && node.name.getText() === 'PHASE_ICONS')

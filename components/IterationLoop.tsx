@@ -55,8 +55,6 @@ type IterationLoopSectionProps = {
   loopHint: string;
   /** One-line affordance shown until the user interacts, e.g. "Explorez chaque étape". */
   interactHint: string;
-  /** Optional content rendered under the loop, inside the same section. */
-  footer?: ReactNode;
 };
 
 /* ----------------------------- Ring geometry ------------------------------ */
@@ -119,7 +117,6 @@ export function IterationLoopSection({
   centerLabel,
   loopHint,
   interactHint,
-  footer,
 }: IterationLoopSectionProps) {
   const reduce = useMotionPreference();
   const sectionRef = useRef<HTMLElement>(null);
@@ -190,25 +187,25 @@ export function IterationLoopSection({
   const ActiveIcon = activePhase.icon;
 
   return (
-    <section ref={sectionRef} id={id} className="py-24 lg:py-32 border-b border-[var(--color-border)]">
+    <section ref={sectionRef} id={id} className="iteration-loop-section py-24 lg:py-32">
       <div className="mx-auto max-w-6xl px-6 lg:px-12">
         <div className="section-label mb-8">
           <span className="num">{sectionNum}</span>
           <span className="name">{sectionName}</span>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+        <div className="iteration-loop-layout grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
           {/* ------------------------------ Copy ------------------------------ */}
           {/* The bottom margin offsets the narration below the loop so the
               copy's vertical center lines up with the ring, not the column. */}
-          <div className={reduce ? undefined : "lg:mb-36"}>
+          <div className={`iteration-loop-copy ${reduce ? "" : "lg:mb-36"}`}>
             <h2 className="editorial-h2 text-2xl lg:text-4xl mb-6">{heading}</h2>
             <p className="editorial-lead max-w-xl mb-8">{lead}</p>
             <div className="pull-quote text-lg lg:text-xl max-w-xl">{pull}</div>
           </div>
 
           {/* --------------------------- Animated loop ------------------------ */}
-          <div className="loop-stage">
+          <div className="loop-stage iteration-loop-stage">
             <div className="loop-stage-meta" aria-hidden="true">
               <span>{loopHint}</span>
               <span className="loop-stage-count">
@@ -365,7 +362,6 @@ export function IterationLoopSection({
             ))}
           </ol>
         )}
-        {footer}
       </div>
     </section>
   );

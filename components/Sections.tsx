@@ -17,7 +17,7 @@ export default function Sections() {
       <main id="main-content" className="min-h-screen" tabIndex={-1}>
         <Hero />
         <div data-reveal><About /></div>
-        <div data-reveal className="section-grid"><DevelopmentCycle /></div>
+        <div data-reveal><DevelopmentCycle /></div>
         <div data-reveal><Services /></div>
         <div data-reveal><Experience /></div>
         <div data-reveal><Certifications /></div>
