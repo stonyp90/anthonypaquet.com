@@ -83,6 +83,14 @@ test('the animated loop has no enclosing square frame', async () => {
   assert.match(styles, /\.loop-stage\s*\{[^}]*box-shadow:\s*none/, 'the orbit has no floating card shadow')
 })
 
+test('experience details use an open editorial surface', async () => {
+  const styles = await readFile(new URL('../app/globals.css', import.meta.url), 'utf8')
+  assert.match(styles, /\.experience-index \.reveal-trigger\[aria-expanded="true"\]\s*\{[^}]*background:\s*transparent/)
+  assert.match(styles, /\.experience-index \.reveal-trigger\[aria-expanded="true"\]\s*\{[^}]*box-shadow:\s*none/)
+  assert.match(styles, /\.experience-index \.reveal-panel\s*\{[^}]*background:\s*transparent/)
+  assert.match(styles, /\.experience-index \.reveal-panel\s*\{[^}]*border-left:\s*0/)
+})
+
 test('the component holds one icon per step', async () => {
   const source = await parse('components/DevelopmentCycle.tsx')
   const icons = find(source, (node) => ts.isVariableDeclaration(node) && node.name.getText() === 'PHASE_ICONS')
