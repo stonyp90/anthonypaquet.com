@@ -102,6 +102,26 @@ test('secondary sections use open surfaces and preserve motion-safe controls', a
   assert.match(styles, /\.footer-connect > div > a\[aria-label\]\s*\{[^}]*min-width:\s*2\.75rem/)
 })
 
+test('secondary sections share a visible motion seam and respect reduced motion', async () => {
+  const source = await readFile(new URL('../components/Sections.tsx', import.meta.url), 'utf8')
+  const styles = await readFile(new URL('../app/globals.css', import.meta.url), 'utf8')
+  assert.equal((source.match(/section-reveal--/g) ?? []).length, 4, 'services through projects use the shared transition wrapper')
+  assert.match(source, /<Footer \/>/, 'footer remains part of the page composition')
+  assert.match(styles, /\.section-reveal::before\s*\{[^}]*transform:\s*scaleX\(/)
+  assert.match(styles, /\.section-reveal:not\(\.reveal-pending\)::before\s*\{[^}]*transform:\s*scaleX\(1\)/)
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\)\s*\{[\s\S]*\.section-reveal::before[\s\S]*transition:\s*none/)
+})
+
+test('Nota describes one AI agent per department instead of an agent count', async () => {
+  const en = await readFile(new URL('../lib/data.ts', import.meta.url), 'utf8')
+  const fr = await readFile(new URL('../lib/content/fr.ts', import.meta.url), 'utf8')
+  for (const source of [en, fr]) {
+    assert.doesNotMatch(source, /17 (AI )?agents IA?/, 'the old agent count is not presented')
+  }
+  assert.match(en, /One AI agent per department/)
+  assert.match(fr, /Un agent IA par département/)
+})
+
 test('share controls keep a comfortable touch target', async () => {
   const source = await readFile(new URL('../components/ShareButtons.tsx', import.meta.url), 'utf8')
   assert.match(source, /w-11 h-11 min-w-11 min-h-11 rounded-full/)

@@ -331,13 +331,13 @@ export const experiences = [
     period: 'Current',
     description: 'Nota is a marketplace for notarial acts across Québec. Clients post the act they need, the date they want to sign and the price they offer. Every request appears on a public calendar, and notaries take the ones that fit their schedule. Posting a date is free.',
     outcomes: [
-      { metric: '17 AI agents', description: 'Marketing, development, infrastructure and go-to-market' },
+      { metric: 'One AI agent per department', description: 'Marketing, go-to-market, sales and engineering' },
       { metric: 'Solo operator', description: 'Every function, orchestrated with AI' },
     ],
     achievements: [
       'Founded Nota to modernize the Quebec notary industry, an underserved, paper-heavy space overdue for software built around how notaries actually work.',
       'Run every function of the company as its sole operator, orchestrating AI agents built on the latest models from Anthropic (Claude), OpenAI and xAI.',
-      'Direct four agent teams: marketing (5 agents), development (2), infrastructure (5) and go-to-market (5: partnerships, notary onboarding, client success, referral program and demand monitoring).',
+      'Each department has its own AI agent — marketing, go-to-market, sales and engineering — coordinated through my orchestration.',
     ],
     tags: ['Legal Tech', 'Notary Tech', 'Quebec', 'Founder', 'AI Agents', '0→1'],
   },

@@ -96,13 +96,13 @@ const expFr: ExpFr[] = [
     description:
       'Nota est une place de marché pour les actes notariés partout au Québec. Le client publie l’acte dont il a besoin, la date de signature voulue et le prix qu’il offre. Chaque demande apparaît sur un calendrier public, et les notaires retiennent celles qui cadrent avec leur horaire. Afficher sa date est gratuit.',
     outcomes: [
-      { metric: '17 agents IA', description: 'Marketing, développement, infrastructure et go-to-market' },
+      { metric: 'Un agent IA par département', description: 'Marketing, mise en marché, ventes et ingénierie' },
       { metric: 'Opérateur solo', description: 'Chaque fonction, orchestrée avec l’IA' },
     ],
     achievements: [
       'Fondé Nota pour moderniser l’industrie notariale québécoise, un marché mal servi, axé sur le papier, qui attendait un logiciel conçu autour du travail réel des notaires.',
       'Assure chaque fonction de l’entreprise comme seul opérateur, en orchestrant des agents IA bâtis sur les derniers modèles d’Anthropic (Claude), d’OpenAI et de xAI.',
-      'Dirige quatre équipes d’agents : marketing (5 agents), développement (2), infrastructure (5) et go-to-market (5 : partenariats, onboarding des notaires, customer success, programme de référence et veille de la demande).',
+      'Chaque département — marketing, mise en marché, ventes et ingénierie — a son propre agent IA, que j’orchestre.',
     ],
   },
   {

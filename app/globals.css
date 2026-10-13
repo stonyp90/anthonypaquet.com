@@ -68,6 +68,8 @@
   --shadow-float: 0 24px 60px -38px var(--color-shadow);
   --motion-duration: 650ms;
   --motion-distance: 24px;
+  --motion-section-duration: 820ms;
+  --motion-section-distance: 32px;
 
 }
 
@@ -381,6 +383,38 @@ section { position: relative; z-index: 1; }
 [data-reveal] { transition: opacity var(--motion-duration) var(--ease-smooth), transform var(--motion-duration) var(--ease-smooth); }
 [data-reveal].reveal-pending { opacity: 0; transform: translateY(var(--motion-distance)); }
 
+/* Secondary sections enter through one editorial seam. The line is a visual
+   hand-off between surfaces, not a card boundary, and stays quiet until the
+   section has actually joined the viewport. */
+[data-reveal].section-reveal {
+  position: relative;
+  transition: opacity var(--motion-section-duration) var(--ease-smooth), transform var(--motion-section-duration) var(--ease-smooth);
+}
+[data-reveal].section-reveal.reveal-pending {
+  opacity: 0;
+  transform: translateY(var(--motion-section-distance));
+  will-change: opacity, transform;
+}
+.section-reveal::before {
+  content: "";
+  position: absolute;
+  z-index: 4;
+  top: 0;
+  right: clamp(1.5rem, 4vw, 3rem);
+  left: clamp(1.5rem, 4vw, 3rem);
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, var(--color-border) 14%, var(--color-accent) 50%, var(--color-border) 86%, transparent);
+  transform: scaleX(0.22);
+  transform-origin: center;
+  opacity: 0.25;
+  transition: transform 900ms var(--ease-smooth), opacity 620ms var(--ease-smooth);
+}
+.section-reveal:not(.reveal-pending)::before {
+  transform: scaleX(1);
+  opacity: 0.72;
+}
+
 /* ---- Reveal index: Experience and Personal projects ---------------------
    An index of entries. From 1024px the index sits on the left and the active
    entry's details stay in view on the right. Below that, the same markup opens
@@ -409,6 +443,22 @@ section { position: relative; z-index: 1; }
   .reveal-panel:not([hidden]) .reveal-tile { animation: reveal-tile 520ms var(--ease-smooth) both; animation-delay: calc(var(--i, 0) * 60ms); }
 }
 @keyframes reveal-tile { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: no-preference) {
+  .service-category-copy,
+  .service-grid { animation: service-swap-in 520ms var(--ease-smooth) both; }
+  .service-grid .service-card { animation: service-card-rise 620ms var(--ease-smooth) both; }
+  .service-grid .service-card:nth-child(2) { animation-delay: 70ms; }
+  .service-grid .service-card:nth-child(3) { animation-delay: 140ms; }
+}
+@keyframes service-swap-in {
+  from { opacity: 0; transform: translateY(0.65rem); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes service-card-rise {
+  from { opacity: 0; transform: translateY(0.8rem); }
+  to { opacity: 1; transform: none; }
+}
 
 /* How I Work: a quiet, solid canvas around one animated instrument. The
    section deliberately has no texture or decorative page-wide background so
@@ -460,6 +510,14 @@ section { position: relative; z-index: 1; }
 @keyframes loop-orbit-spin { to { transform: rotate(360deg); } }
 
 @media (prefers-reduced-motion: reduce) {
+  .section-reveal::before {
+    transform: scaleX(1);
+    opacity: 0.55;
+    transition: none;
+  }
+  .service-category-copy,
+  .service-grid,
+  .service-grid .service-card { animation: none; }
   .loop-stage-pulse, .loop-orbit::before, .loop-orbit::after { animation: none; }
 }
 

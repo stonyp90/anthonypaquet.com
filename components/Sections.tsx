@@ -18,10 +18,10 @@ export default function Sections() {
         <Hero />
         <div data-reveal><About /></div>
         <div data-reveal><DevelopmentCycle /></div>
-        <div data-reveal><Services /></div>
-        <div data-reveal><Experience /></div>
-        <div data-reveal><Certifications /></div>
-        <div data-reveal><PersonalProjects /></div>
+        <div data-reveal className="section-reveal section-reveal--services"><Services /></div>
+        <div data-reveal className="section-reveal section-reveal--experience"><Experience /></div>
+        <div data-reveal className="section-reveal section-reveal--certifications"><Certifications /></div>
+        <div data-reveal className="section-reveal section-reveal--projects"><PersonalProjects /></div>
       </main>
       <Footer />
     </MotionProvider>

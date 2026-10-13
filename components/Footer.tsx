@@ -19,7 +19,7 @@ export default function Footer() {
   ]
 
   return (
-    <footer className="site-footer bg-paper border-t border-[var(--color-border)]">
+    <footer data-reveal className="site-footer section-reveal bg-paper border-t border-[var(--color-border)]">
       <div className="footer-shell mx-auto max-w-6xl px-6 lg:px-12 py-16 lg:py-20">
         <div className="grid gap-10 sm:gap-12 md:grid-cols-12">
           {/* Brand + positioning */}
