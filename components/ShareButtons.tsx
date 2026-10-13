@@ -9,7 +9,7 @@ import { useContent } from '@/components/LocaleProvider'
 const encodedUrl = encodeURIComponent(siteUrl)
 
 const buttonClass =
-  'inline-flex items-center justify-center w-9 h-9 rounded-sm border border-[var(--color-border-strong)] bg-paper text-ink-soft hover:text-accent-text hover:border-accent transition-colors duration-300'
+  'inline-flex items-center justify-center w-11 h-11 min-w-11 min-h-11 rounded-full border border-[var(--color-border-strong)] bg-paper text-ink-soft hover:text-accent-text hover:border-accent transition-colors duration-300'
 
 export default function ShareButtons() {
   const c = useContent()
@@ -67,7 +67,7 @@ export default function ShareButtons() {
           whileTap={{ scale: 0.95 }}
           className={
             copied
-              ? 'inline-flex items-center justify-center w-9 h-9 rounded-sm border border-[var(--color-live)] bg-[var(--color-live-bg)] text-[var(--color-live)] transition-colors duration-300'
+              ? 'inline-flex items-center justify-center w-11 h-11 min-w-11 min-h-11 rounded-full border border-[var(--color-live)] bg-[var(--color-live-bg)] text-[var(--color-live)] transition-colors duration-300'
               : buttonClass
           }
           aria-label={copied ? c.ui.share.linkCopied : c.ui.share.copyLink}

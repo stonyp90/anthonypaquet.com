@@ -91,6 +91,22 @@ test('experience details use an open editorial surface', async () => {
   assert.match(styles, /\.experience-index \.reveal-panel\s*\{[^}]*border-left:\s*0/)
 })
 
+test('secondary sections use open surfaces and preserve motion-safe controls', async () => {
+  const styles = await readFile(new URL('../app/globals.css', import.meta.url), 'utf8')
+  assert.match(styles, /\.service-card\s*\{[^}]*border-radius:\s*0 !important/)
+  assert.match(styles, /\.service-card\s*\{[^}]*box-shadow:\s*none !important/)
+  assert.match(styles, /\.certification-panel,[\s\S]*\.language-panel\s*\{[^}]*background:\s*transparent !important/)
+  assert.match(styles, /\.certification-item\s*\{[^}]*background:\s*transparent !important/)
+  assert.match(styles, /\.projects-index \.reveal-trigger\[aria-expanded="true"\]\s*\{[^}]*background:\s*transparent/)
+  assert.match(styles, /\.projects-index \.reveal-panel\s*\{[^}]*background:\s*transparent/)
+  assert.match(styles, /\.footer-connect > div > a\[aria-label\]\s*\{[^}]*min-width:\s*2\.75rem/)
+})
+
+test('share controls keep a comfortable touch target', async () => {
+  const source = await readFile(new URL('../components/ShareButtons.tsx', import.meta.url), 'utf8')
+  assert.match(source, /w-11 h-11 min-w-11 min-h-11 rounded-full/)
+})
+
 test('the component holds one icon per step', async () => {
   const source = await parse('components/DevelopmentCycle.tsx')
   const icons = find(source, (node) => ts.isVariableDeclaration(node) && node.name.getText() === 'PHASE_ICONS')
