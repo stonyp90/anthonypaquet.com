@@ -19,11 +19,11 @@ export default function Footer() {
   ]
 
   return (
-    <footer className="bg-paper border-t border-[var(--color-border)]">
-      <div className="mx-auto max-w-6xl px-6 lg:px-12 py-16 lg:py-20">
+    <footer className="site-footer bg-paper border-t border-[var(--color-border)]">
+      <div className="footer-shell mx-auto max-w-6xl px-6 lg:px-12 py-16 lg:py-20">
         <div className="grid gap-10 sm:gap-12 md:grid-cols-12">
           {/* Brand + positioning */}
-          <div className="md:col-span-5 text-center sm:text-left">
+          <div className="footer-brand md:col-span-5 text-center sm:text-left">
             <div className="flex items-center justify-center sm:justify-start gap-2.5 mb-4">
               <span className="brand-mark" aria-hidden="true">
                 <span></span>
@@ -45,7 +45,7 @@ export default function Footer() {
           </div>
 
           {/* Quick Links */}
-          <nav className="md:col-span-3 text-center sm:text-left" aria-label="Footer">
+          <nav className="footer-links md:col-span-3 text-center sm:text-left" aria-label="Footer">
             <h3 className="font-mono text-gray-warm text-xs uppercase tracking-[0.18em] mb-4">
               {c.ui.footer.exploreTitle}
             </h3>
@@ -64,7 +64,7 @@ export default function Footer() {
           </nav>
 
           {/* Connect */}
-          <div className="md:col-span-4 text-center sm:text-left">
+          <div className="footer-connect md:col-span-4 text-center sm:text-left">
             <h3 className="font-mono text-gray-warm text-xs uppercase tracking-[0.18em] mb-4">
               {c.ui.footer.connectTitle}
             </h3>
@@ -95,12 +95,12 @@ export default function Footer() {
         </div>
 
         {/* Share */}
-        <div className="border-t border-[var(--color-border)] pt-8 mt-12 sm:mt-14">
+        <div className="footer-share border-t border-[var(--color-border)] pt-8 mt-12 sm:mt-14">
           <ShareButtons />
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-[var(--color-border)] pt-6 mt-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+        <div className="footer-bottom border-t border-[var(--color-border)] pt-6 mt-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
           <p className="font-mono text-gray-warm text-[10px] sm:text-xs tracking-wide">
             © {year} {c.personalInfo.name}. {c.ui.footer.rights}
           </p>

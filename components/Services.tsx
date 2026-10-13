@@ -60,12 +60,12 @@ export default function Services() {
   const categories: CategoryKey[] = ['ai', 'architecture', 'finops', 'security']
 
   return (
-    <section ref={ref} className="py-20 lg:py-28" id="services">
+    <section ref={ref} className="services-section py-20 lg:py-28" id="services">
       <m.div
         variants={containerVariants}
         initial={false}
         animate="visible"
-        className="mx-auto max-w-6xl px-6 lg:px-12"
+        className="services-shell mx-auto max-w-6xl px-6 lg:px-12"
       >
         {/* Section Header */}
         <m.div variants={itemVariants}>
@@ -82,7 +82,7 @@ export default function Services() {
         </m.div>
 
         {/* Category Tabs */}
-        <m.div variants={itemVariants} className="flex flex-wrap gap-2 sm:gap-3 mb-10">
+        <m.div variants={itemVariants} className="service-tabs flex flex-wrap gap-2 sm:gap-3 mb-10">
           {categories.map((category) => {
             const active = activeCategory === category
             return (
@@ -108,7 +108,7 @@ export default function Services() {
           initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
-          className="mb-10 max-w-2xl"
+          className="service-category-copy mb-10 max-w-2xl"
         >
           <h3 className="editorial-h3 text-xl lg:text-2xl mb-2">
             {c.ui.services.categories[activeCategory].subtitle}
@@ -124,7 +124,7 @@ export default function Services() {
           initial={false}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 mb-16"
+          className="service-grid grid md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 mb-16"
         >
           {c.services[activeCategory].map((service, index) => {
             const IconComponent = iconMap[service.icon] || FaCloud
@@ -135,7 +135,7 @@ export default function Services() {
                 initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="group flex flex-col overflow-hidden rounded-sm bg-paper border border-[var(--color-border)] hover:border-accent transition-[border-color,transform,box-shadow] duration-200 ease-smooth hover:-translate-y-0.5 hover:shadow-[var(--shadow-card-hover)] shadow-[var(--shadow-card)]"
+                className="service-card group flex flex-col overflow-hidden rounded-sm bg-paper border border-[var(--color-border)] hover:border-accent transition-[border-color,transform,box-shadow] duration-200 ease-smooth hover:-translate-y-0.5 hover:shadow-[var(--shadow-card-hover)] shadow-[var(--shadow-card)]"
               >
                 {/* Accent top rule */}
                 <div className="h-[2px] w-full bg-accent" aria-hidden="true" />
@@ -158,8 +158,8 @@ export default function Services() {
         </m.div>
 
         {/* Engagement Approach */}
-        <m.div variants={itemVariants}>
-          <div className="rounded-sm bg-paper border border-[var(--color-border)] p-6 sm:p-8 max-w-3xl shadow-[var(--shadow-card)] transition-[border-color,box-shadow] duration-200 ease-smooth hover:border-border-strong hover:shadow-[var(--shadow-card-hover)]">
+        <m.div variants={itemVariants} className="services-engagement">
+          <div className="engagement-card rounded-sm bg-paper border border-[var(--color-border)] p-6 sm:p-8 max-w-3xl shadow-[var(--shadow-card)] transition-[border-color,box-shadow] duration-200 ease-smooth hover:border-border-strong hover:shadow-[var(--shadow-card-hover)]">
             <h3 className="editorial-h3 text-xl lg:text-2xl mb-3">
               {c.ui.services.engagementTitle}
             </h3>

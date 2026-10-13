@@ -77,6 +77,12 @@ test('the agent loop stays focused on the loop itself', async () => {
   assert.doesNotMatch(source, /LoopProof|loop-output|proof=/, 'the retired output block is not rendered here')
 })
 
+test('the animated loop has no enclosing square frame', async () => {
+  const styles = await readFile(new URL('../app/globals.css', import.meta.url), 'utf8')
+  assert.match(styles, /\.loop-stage\s*\{[^}]*border:\s*0/, 'the orbit is presented as an open canvas')
+  assert.match(styles, /\.loop-stage\s*\{[^}]*box-shadow:\s*none/, 'the orbit has no floating card shadow')
+})
+
 test('the component holds one icon per step', async () => {
   const source = await parse('components/DevelopmentCycle.tsx')
   const icons = find(source, (node) => ts.isVariableDeclaration(node) && node.name.getText() === 'PHASE_ICONS')

@@ -70,7 +70,7 @@ export default function PersonalProjects() {
       aria-labelledby="personal-projects-heading"
       className="personal-projects"
     >
-      <div className="projects-heading">
+      <div className="projects-heading projects-shell">
         <div className="section-label mb-8">
           <span className="num">06</span>
           <span className="name">{copy.label}</span>
@@ -81,7 +81,7 @@ export default function PersonalProjects() {
         <p className="editorial-lead max-w-2xl">{copy.lead}</p>
       </div>
 
-      <div className="projects-body">
+      <div className="projects-body projects-shell">
         <RevealIndex entries={entries} className="projects-index" />
       </div>
     </section>

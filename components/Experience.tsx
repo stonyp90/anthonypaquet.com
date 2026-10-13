@@ -19,8 +19,8 @@ export default function Experience() {
   }))
 
   return (
-    <section className="section-grid py-20 lg:py-28" id="experience">
-      <div className="mx-auto max-w-6xl px-6 lg:px-12">
+    <section className="experience-section section-grid py-20 lg:py-28" id="experience">
+      <div className="experience-shell mx-auto max-w-6xl px-6 lg:px-12">
         <div className="mb-12">
           <div className="section-label mb-8">
             <span className="num">04</span>
