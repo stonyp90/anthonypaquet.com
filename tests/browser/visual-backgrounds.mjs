@@ -41,6 +41,9 @@ try {
     assert.match(await page.locator('.project-card--tablix img').getAttribute('src'), /\.svg$/, 'Tablix uses a transparent native SVG')
     await page.screenshot({ path: `tmp/browser/fr-${width}-transparent-hero.png` })
     for (const project of ['tablix', 'scaleforged']) {
+      // The index reveals one project at a time: open the entry before measuring it.
+      const trigger = page.locator(`#${project} .reveal-trigger`)
+      if (await trigger.getAttribute('aria-expanded') !== 'true') await trigger.click()
       await page.locator(`.project-card--${project}`).screenshot({ path: `tmp/browser/fr-${width}-${project}-transparent.png` })
     }
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false)

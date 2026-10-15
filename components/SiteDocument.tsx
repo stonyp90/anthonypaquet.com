@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     default: 'Anthony Paquet | AI & Cloud Architect | Engineering Leader',
     template: '%s | Anthony Paquet',
   },
-  description: 'AI & Cloud Architect for Series A AI labs and growth-stage companies. Cut cloud costs 30 to 60%, achieve SOC 2 / HIPAA in weeks, scale 0→1 to enterprise. Currently with Bespoke Labs (Series A RL lab) and founder of Tablix (Quebec legal-tech SaaS for RDPRM, REQ, and hypothèque extraction). AWS, Azure, GCP.',
+  description: 'AI & Cloud Architect for Series A AI labs and growth-stage companies. Cut cloud costs 30 to 60%, achieve SOC 2 / HIPAA in weeks, scale 0→1 to enterprise. Previously with Bespoke Labs (Series A RL lab) and founder of Tablix (Quebec legal-tech SaaS for RDPRM, REQ, and hypothèque extraction). AWS, Azure, GCP.',
   icons: {
     icon: [
       { url: '/favicon.ico?v=2', sizes: 'any' },
@@ -122,7 +122,7 @@ export const metadata: Metadata = {
     alternateLocale: 'fr_CA',
     url: 'https://www.anthonypaquet.com',
     title: 'Anthony Paquet | AI & Cloud Security Architect | Bespoke Labs · Tablix',
-    description: 'AI & Cloud Architect for Series A AI labs and growth-stage companies. Cloud cost reduction 30 to 60%, SOC 2 / HIPAA in weeks, infrastructure security. Currently with Bespoke Labs (Series A RL lab) and founder of Tablix (Quebec legal-tech SaaS).',
+    description: 'AI & Cloud Architect for Series A AI labs and growth-stage companies. Cloud cost reduction 30 to 60%, SOC 2 / HIPAA in weeks, infrastructure security. Previously with Bespoke Labs (Series A RL lab) and founder of Tablix (Quebec legal-tech SaaS).',
     siteName: 'Anthony Paquet, AI & Cloud Architect | Bespoke Labs · Tablix Founder',
     images: [
       {
@@ -137,7 +137,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Anthony Paquet | AI & Cloud Architect | Bespoke Labs · Tablix',
-    description: 'AI & Cloud Architect for Series A AI labs. Cloud cost 30 to 60%, SOC 2 / HIPAA in weeks. Currently with Bespoke Labs · founder of Tablix (Quebec legal-tech).',
+    description: 'AI & Cloud Architect for Series A AI labs. Cloud cost 30 to 60%, SOC 2 / HIPAA in weeks. Previously with Bespoke Labs · founder of Tablix (Quebec legal-tech).',
     images: {
       url: '/og-image.png',
       alt: 'Anthony Paquet, AI & Cloud Architect | Bespoke Labs and Tablix',
@@ -169,7 +169,7 @@ const personSchema = {
   url: 'https://www.anthonypaquet.com',
   image: portraitUrl,
   jobTitle: 'AI & Cloud Security Architect',
-  description: 'Independent AI & Cloud Architect specializing in FinOps (30 to 60% cost reduction), compliance (SOC 2, HIPAA, PCI-DSS), infrastructure security, and disaster recovery for Series A AI labs and growth-stage companies. Currently engaged with Bespoke Labs (Series A RL lab) and founder of Tablix Inc., a Quebec SaaS for legal-document extraction.',
+  description: 'Independent AI & Cloud Architect specializing in FinOps (30 to 60% cost reduction), compliance (SOC 2, HIPAA, PCI-DSS), infrastructure security, and disaster recovery for Series A AI labs and growth-stage companies. Previously engaged with Bespoke Labs (Series A RL lab) and founder of Tablix Inc., a Quebec SaaS for legal-document extraction.',
   sameAs: [
     'https://linkedin.com/in/anthony-paquet-94a31085',
     'https://github.com/stonyp90',
@@ -211,14 +211,8 @@ const personSchema = {
   ],
   worksFor: {
     '@type': 'Organization',
-    name: 'Bespoke Labs',
-    description: 'Series A-funded cutting-edge RL (reinforcement learning) lab running on Google Cloud Platform (GCP). Anthony is engaged as a contractor (via a.team) for GCP cost reduction (FinOps), SOC 2 compliance, infrastructure security, and engineering contributions to Horizon, the lab\'s core product.',
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'Mountain View',
-      addressRegion: 'California',
-      addressCountry: 'United States',
-    },
+    name: 'Nota',
+    url: 'https://gonota.ca',
   },
   owns: [
     {
@@ -404,7 +398,7 @@ const faqSchema = {
       name: 'Does Anthony Paquet work with Series A AI labs and AI startups?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. Anthony is currently engaged with Bespoke Labs, a Series A-funded RL (reinforcement learning) lab, where he drives cloud cost reduction (FinOps), SOC 2 compliance, infrastructure security, and contributes engineering to their core product Horizon. He is well-suited for AI startups Series A through C that need to control GPU and inference costs, achieve SOC 2 for enterprise sales, and harden security before scaling.',
+        text: 'Yes. Anthony previously worked with Bespoke Labs, a Series A-funded RL (reinforcement learning) lab, where he drove cloud cost reduction (FinOps), SOC 2 compliance, infrastructure security, and contributed engineering to their core product Horizon. He is well-suited for AI startups Series A through C that need to control GPU and inference costs, achieve SOC 2 for enterprise sales, and harden security before scaling.',
       },
     },
     {

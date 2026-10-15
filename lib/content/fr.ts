@@ -102,7 +102,7 @@ const expFr: ExpFr[] = [
     achievements: [
       'Fondé Nota pour moderniser l’industrie notariale québécoise, un marché mal servi, axé sur le papier, qui attendait un logiciel conçu autour du travail réel des notaires.',
       'Assure chaque fonction de l’entreprise comme seul opérateur, en orchestrant des agents IA bâtis sur les derniers modèles d’Anthropic (Claude), d’OpenAI et de xAI.',
-      'Chaque département — marketing, mise en marché, ventes et ingénierie — a son propre agent IA, que j’orchestre.',
+      'Chaque département, du marketing à la mise en marché, aux ventes et à l’ingénierie, a son propre agent IA, que j’orchestre.',
     ],
   },
   {

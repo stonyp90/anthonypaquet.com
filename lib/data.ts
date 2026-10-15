@@ -337,7 +337,7 @@ export const experiences = [
     achievements: [
       'Founded Nota to modernize the Quebec notary industry, an underserved, paper-heavy space overdue for software built around how notaries actually work.',
       'Run every function of the company as its sole operator, orchestrating AI agents built on the latest models from Anthropic (Claude), OpenAI and xAI.',
-      'Each department has its own AI agent — marketing, go-to-market, sales and engineering — coordinated through my orchestration.',
+      'Each department has its own AI agent for marketing, go-to-market, sales and engineering, coordinated through my orchestration.',
     ],
     tags: ['Legal Tech', 'Notary Tech', 'Quebec', 'Founder', 'AI Agents', '0→1'],
   },
