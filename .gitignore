@@ -44,3 +44,6 @@ __pycache__/
 
 # Git worktrees created by agents live inside the repo
 /.claude/worktrees/
+
+# Preserve non-regenerable work when retiring agent worktrees
+/.retained/

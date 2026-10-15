@@ -12,7 +12,7 @@ const checks = []
 try {
   for (const route of ['/', '/fr/']) {
     const locale = route === '/' ? 'en' : 'fr'
-    const staticContext = await browser.newContext({ javaScriptEnabled: false })
+    const staticContext = await browser.newContext({ javaScriptEnabled: false, reducedMotion: 'reduce' })
     const staticPage = await staticContext.newPage()
     await staticPage.goto(`${baseURL}${route}`)
     assert.equal(await staticPage.locator('html').getAttribute('lang'), locale, 'Correct static document language')
@@ -45,11 +45,10 @@ try {
       // Personal-project names belong to #personal-projects only. The company
       // "Nota" legitimately heads #experience, so match its project card name.
       assert.doesNotMatch(await page.locator('#experience').textContent(), /GoNota|Tablix|Ursly|ScaleForged|Lunorive/)
-      // How I Work names the product the loop shipped, and its link opens that
-      // project in the index, side by side or stacked.
-      await page.locator('#how-i-work a[href="#lunorive"]').click()
-      await page.waitForFunction(() => document.querySelector('#lunorive button')?.getAttribute('aria-expanded') === 'true')
-      assert.equal(await page.locator('.project-card--lunorive').isVisible(), true, 'The loop output link opens Lunorive')
+      // The lifecycle remains one standalone section, as requested after the
+      // earlier Lunorive callout was removed.
+      assert.equal(await page.locator('#how-i-work').count(), 1)
+      assert.equal(await page.locator('#how-i-work a[href="#lunorive"]').count(), 0)
       await page.locator('.site-nav a[href="#personal-projects"]').click()
       await page.locator('#personal-projects').scrollIntoViewIfNeeded()
       assert.equal(await page.locator('#personal-projects').evaluate(el => getComputedStyle(el.parentElement).opacity), '1')
@@ -95,6 +94,19 @@ try {
   const context = await browser.newContext({ reducedMotion: 'no-preference', viewport: { width: 1280, height: 900 } })
   const page = await context.newPage()
   await page.goto(`${baseURL}/fr/`, { waitUntil: 'networkidle' })
+  await page.locator('#how-i-work').scrollIntoViewIfNeeded()
+  const stations = page.locator('#how-i-work .loop-station')
+  assert.equal(await stations.count(), 12, 'All twelve lifecycle steps are interactive')
+  await stations.nth(7).click()
+  assert.equal(await stations.nth(7).getAttribute('aria-pressed'), 'true', 'Click pins a lifecycle step')
+  await stations.nth(7).click()
+  await stations.nth(7).evaluate(element => element.blur())
+  await page.mouse.move(0, 0)
+  assert.equal(await stations.nth(7).getAttribute('aria-pressed'), 'false', 'Click releases the pinned step')
+  const orbitCoordinates = () => page.locator('#how-i-work svg[viewBox] circle').evaluateAll(circles => circles.map(circle => [circle.getAttribute('cx'), circle.getAttribute('cy')]))
+  const beforeOrbit = JSON.stringify(await orbitCoordinates())
+  await page.waitForFunction(before => JSON.stringify([...document.querySelectorAll('#how-i-work svg[viewBox] circle')].map(circle => [circle.getAttribute('cx'), circle.getAttribute('cy')])) !== before, beforeOrbit)
+  checks.push('normal motion: twelve stations, pin/release and moving orbit')
   await page.locator('#personal-projects').scrollIntoViewIfNeeded()
   await page.waitForFunction(() => getComputedStyle(document.querySelector('#personal-projects').parentElement).opacity === '1')
   assert.equal(await page.locator('.reveal-pending #personal-projects').count(), 0)
