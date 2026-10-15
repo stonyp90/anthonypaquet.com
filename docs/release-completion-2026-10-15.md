@@ -9,6 +9,7 @@ The portfolio requirements were reconciled with the local extracted session inve
 ## Changes and decisions
 
 - Recover the two unique commits from `orchestrator/cv-and-tests`: ignore in-repository worktrees, and open a project before taking its screenshot. The older branch is behind the current design; merging its complete tree would regress it, so only its two unique changes are replayed.
+- Complete the previously flagged employment metadata fix: the UI called Bespoke a previous role but SEO, JSON-LD and llms.txt still described it as current. Three new regression guards reproduce that contradiction before correction; metadata now uses past tense and the current employer schema agrees with the Nota founder role. No role dates are invented.
 - Reproduce and fix the existing failing copy test: the new Nota department description used two em dashes in each locale despite the existing punctuation contract. Punctuation changes preserve the information and the one-agent-per-department wording.
 - Keep the accepted hero, portrait and latest open editorial surfaces. The lifecycle stays one standalone animated twelve-step section, without the older Lunorive callout. Update the browser contract accordingly; add real pin/release and moving-orbit checks.
 - Ignore generated scratch, outputs and agent worktrees in ESLint; the supported ESLint global-ignore configuration leaves all shipped source under lint.
@@ -33,6 +34,7 @@ These integration and preservation choices are reversible AI engineering judgmen
 Checked 15 October 2026 against installed packages: Next 15.5.9, React 19.2.3, Framer Motion 11.18.2, ESLint 9.39.2, TypeScript 5.9.3, Wrangler 4.148.0. No package upgrade was needed.
 
 - Next 15 static exports: https://nextjs.org/docs/15/app/getting-started/deploying
+- Schema.org employer relation: https://schema.org/worksFor
 - ESLint flat global ignores: https://eslint.org/docs/latest/use/configure/ignore
 - Motion reduced-motion behavior: https://motion.dev/docs/react-accessibility
 - Cloudflare versions and active deployments: https://developers.cloudflare.com/workers/versions-and-deployments/
@@ -41,7 +43,7 @@ Checked 15 October 2026 against installed packages: Next 15.5.9, React 19.2.3, F
 ## Verification and release procedure
 
 1. Reproduce the current failing copy guard before changing punctuation.
-2. Run lint, TypeScript, all 61 Node tests and static build.
+2. Run lint, TypeScript, all 64 Node tests and static build.
 3. Serve the export and run both browser scripts: EN/FR, 1440/390/320 px, no-JavaScript readable export, project images/links, keyboard controls, responsive visual checks, reduced-motion change, twelve-step pin/release and orbit motion.
 4. Open the focused PR, await its exact-head checks, merge, rebuild from the final clean commit, deploy and compare public `release.json`, portrait/PDF hashes and live browser behavior.
 5. Remove merged worktrees and branches after retaining non-regenerable files. Re-check main status, remote parity, active Cloudflare version and public routes.
