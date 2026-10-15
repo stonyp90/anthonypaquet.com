@@ -4,7 +4,7 @@
 
 The owner authorized completion of unfinished Codex and Claude Code work, reviewed integration into main, and production deployment. The latest accepted design and content take precedence over older requests. No new architecture boundary, service, external adapter, provider subscription or dependency is introduced. Existing content/data modules remain separate from React presentation and the Cloudflare asset/redirect adapter.
 
-The portfolio requirements were reconciled with the local extracted session inventory: 21 records under this repository, including 10 imported mirrors; the current lifecycle thread is `01a1369f-3b15-7df3-8313-f0cedabe2f2b`. Imported mirror records are not independent completed tasks.
+The portfolio requirements were reconciled with the local extracted session inventory: 20 records under this repository, including 10 imported mirrors; the current lifecycle thread is `01a1369f-3b15-7df3-8313-f0cedabe2f2b`. Imported mirror records are not independent completed tasks.
 
 ## Changes and decisions
 
@@ -28,6 +28,10 @@ These integration and preservation choices are reversible AI engineering judgmen
 - September Eusli/Earthly naming requests were superseded by the October Ursly project and branding; do not restore old names or old employment metadata.
 - HTTPS/DNS thread `8b4f0ed7-8b16-4ee5-8a9d-d84cf63885c3`: site HTTPS is independently checked. The last historical SMTP send-as problem required the owner's Google application password. No test email or personal-profile post is authorized by this release, and mail sending is not claimed complete.
 - CV document threads: the website CV and local NRCan portrait handoff are covered. This audit does not submit job applications or assert external account changes.
+
+## Inventory coverage caveats
+
+Three imported records need separate treatment. The slow-action/auth spinner mirror (`01a0a22d-8df5-77f0-9d03-2f845fcd803c`) ends with a request to switch to another project and was forwarded to the Nota owner for review; this static portfolio has no auth flow. The “Document improvement” mirror (`01a09810-7d28-7411-9565-7c1f34adb40c`) points to a missing original Claude file under talk-to-a-document, so it is not evidence of a portfolio task completed here. The West Hollywood mirror (`01a09810-c45e-7cd2-aa5e-386714b9eeab`) also has a missing original; the current CREE8 location is present, but exact historical requirement coverage is unproven. These are not counted as independently completed requirements.
 
 ## Versions and official guidance
 
