@@ -102,3 +102,38 @@ test('every card visual is declared active and matches its recorded brand manife
     }
   }
 })
+
+// A social destination ships only when its ownership is verified. The 2026-10-15
+// studio social audit (docs/social evidence in the scaleforged-website repository)
+// confirmed admin access to the ScaleForge LinkedIn company page. X, Facebook,
+// Reddit and every other network stayed unverified, so none of them may appear
+// in the catalogue, even as a placeholder.
+test('ScaleForged links only the verified company LinkedIn page', () => {
+  const verified = ['https://www.linkedin.com/company/scaleforged/']
+  for (const locale of ['en', 'fr']) {
+    const project = getPersonalProjects(locale).find(({ id }) => id === 'scaleforged')
+    assert.deepEqual((project.socialLinks ?? []).map(({ href }) => href), verified)
+  }
+  for (const forbidden of ['facebook.com', 'x.com', 'twitter.com', 'instagram.com', 'youtube.com']) {
+    assert.equal(source.toLowerCase().includes(forbidden), false, `${forbidden} is not a verified ScaleForge profile`)
+  }
+})
+
+// The investor pitch is private until the final review passes and the owner
+// releases it. The entry point is prepared in code, but the release gate keeps
+// every pitch link out of the rendered cards while the status is not live.
+test('the pitch entry point stays closed until the owner releases it', async () => {
+  const configSource = await readFile(new URL('../config/pitch-release.json', import.meta.url), 'utf8')
+  const config = JSON.parse(configSource)
+  assert.equal(config.status, 'pending-owner-release')
+  const compiledGate = ts.transpileModule(
+    await readFile(new URL('../lib/pitch-release.ts', import.meta.url), 'utf8'),
+    { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }
+  ).outputText
+  const { pitchLinks } = await import(
+    `data:text/javascript;base64,${Buffer.from(compiledGate).toString('base64')}`
+  )
+  assert.equal(pitchLinks(config), null, 'A pending pitch must not create public links')
+  const live = { ...config, status: 'live', verified: true }
+  assert.ok(pitchLinks(live), 'A released pitch exposes its bilingual entries')
+})

@@ -47,3 +47,7 @@ __pycache__/
 
 # Preserve non-regenerable work when retiring agent worktrees
 /.retained/
+
+# Private ScaleForge investor pitch authoring. The pitch stays unpublished
+# until the final review passes and the owner releases it.
+/docs/scaleforge-pitch/

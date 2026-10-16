@@ -1,10 +1,18 @@
 import type { Locale } from '@/lib/content'
 
+export type ProjectSocialLink = {
+  label: string
+  /** Shipped only after the social audit verified ownership of the profile. */
+  href: `https://${string}`
+}
+
 export type PersonalProject = {
   id: 'gonota' | 'tablix' | 'ursly' | 'scaleforged' | 'lunorive'
   name: string
   /** Official destination. Absent until the product has a confirmed public URL. */
   url?: `https://${string}`
+  /** Verified company social profiles. Only audited, owner-administered pages ship. */
+  socialLinks?: readonly ProjectSocialLink[]
   category: string
   description: string
   slogan?: readonly string[]
@@ -72,6 +80,7 @@ const projects: Record<Locale, readonly PersonalProject[]> = {
     },
     {
       id: 'scaleforged', name: 'ScaleForged', url: 'https://scaleforged.io',
+      socialLinks: [{ label: 'ScaleForge on LinkedIn', href: 'https://www.linkedin.com/company/scaleforged/' }],
       category: 'Independent venture studio',
       description: 'An independent studio building vertical SaaS platforms on a shared technical foundation.',
       visual: visuals.scaleforged,
@@ -106,6 +115,7 @@ const projects: Record<Locale, readonly PersonalProject[]> = {
     },
     {
       id: 'scaleforged', name: 'ScaleForged', url: 'https://scaleforged.io',
+      socialLinks: [{ label: 'ScaleForge sur LinkedIn', href: 'https://www.linkedin.com/company/scaleforged/' }],
       category: 'Studio venture indépendant',
       description: 'Un studio indépendant qui construit des plateformes SaaS verticales sur un socle technique commun.',
       visual: visuals.scaleforged,

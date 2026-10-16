@@ -217,6 +217,18 @@ const personSchema = {
   owns: [
     {
       '@type': 'Organization',
+      '@id': 'https://scaleforged.io/#org',
+      name: 'ScaleForge',
+      url: 'https://scaleforged.io',
+      description: 'AI venture studio rooted in the Quebec City region. It designs, builds and improves digital products with people who know their industries, on short feedback loops. Each product keeps its own brand and audience.',
+      areaServed: {
+        '@type': 'Place',
+        name: 'Quebec, Canada',
+      },
+      sameAs: ['https://www.linkedin.com/company/scaleforged/'],
+    },
+    {
+      '@type': 'Organization',
       '@id': 'https://tablix.ca/#org',
       name: 'Tablix Inc.',
       url: 'https://tablix.ca',

@@ -1,0 +1,10 @@
+{
+  "status": "pending-owner-release",
+  "verified": false,
+  "revision": null,
+  "note": "The bilingual ScaleForge investor pitch is private until the final review passes and the owner releases it (docs/scaleforge-pitch/README.md). Flip status to live and verified only together with the released package copied into public/scaleforge-pitch/. No public link exists while this gate is pending.",
+  "locales": {
+    "en": { "href": "/scaleforge-pitch/index.html", "label": "Watch the narrated investor pitch" },
+    "fr": { "href": "/scaleforge-pitch/index.fr.html", "label": "Voir la présentation narrée aux investisseurs" }
+  }
+}
