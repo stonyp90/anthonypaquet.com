@@ -22,7 +22,9 @@ Living style guide: `/brand/` (FR) and `/en/brand/` on scaleforged.io,
 - Brass (`--color-accent`) is decorative on light surfaces. Text, links and
   icons use `--color-accent-text`.
 - `<html>` carries `data-brand="anthony-paquet"` or `data-brand="scaleforged"`.
-  The voices differ only in display face and display tracking.
+  The voices differ only in display face and display tracking: the personal
+  brand uses the serif, the studio uses Big Shoulders Display (`--font-forged`,
+  loaded as `--font-bigshoulders`), the face of its strike-F logo.
 - Motion reads `--duration-*` and `--motion-*`, which drop to zero under
   `prefers-reduced-motion`.
 

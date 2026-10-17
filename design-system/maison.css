@@ -1,6 +1,6 @@
 /* ==========================================================================
    MAISON · shared design system for Anthony Paquet and ScaleForge
-   Version 1.0.0 (2026-10-17)
+   Version 1.1.0 (2026-10-17)
 
    This file is byte-identical in stonyp90/stonyp90 (anthonypaquet.com) and
    stonyp90/scaleforged-website (scaleforged.io). Change it in both repos in
@@ -77,12 +77,13 @@
   --color-beta: var(--maison-rust);
   --color-beta-bg: var(--maison-rust-wash);
 
-  /* Type families. next/font sets --font-inter, --font-playfair and
-     --font-jetbrains on <html>; the fallbacks keep each stack valid where a
-     site does not load that face. */
+  /* Type families. next/font sets --font-inter, --font-playfair,
+     --font-jetbrains and --font-bigshoulders on <html>; the fallbacks keep
+     each stack valid where a site does not load that face. */
   --font-sans: var(--font-inter, "Inter"), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-serif: var(--font-playfair, Georgia), Georgia, serif;
   --font-mono: var(--font-jetbrains, ui-monospace), ui-monospace, "SFMono-Regular", Consolas, monospace;
+  --font-forged: var(--font-bigshoulders, var(--font-inter, "Inter")), "Arial Narrow", sans-serif;
   --font-body: var(--font-sans);
   --font-display: var(--brand-display-family, var(--font-serif));
 
@@ -150,7 +151,8 @@
 
 /* 3. Brand themes ------------------------------------------------------------
    Same house, two voices. The personal brand speaks in a serif (authored,
-   human); the studio speaks in the sans (built, technical). Everything else,
+   human); the studio speaks in a condensed industrial sans, the face of its
+   strike-F wordmark (built, forged). Everything else,
    palette, spacing, shape, motion and focus, is shared. */
 [data-brand="anthony-paquet"] {
   --brand-display-family: var(--font-serif);
@@ -158,8 +160,8 @@
 }
 
 [data-brand="scaleforged"] {
-  --brand-display-family: var(--font-sans);
-  --brand-display-tracking: -0.045em;
+  --brand-display-family: var(--font-forged);
+  --brand-display-tracking: 0.01em;
 }
 
 @media (prefers-reduced-motion: reduce) {

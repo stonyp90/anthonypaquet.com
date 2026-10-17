@@ -6,7 +6,7 @@ export type MaisonLocale = 'fr' | 'en'
 export type MaisonBrand = 'anthony-paquet' | 'scaleforged'
 type Copy = Record<MaisonLocale, string>
 
-export const MAISON_VERSION = '1.0.0'
+export const MAISON_VERSION = '1.1.0'
 
 export type MaisonColor = { token: string; role: string; hex: string; use: Copy }
 
