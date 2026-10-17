@@ -20,16 +20,18 @@
   --color-accent-glow: #d4831f12;
   --color-header: #fffcf5f2;
   --color-mask: #000;
-  --color-tablix-green: #22c55e;
-  --color-tablix-green-light: #4ade80;
+  /* Tablix's canonical deep green from the 2026-10-15 brand (squareBack of
+     design-system/brand/tablix-mark.svg); the lime accent is unreadable on
+     this cream ground, so only the ink-safe brand green is used for text. */
+  --color-tablix-green: #2c5f34;
   --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  /* Logo colours, locked to public/favicon.svg (AP monogram) and
-     public/images/logos/scaleforged.svg (ScaleForge bars). Both marks share
-     the iron and the brass. Used only by components/BrandMark.tsx. */
+  /* The personal AP monogram, drawn from these by components/BrandMark.tsx and
+     locked to public/favicon.svg. Product marks are never drawn here: each one
+     is a byte-exact copy of its own brand file, see
+     docs/project-brand-assets-2026-10-02.json. */
   --mark-iron: #1a1a1a;
   --mark-brass: #d9892a;
-  --mark-ember: #f0b86a;
   --mark-bone: #fbf5ea;
 }
 
@@ -511,9 +513,7 @@ section { position: relative; z-index: 1; }
 .projects-index .reveal-trigger { padding-top: 1.35rem; padding-bottom: 1.35rem; }
 .projects-index .reveal-title { font-size: clamp(1.6rem, 3.2vw, 2.5rem); letter-spacing: -0.01em; }
 .project-visual { display: flex; align-items: center; justify-content: center; height: 13rem; padding: 2rem; border: 1px solid var(--color-border); border-radius: 0.5rem; background: var(--color-paper-soft); }
-.project-logo { width: auto; max-width: 70%; height: auto; max-height: 5rem; object-fit: contain; }
-.project-card--tablix .project-logo, .project-card--scaleforged .project-logo, .project-card--ursly .project-logo { height: 4.5rem; }
-.project-card--lunorive .project-logo { height: 2.5rem; }
+.project-logo { width: auto; max-width: 70%; height: 4.5rem; max-height: 5rem; object-fit: contain; }
 .project-description { max-width: 60ch; margin: 1.5rem 0 0; color: var(--color-ink-soft); font-size: 1.05rem; line-height: 1.65; }
 .project-slogan { display: flex; flex-wrap: wrap; gap: 0.35rem 1rem; margin: 1rem 0 0; font-size: 1rem; font-weight: 500; color: var(--color-ink); }
 .project-link { display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 1.5rem; padding: 0.5rem 0; font-size: 0.9rem; font-weight: 500; border-bottom: 1px solid var(--color-border-strong); color: var(--color-accent-text); transition: color 200ms var(--ease-smooth), border-color 200ms var(--ease-smooth); }

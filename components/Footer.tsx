@@ -26,7 +26,7 @@ export default function Footer() {
           {/* Brand + positioning */}
           <div className="footer-brand md:col-span-5 text-center sm:text-left">
             <div className="flex items-center justify-center sm:justify-start gap-2.5 mb-4">
-              <BrandMark brand="anthony-paquet" />
+              <BrandMark />
               <span className="brand-name text-lg sm:text-xl">{c.personalInfo.name}</span>
             </div>
             <p className="font-display text-ink text-lg sm:text-xl leading-snug max-w-sm mx-auto sm:mx-0">
