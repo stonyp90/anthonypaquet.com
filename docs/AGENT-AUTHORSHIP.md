@@ -18,6 +18,15 @@ provider (Codex / Claude Code) in the same repository.
 | `01a14109-eec4-7c02-9b63-9745745c9936` | Codex | 2026-10-15 | ScaleForge pitch authoring: deck/narration/splash/brand, player, films, website entry. Threads A-F. | `docs/scaleforge-pitch/.coord/*-report.*` |
 | `12aad3f2-e061-487a-b504-1a8bfb5b22c2` | Qoder (peer) | 2026-10-16 | Owner-authorized branch inventory and merge of the Codex-authored pitch entry to main; player defect report `peer-web-fixes.json`. | `9e0a78c` |
 | `f51d9464-7b3b-4af7-89ef-33965921f5c8` | Qoder | 2026-10-16 | Resume of the authoring after the Codex token limit: owner revision 2026-10-16b (25 chapters, five spoken studio brands, per-brand pronunciation, retired-brand leak guard), generator regeneration and guard completion. | `docs/scaleforge-pitch/.coord/H2.json`, `change-log.txt` |
+| `91bde8ec-764b-4afb-aa6d-9f2beb5b8980` | Qoder | 2026-10-17 | Canonical product marks: the five card visuals, the pinned provenance manifest, `scripts/sync-product-logos.mjs`, the retired redraws deleted, `BrandMark` reduced to the personal monogram. Owner decisions: canonical mark only per card, byte-exact copies including raster PNGs, ScaleForge's strike-F adopted. | `fbbcf1f` |
+| `01a14109-eec4-7c02-9b63-9745745c9936` | Codex | 2026-10-17 | Repair of the sync adapter above (restore drifted or missing outputs, validate shipped bytes even when the source repository is absent) plus fixture regressions and the source evidence record. | `fbbcf1f`, `docs/project-brand-evidence-2026-10-17.md` |
+
+## Boundary of the 2026-10-17 canonical marks work
+
+The mark cohort and its manifest are the Qoder authoring above; the sync repair, its
+fixture tests and `docs/project-brand-evidence-2026-10-17.md` are the Codex authoring.
+Both reached `main` as one squash-merged commit through PR #8, which copied the peer
+checkout's 26 dirty paths into an isolated worktree before repairing them.
 
 ## Boundary of the Qoder authoring session
 
