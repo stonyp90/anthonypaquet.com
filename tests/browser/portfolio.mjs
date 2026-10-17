@@ -61,7 +61,7 @@ try {
       assert.equal(await page.locator('#top img').evaluate(img => img.complete && img.naturalWidth > 0), true)
       // Personal-project names belong to #personal-projects only. The company
       // "Nota" legitimately heads #experience, so match its project card name.
-      assert.doesNotMatch(await page.locator('#experience').textContent(), /GoNota|Tablix|Ursly|ScaleForged|Lunorive/)
+      assert.doesNotMatch(await page.locator('#experience').textContent(), /GoNota|Tablix|Ursly|ScaleForge|Lunorive/)
       // The lifecycle remains one standalone section, as requested after the
       // earlier Lunorive callout was removed.
       assert.equal(await page.locator('#how-i-work').count(), 1)

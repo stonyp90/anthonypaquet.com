@@ -4,6 +4,7 @@ import { m } from 'framer-motion'
 import Link from 'next/link'
 import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa'
 import { useContent } from '@/components/LocaleProvider'
+import BrandMark from './BrandMark'
 import ShareButtons from './ShareButtons'
 
 export default function Footer() {
@@ -25,11 +26,7 @@ export default function Footer() {
           {/* Brand + positioning */}
           <div className="footer-brand md:col-span-5 text-center sm:text-left">
             <div className="flex items-center justify-center sm:justify-start gap-2.5 mb-4">
-              <span className="brand-mark" aria-hidden="true">
-                <span></span>
-                <span></span>
-                <span></span>
-              </span>
+              <BrandMark brand="anthony-paquet" />
               <span className="brand-name text-lg sm:text-xl">{c.personalInfo.name}</span>
             </div>
             <p className="font-display text-ink text-lg sm:text-xl leading-snug max-w-sm mx-auto sm:mx-0">
