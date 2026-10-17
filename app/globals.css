@@ -3,74 +3,27 @@
 @tailwind utilities;
 
 /* ==========================================================================
-   ANTHONY PAQUET — EDITORIAL MAISON THEME
-   Cream paper, Playfair display, warm brass accent. Ported from ScaleForged.
-   Fonts are loaded via next/font in app/layout.tsx (--font-inter / -playfair /
-   -jetbrains). Tailwind v3 utilities map to these tokens in tailwind.config.js.
+   ANTHONY PAQUET · Maison design system, personal voice
+   Palette, type, space, shape, motion and focus come from the shared
+   design-system/maison.css (same file as scaleforged.io), imported before this
+   file in components/SiteDocument.tsx. <html> carries
+   data-brand="anthony-paquet", which sets the Playfair display voice.
+   Tailwind v3 utilities map to these tokens in tailwind.config.js. Only
+   tokens that exist on this site alone are declared here.
    ========================================================================== */
 
 :root {
-  /* Editorial palette ------------------------------------------------------ */
-  --color-cream: #f6efe0;        /* page bg — warm cream */
-  --color-paper: #fffcf5;        /* surface bg — soft warm white */
-  --color-paper-soft: #faf3e6;   /* zebra / subtle alt */
-  --color-ink: #1b1714;          /* primary text — warm near-black, AAA on cream */
-  --color-ink-soft: #463f38;     /* secondary text — warm, AA+ on cream + panels */
-  --color-gray: #6a615b;         /* muted text */
-  --color-accent: #d4831f;       /* warm brass/orange — decorative fills */
-  --color-accent-soft: #edb265;
-  --color-accent-bg: #fcf3e0;
-  --color-accent-text: #8f5310;  /* deep brass for text/links/icons — WCAG AA+ */
-  --color-border: #e7dcc6;       /* hairlines / dividers */
-  --color-border-strong: #c4b394;
   --color-grid-faint: #c4b39429;
   --color-grid-strong: #c4b3944d;
+  --color-grid: #c4b39438;
   --color-accent-haze: #d4831f08;
   --color-accent-glow: #d4831f12;
+  --color-header: #fffcf5f2;
   --color-mask: #000;
   --color-tablix-green: #22c55e;
   --color-tablix-green-light: #4ade80;
-
-  /* Typography ------------------------------------------------------------- */
-  --font-display: var(--font-playfair), Georgia, serif;
-  --font-body: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-mono: var(--font-jetbrains), "JetBrains Mono", "Fira Code", monospace;
-
-  /* Status badges ---------------------------------------------------------- */
-  --color-live: #246626;
-  --color-live-bg: #e7f1e6;
-  --color-beta: #92440f;
-  --color-beta-bg: #fdf2ea;
-
-  /* Motion + spacing (kept) ------------------------------------------------ */
-  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  --space-xs: clamp(0.5rem, 1vw, 0.75rem);
-  --space-sm: clamp(0.75rem, 2vw, 1rem);
-  --space-md: clamp(1rem, 3vw, 1.5rem);
-  --space-lg: clamp(1.5rem, 4vw, 2.5rem);
-  --space-xl: clamp(2rem, 6vw, 4rem);
-  --space-2xl: clamp(3rem, 8vw, 6rem);
-  --color-section-alt: #f1e8d4;
-  --color-header: #fffcf5f2;
-  --color-grid: #c4b39438;
-  --color-shadow: #3a2a1433;
-  --surface-base: var(--color-cream);
-  --surface-raised: var(--color-paper);
-  --surface-muted: var(--color-paper-soft);
-  --line-subtle: var(--color-border);
-  --line-strong: var(--color-border-strong);
-  --radius-control: 0.35rem;
-  --radius-panel: 0.75rem;
-  --shadow-card: 0 12px 36px -22px var(--color-shadow);
-  --shadow-card-hover: 0 22px 46px -22px var(--color-shadow);
-  --shadow-float: 0 24px 60px -38px var(--color-shadow);
-  --motion-duration: 650ms;
-  --motion-distance: 24px;
-  --motion-section-duration: 820ms;
-  --motion-section-distance: 32px;
-
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -122,7 +75,7 @@ section { position: relative; z-index: 1; }
 /* Section label — monospace eyebrow ---------------------------------------- */
 .section-label { display: flex; align-items: center; gap: 14px; }
 .section-label::before { content: ""; width: 28px; height: 1.5px; background: var(--color-accent); display: block; flex-shrink: 0; }
-.section-label .num { font-family: var(--font-mono); font-weight: 500; color: var(--color-accent); font-size: 0.7rem; letter-spacing: 0.06em; }
+.section-label .num { font-family: var(--font-mono); font-weight: 500; color: var(--color-accent-text); font-size: 0.7rem; letter-spacing: 0.06em; }
 .section-label .name { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-ink-soft); }
 
 /* Pull quote --------------------------------------------------------------- */
@@ -159,13 +112,13 @@ section { position: relative; z-index: 1; }
 
 /* Pillar card -------------------------------------------------------------- */
 .pillar { border: 1px solid var(--color-border); border-top: 3px solid var(--color-accent); background: var(--color-paper); padding: 1.75rem 1.5rem; }
-.pillar .num { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.12em; color: var(--color-accent); font-weight: 600; text-transform: uppercase; margin-bottom: 0.5rem; display: block; }
+.pillar .num { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.12em; color: var(--color-accent-text); font-weight: 600; text-transform: uppercase; margin-bottom: 0.5rem; display: block; }
 .pillar h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.4rem; line-height: 1.15; margin-bottom: 0.75rem; color: var(--color-ink); }
 .pillar p { font-size: 0.95rem; line-height: 1.5; color: var(--color-ink-soft); margin-bottom: 0.5rem; }
 
 /* Highlight block (warm pin) ---------------------------------------------- */
 .editorial-highlight { background: var(--color-accent-bg); border: 1px solid var(--color-accent-soft); border-left: 4px solid var(--color-accent); padding: 1.25rem 1.5rem; border-radius: 2px; }
-.editorial-highlight .pin { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent); font-weight: 600; margin-bottom: 0.75rem; display: block; }
+.editorial-highlight .pin { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent-text); font-weight: 600; margin-bottom: 0.75rem; display: block; }
 
 /* Credentials row ---------------------------------------------------------- */
 .cred-row { display: grid; grid-template-columns: 11rem 1fr; gap: 1.5rem; padding: 1rem 0; border-bottom: 1px solid var(--color-border); }

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Playfair_Display, JetBrains_Mono } from 'next/font/google'
+import '@/design-system/maison.css'
 import '@/app/globals.css'
 import { personalInfo, siteUrl } from '@/lib/data'
 
@@ -503,7 +504,7 @@ export default function SiteDocument({
   lang: 'en' | 'fr'
 }) {
   return (
-    <html lang={lang} className={`${inter.variable} ${playfair.variable} ${jetbrains.variable}`}>
+    <html lang={lang} data-brand="anthony-paquet" className={`${inter.variable} ${playfair.variable} ${jetbrains.variable}`}>
       <body className="font-sans antialiased">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         {children}

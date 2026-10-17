@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Generate out/sitemap.xml from the static export so lastmod and the alternate
 // language links can never drift from the pages that actually ship.
-import { readdirSync, statSync, writeFileSync } from 'node:fs'
+import { readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 
 const ROOT = process.argv[2] ?? 'out'
@@ -14,7 +14,12 @@ function htmlFiles(dir, base = '') {
     if (entry.name.startsWith('.')) continue
     const rel = path.posix.join(base, entry.name)
     if (entry.isDirectory()) found.push(...htmlFiles(path.join(dir, entry.name), rel))
-    else if (entry.name.endsWith('.html')) found.push({ rel, mtime: statSync(path.join(dir, entry.name)).mtime })
+    else if (entry.name.endsWith('.html')) {
+      const file = path.join(dir, entry.name)
+      // Pages that opt out of indexing (the /brand style guide) stay out of the sitemap.
+      if (/<meta name="robots" content="[^"]*noindex/i.test(readFileSync(file, 'utf8'))) continue
+      found.push({ rel, mtime: statSync(file).mtime })
+    }
   }
   return found
 }
