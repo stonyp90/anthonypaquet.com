@@ -74,8 +74,9 @@ test('every project card uses a mark on the shared light card', async () => {
 })
 
 // Brand provenance is a runtime gate, not a document a reader has to trust: every
-// shipped mark must match the hash recorded for it, and no card may use an asset
-// the manifest does not declare active.
+// shipped mark must match the hash recorded for it, no card may use an asset the
+// manifest does not declare active, and each active mark must be pinned to a commit
+// in its own product repository and copied byte for byte rather than adapted here.
 test('every card visual is declared active and matches its recorded brand manifest', async () => {
   const manifest = JSON.parse(
     await readFile(new URL('../docs/project-brand-assets-2026-10-02.json', import.meta.url), 'utf8')
@@ -86,6 +87,21 @@ test('every card visual is declared active and matches its recorded brand manife
       const entry = byOutput.get(`public${project.visual.src}`)
       assert.ok(entry, `${project.name} ships a visual with no manifest provenance`)
       assert.match(entry.usage ?? 'Active', /^Active/, `${project.name} uses a historical asset`)
+      assert.equal(
+        entry.transformation,
+        'Byte-identical copy',
+        `${project.name} mark must be copied byte for byte, never redrawn for this site`
+      )
+      assert.match(
+        entry.commit ?? '',
+        /^[0-9a-f]{40}$/,
+        `${project.name} mark must be pinned to a commit in its product repository`
+      )
+      assert.equal(
+        entry.sourceSha256,
+        entry.outputSha256,
+        `${project.name} shipped mark is not the byte-identical copy its manifest records`
+      )
       const bytes = await readFile(new URL(`../public${project.visual.src}`, import.meta.url))
       assert.equal(
         createHash('sha256').update(bytes).digest('hex'),

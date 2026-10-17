@@ -18,6 +18,13 @@ provider (Codex / Claude Code) in the same repository.
 | `01a14109-eec4-7c02-9b63-9745745c9936` | Codex | 2026-10-15 | ScaleForge pitch authoring: deck/narration/splash/brand, player, films, website entry. Threads A-F. | `docs/scaleforge-pitch/.coord/*-report.*` |
 | `12aad3f2-e061-487a-b504-1a8bfb5b22c2` | Qoder (peer) | 2026-10-16 | Owner-authorized branch inventory and merge of the Codex-authored pitch entry to main; player defect report `peer-web-fixes.json`. | `9e0a78c` |
 | `f51d9464-7b3b-4af7-89ef-33965921f5c8` | Qoder | 2026-10-16 | Resume of the authoring after the Codex token limit: owner revision 2026-10-16b (25 chapters, five spoken studio brands, per-brand pronunciation, retired-brand leak guard), generator regeneration and guard completion. | `docs/scaleforge-pitch/.coord/H2.json`, `change-log.txt` |
+| `91bde8ec-764b-4afb-aa6d-9f2beb5b8980` | Qoder | 2026-10-17 | Canonical product marks on the portfolio: each project card now carries that product's own brand file, copied byte for byte at a pinned commit, with a sync gate and guard tests; the redrawn marks are deleted and `BrandMark` is the personal monogram only. | `qoder/canonical-product-marks-20261017` |
+
+## Boundary of the 2026-10-17 canonical marks session
+
+Owner decisions recorded in `docs/project-brand-assets-2026-10-02.json`: canonical mark only
+per card, byte-exact copies (PNG where the product's adopted canonical is raster), and
+ScaleForge's strike-F adopted over the retired bars.
 
 ## Boundary of the Qoder authoring session
 

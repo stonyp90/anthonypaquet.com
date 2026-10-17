@@ -48,12 +48,15 @@ export const personalProjectCopy: Record<Locale, ProjectSectionCopy> = {
   },
 }
 
+/* Each card carries that product's own canonical mark, copied byte for byte from
+   the product repository at a pinned commit. See
+   docs/project-brand-assets-2026-10-02.json and scripts/sync-product-logos.mjs. */
 const visuals = {
-  gonota: { src: '/images/logos/gonota.svg', width: 204, height: 96 },
-  tablix: { src: '/images/logos/tablix-personal.svg', width: 330, height: 330 },
-  ursly: { src: '/images/logos/ursly-mark.svg', width: 240, height: 240 },
-  scaleforged: { src: '/images/logos/scaleforged.svg', width: 24, height: 24 },
-  lunorive: { src: '/images/logos/lunorive-wordmark.svg', width: 517, height: 100 },
+  gonota: { src: '/images/logos/nota-mark.png', width: 512, height: 512 },
+  tablix: { src: '/images/logos/tablix-mark.svg', width: 512, height: 512 },
+  ursly: { src: '/images/logos/ursly-mark.svg', width: 1024, height: 1024 },
+  scaleforged: { src: '/images/logos/scaleforge-mark.svg', width: 106, height: 210 },
+  lunorive: { src: '/images/logos/lunorive-mark.png', width: 256, height: 256 },
 } as const
 
 /** Independent product data; presentation and external navigation stay in adapters. */

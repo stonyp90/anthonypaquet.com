@@ -38,7 +38,6 @@ module.exports = {
         'beta-bg': 'var(--color-beta-bg)',
         // Brand (kept)
         'tablix-green': 'var(--color-tablix-green)',
-        'tablix-green-light': 'var(--color-tablix-green-light)',
       },
       fontFamily: {
         sans: ['var(--font-sans)'],
