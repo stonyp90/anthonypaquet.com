@@ -17,7 +17,7 @@ const { getPersonalProjects, personalProjectCopy } = await import(
 test('each locale exposes the five personal projects with their official destinations', () => {
   for (const locale of ['en', 'fr']) {
     const projects = getPersonalProjects(locale)
-    assert.deepEqual(projects.map(({ name }) => name), ['GoNota', 'Tablix', 'Ursly', 'ScaleForged', 'Lunorive'])
+    assert.deepEqual(projects.map(({ name }) => name), ['GoNota', 'Tablix', 'Ursly', 'ScaleForge', 'Lunorive'])
     assert.deepEqual(projects.map(({ url }) => url), [
       'https://gonota.ca', 'https://tablix.ca', 'https://ursly.io', 'https://scaleforged.io', undefined,
     ])
@@ -108,7 +108,7 @@ test('every card visual is declared active and matches its recorded brand manife
 // confirmed admin access to the ScaleForge LinkedIn company page. X, Facebook,
 // Reddit and every other network stayed unverified, so none of them may appear
 // in the catalogue, even as a placeholder.
-test('ScaleForged links only the verified company LinkedIn page', () => {
+test('ScaleForge links only the verified company LinkedIn page', () => {
   const verified = ['https://www.linkedin.com/company/scaleforged/']
   for (const locale of ['en', 'fr']) {
     const project = getPersonalProjects(locale).find(({ id }) => id === 'scaleforged')

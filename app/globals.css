@@ -24,6 +24,13 @@
   --color-tablix-green-light: #4ade80;
   --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  /* Logo colours, locked to public/favicon.svg (AP monogram) and
+     public/images/logos/scaleforged.svg (ScaleForge bars). Both marks share
+     the iron and the brass. Used only by components/BrandMark.tsx. */
+  --mark-iron: #1a1a1a;
+  --mark-brass: #d9892a;
+  --mark-ember: #f0b86a;
+  --mark-bone: #fbf5ea;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -55,20 +62,11 @@ section { position: relative; z-index: 1; }
 .container { max-width: 1400px; margin: 0 auto; padding: 0 var(--space-md); }
 
 /* ==========================================================================
-   EDITORIAL UTILITY CLASSES (ported from ScaleForged)
+   EDITORIAL UTILITY CLASSES (shared with ScaleForge)
    ========================================================================== */
 
-/* Brand mark — three vertical bars ----------------------------------------- */
-.brand-mark { display: inline-flex; align-items: flex-end; gap: 3px; height: 22px; }
-.brand-mark span { display: block; width: 6px; border-radius: 1px; }
-.brand-mark span:nth-child(1) { height: 10px; background: var(--color-accent-soft); }
-.brand-mark span:nth-child(2) { height: 18px; background: var(--color-accent); }
-.brand-mark span:nth-child(3) { height: 14px; background: var(--color-ink); }
-.brand-mark--large { height: 36px; }
-.brand-mark--large span { width: 10px; }
-.brand-mark--large span:nth-child(1) { height: 18px; }
-.brand-mark--large span:nth-child(2) { height: 30px; }
-.brand-mark--large span:nth-child(3) { height: 22px; }
+/* Brand name — display wordmark with a brass full stop. The marks themselves
+   are components/BrandMark.tsx. --------------------------------------------- */
 .brand-name { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.01em; }
 .brand-name::after { content: "."; color: var(--color-accent); }
 

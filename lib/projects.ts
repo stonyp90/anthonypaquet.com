@@ -79,7 +79,7 @@ const projects: Record<Locale, readonly PersonalProject[]> = {
       visual: visuals.ursly,
     },
     {
-      id: 'scaleforged', name: 'ScaleForged', url: 'https://scaleforged.io',
+      id: 'scaleforged', name: 'ScaleForge', url: 'https://scaleforged.io',
       socialLinks: [{ label: 'ScaleForge on LinkedIn', href: 'https://www.linkedin.com/company/scaleforged/' }],
       category: 'Independent venture studio',
       description: 'An independent studio building vertical SaaS platforms on a shared technical foundation.',
@@ -114,7 +114,7 @@ const projects: Record<Locale, readonly PersonalProject[]> = {
       visual: visuals.ursly,
     },
     {
-      id: 'scaleforged', name: 'ScaleForged', url: 'https://scaleforged.io',
+      id: 'scaleforged', name: 'ScaleForge', url: 'https://scaleforged.io',
       socialLinks: [{ label: 'ScaleForge sur LinkedIn', href: 'https://www.linkedin.com/company/scaleforged/' }],
       category: 'Studio venture indépendant',
       description: 'Un studio indépendant qui construit des plateformes SaaS verticales sur un socle technique commun.',
