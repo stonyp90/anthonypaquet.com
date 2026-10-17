@@ -100,6 +100,7 @@ const copy = {
     },
     motion: {
       intro: 'Le mouvement accompagne la lecture, jamais l’inverse. Avec « réduire les animations », chaque durée et chaque distance tombe à zéro.',
+      identity: 'L’animation de marque d’un autre produit se montre avec ses propres fichiers, épinglés à un commit et vérifiés par empreinte. On ne la redessine jamais.',
       token: 'Jeton',
       value: 'Valeur',
       use: 'Usage',
@@ -186,6 +187,7 @@ const copy = {
     },
     motion: {
       intro: 'Motion serves reading, never the reverse. With “reduce motion” on, every duration and distance drops to zero.',
+      identity: 'Another product’s brand motion is shown with its own files, pinned to a commit and hash-checked. It is never redrawn.',
       token: 'Token',
       value: 'Value',
       use: 'Use',
@@ -372,6 +374,7 @@ export default function MaisonGuide({ locale, brand, homeHref, altLocaleHref, si
         <section id="mg-motion" className="mg-section" aria-labelledby="mg-motion-h">
           <h2 id="mg-motion-h" className="mg-h2">{t.sections.motion}</h2>
           <p className="mg-intro">{t.motion.intro}</p>
+          <p className="mg-intro">{t.motion.identity}</p>
           <div className="mg-table-wrap">
             <table className="mg-table">
               <thead><tr><th scope="col">{t.motion.token}</th><th scope="col">{t.motion.value}</th><th scope="col">{t.motion.use}</th></tr></thead>

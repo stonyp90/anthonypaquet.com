@@ -27,6 +27,9 @@ Living style guide: `/brand/` (FR) and `/en/brand/` on scaleforged.io,
   loaded as `--font-bigshoulders`), the face of its strike-F logo.
 - Motion reads `--duration-*` and `--motion-*`, which drop to zero under
   `prefers-reduced-motion`.
+- Another product's brand motion (a program's splash on scaleforged.io) is that
+  product's own files, copied at a pinned commit and hash-checked, shown in a
+  same-origin frame. It is never redrawn, re-timed or recoloured.
 
 ## Changing a token
 
