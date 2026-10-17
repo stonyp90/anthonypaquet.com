@@ -244,7 +244,7 @@ export function IterationLoopSection({
                   {centerLabel}
                   <span className="accent-text">.</span>
                 </span>
-                <span className="mt-2 inline-flex items-center gap-1.5 font-mono text-[0.55rem] uppercase tracking-[0.12em] text-[var(--color-accent)]">
+                <span className="mt-2 inline-flex items-center gap-1.5 font-mono text-[0.55rem] uppercase tracking-[0.12em] text-[var(--color-accent-text)]">
                   <m.span
                     animate={moving ? { rotate: 360 } : undefined}
                     transition={{ duration: STEP_SECONDS * 4, ease: "linear", repeat: Infinity }}

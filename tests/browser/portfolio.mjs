@@ -1,11 +1,21 @@
 import assert from 'node:assert/strict'
-import { mkdir } from 'node:fs/promises'
+import { mkdir, readFile } from 'node:fs/promises'
+import ts from 'typescript'
 
 const { chromium } = await import(process.env.PLAYWRIGHT_MODULE || 'playwright')
 const baseURL = process.env.PORTFOLIO_URL || 'http://127.0.0.1:4173'
 const artifactDir = process.env.BROWSER_ARTIFACT_DIR || 'tmp/browser'
 await mkdir(artifactDir, { recursive: true })
 const browser = await chromium.launch({ headless: true, channel: process.env.BROWSER_CHANNEL || 'chrome' })
+// Expected project destinations come from the catalog itself, so adding a
+// verified link updates this contract instead of breaking a hard-coded count.
+const catalogSource = await readFile(new URL('../../lib/projects.ts', import.meta.url), 'utf8')
+const { getPersonalProjects } = await import(`data:text/javascript;base64,${Buffer.from(ts.transpileModule(catalogSource, {
+  compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 },
+}).outputText).toString('base64')}`)
+const projectHrefs = locale => getPersonalProjects(locale)
+  .flatMap(({ url, socialLinks = [] }) => [url, ...socialLinks.map(({ href }) => href)])
+  .filter(Boolean)
 const failures = []
 const checks = []
 
@@ -35,7 +45,14 @@ try {
       const page = await context.newPage()
       const errors = []
       page.on('pageerror', error => errors.push(error.message))
-      page.on('console', message => { if (message.type() === 'error') errors.push(message.text()) })
+      // Third-party hosts (the Credly badge images) can be down or blocked
+      // without the site being at fault, so only same-origin failures count.
+      page.on('console', message => {
+        if (message.type() !== 'error') return
+        const source = message.location().url
+        if (source && new URL(source).origin !== new URL(baseURL).origin) return
+        errors.push(message.text())
+      })
       await page.goto(`${baseURL}${route}`, { waitUntil: 'networkidle' })
       assert.equal(await page.locator('html').getAttribute('lang'), locale)
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)
@@ -52,8 +69,13 @@ try {
       await page.locator('.site-nav a[href="#personal-projects"]').click()
       await page.locator('#personal-projects').scrollIntoViewIfNeeded()
       assert.equal(await page.locator('#personal-projects').evaluate(el => getComputedStyle(el.parentElement).opacity), '1')
-      // Every project with a public URL links out. Lunorive has none yet.
-      assert.equal(await page.locator('.project-card a').count(), 4)
+      // Every project with a public URL or verified profile links out, and
+      // nothing else does: Lunorive has no URL yet and the pitch gate is closed.
+      assert.deepEqual(
+        await page.locator('.project-card a').evaluateAll(links => links.map(link => link.getAttribute('href'))),
+        projectHrefs(locale),
+        'Project links match the catalog'
+      )
       // The index shows one project at a time, so open each entry, then wait
       // for its mark to finish loading before naturalWidth is meaningful.
       const projectTriggers = page.locator('#personal-projects .reveal-trigger')

@@ -66,6 +66,8 @@ PLAYWRIGHT_MODULE=/absolute/path/to/playwright/index.mjs \
 BROWSER_CHANNEL=chrome node tests/browser/portfolio.mjs
 ```
 
+`tests/browser/accessibility.mjs` runs an axe-core WCAG 2.2 AA audit of both locales the same way; set `AXE_CORE_PATH` to its `axe.min.js`. Since 17 October 2026 CI runs all three browser scripts on every push and pull request.
+
 The test dependency is deliberately external to the shipped site. `PLAYWRIGHT_MODULE` can be omitted where `playwright` is locally installed. `BROWSER_ARTIFACT_DIR` controls the screenshot destination. `npm run check` runs the ordinary source/build checks; `docker compose up --build` serves the export.
 
 ## Production deployment and verification (2026-10-06)
