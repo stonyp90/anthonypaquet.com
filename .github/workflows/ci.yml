@@ -31,3 +31,48 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
+
+  browser:
+    name: Browser and accessibility checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      NEXT_TELEMETRY_DISABLED: "1"
+      # Test tools stay outside package.json, as in local runs: they are
+      # installed into a scratch prefix and passed to the scripts by path.
+      TOOLS: ${{ github.workspace }}/../browser-tools
+      PLAYWRIGHT_VERSION: "1.56.1"
+      AXE_CORE_VERSION: "4.10.3"
+      BROWSER_CHANNEL: chromium
+      PORTFOLIO_URL: http://127.0.0.1:4173
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Install browser test tools
+        run: |
+          npm install --prefix "$TOOLS" --no-save --no-audit --no-fund "playwright@$PLAYWRIGHT_VERSION" "axe-core@$AXE_CORE_VERSION"
+          "$TOOLS/node_modules/.bin/playwright" install --with-deps chromium
+          echo "PLAYWRIGHT_MODULE=$TOOLS/node_modules/playwright/index.mjs" >> "$GITHUB_ENV"
+          echo "AXE_CORE_PATH=$TOOLS/node_modules/axe-core/axe.min.js" >> "$GITHUB_ENV"
+      - name: Serve the static export
+        run: |
+          node scripts/serve-out.mjs out 4173 &
+          for _ in $(seq 1 30); do curl -sf "$PORTFOLIO_URL/" > /dev/null && exit 0; sleep 1; done
+          echo "::error::Static server did not start" && exit 1
+      - run: node tests/browser/portfolio.mjs
+      - run: node tests/browser/visual-backgrounds.mjs
+      - run: node tests/browser/accessibility.mjs
+      - name: Keep screenshots of a failed run
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-screenshots
+          path: tmp/browser/
+          if-no-files-found: ignore
