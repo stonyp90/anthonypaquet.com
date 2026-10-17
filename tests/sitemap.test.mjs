@@ -88,6 +88,18 @@ test('a nested page is listed under its own locale group', () => {
   }
 })
 
+test('pages marked noindex stay out of the sitemap', () => {
+  const root = fixture(['index.html', 'brand/index.html'])
+  try {
+    writeFileSync(path.join(root, 'brand/index.html'), '<html><head><meta name="robots" content="noindex, follow"/></head><body>guide</body></html>')
+    assert.equal(run(root).status, 0)
+    const xml = readFileSync(path.join(root, 'sitemap.xml'), 'utf8')
+    assert.deepEqual(locsOf(xml), ['https://example.test/'])
+  } finally {
+    rmSync(root, { recursive: true, force: true })
+  }
+})
+
 test('an export with no indexable page fails the build', () => {
   const root = fixture(['404/index.html'])
   try {

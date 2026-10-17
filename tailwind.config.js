@@ -19,7 +19,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Editorial "maison" palette (ported from ScaleForged)
+        // Maison palette (design-system/maison.css, shared with ScaleForge)
         cream: 'var(--color-cream)',
         paper: 'var(--color-paper)',
         'paper-soft': 'var(--color-paper-soft)',
@@ -41,10 +41,10 @@ module.exports = {
         'tablix-green-light': 'var(--color-tablix-green-light)',
       },
       fontFamily: {
-        sans: ['var(--font-inter)', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
-        display: ['var(--font-playfair)', 'Georgia', 'serif'],
-        serif: ['var(--font-playfair)', 'Georgia', 'serif'],
-        mono: ['var(--font-jetbrains)', 'JetBrains Mono', 'monospace'],
+        sans: ['var(--font-sans)'],
+        display: ['var(--font-display)'],
+        serif: ['var(--font-serif)'],
+        mono: ['var(--font-mono)'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

@@ -1,0 +1,175 @@
+/* ==========================================================================
+   MAISON · shared design system for Anthony Paquet and ScaleForge
+   Version 1.0.0 (2026-10-17)
+
+   This file is byte-identical in stonyp90/stonyp90 (anthonypaquet.com) and
+   stonyp90/scaleforged-website (scaleforged.io). Change it in both repos in
+   the same pass, bump the version above and refresh design-system/maison.lock
+   (npm run design:lock). Site-only tokens stay in each app/globals.css.
+
+   Layers
+   1. Primitives   --maison-*        raw values, never used by components
+   2. Semantic     --color-*, ...    roles the sites style with
+   3. Brand theme  [data-brand]      what differs between the two voices
+   ========================================================================== */
+
+/* 1. Primitives ------------------------------------------------------------ */
+:root {
+  --maison-cream: #f6efe0;
+  --maison-paper: #fffcf5;
+  --maison-paper-soft: #faf3e6;
+  --maison-sand: #f1e8d4;
+  --maison-ink: #1b1714;
+  --maison-ink-soft: #463f38;
+  --maison-stone: #6a615b;
+  --maison-brass: #d4831f;
+  --maison-brass-soft: #edb265;
+  --maison-brass-wash: #fcf3e0;
+  --maison-brass-deep: #8f5310;
+  --maison-line: #e7dcc6;
+  --maison-line-strong: #c4b394;
+  --maison-moss: #246626;
+  --maison-moss-wash: #e7f1e6;
+  --maison-rust: #92440f;
+  --maison-rust-wash: #fdf2ea;
+  --maison-shadow: #3a2a1433;
+}
+
+/* 2. Semantic tokens --------------------------------------------------------
+   Declared on every themed element as well as :root so tokens that read a
+   brand value (fonts, display tracking) recompute inside a [data-brand] scope. */
+:root,
+[data-brand] {
+  /* Surfaces */
+  --color-cream: var(--maison-cream);            /* page */
+  --color-paper: var(--maison-paper);            /* raised surface */
+  --color-paper-soft: var(--maison-paper-soft);  /* zebra, subtle alt */
+  --color-section-alt: var(--maison-sand);       /* alternating section */
+  --surface-base: var(--maison-cream);
+  --surface-raised: var(--maison-paper);
+  --surface-muted: var(--maison-paper-soft);
+  --surface-inverse: var(--maison-ink);
+
+  /* Text */
+  --color-ink: var(--maison-ink);                /* primary, 15.5:1 on cream */
+  --color-ink-soft: var(--maison-ink-soft);      /* secondary, 9:1 on cream */
+  --color-gray: var(--maison-stone);             /* muted, 5.3:1 on cream */
+  --text-inverse: var(--maison-cream);
+  --text-inverse-muted: var(--maison-line-strong); /* 8.7:1 on ink */
+
+  /* Accent: brass. Fills and rules only on light surfaces (2.6:1).
+     Text, links and icons on light surfaces use --color-accent-text (5.4:1). */
+  --color-accent: var(--maison-brass);
+  --color-accent-soft: var(--maison-brass-soft);
+  --color-accent-bg: var(--maison-brass-wash);
+  --color-accent-text: var(--maison-brass-deep);
+
+  /* Lines */
+  --color-border: var(--maison-line);
+  --color-border-strong: var(--maison-line-strong);
+  --line-subtle: var(--maison-line);
+  --line-strong: var(--maison-line-strong);
+  --line-inverse: var(--maison-ink-soft);
+
+  /* Status */
+  --color-live: var(--maison-moss);
+  --color-live-bg: var(--maison-moss-wash);
+  --color-beta: var(--maison-rust);
+  --color-beta-bg: var(--maison-rust-wash);
+
+  /* Type families. next/font sets --font-inter, --font-playfair and
+     --font-jetbrains on <html>; the fallbacks keep each stack valid where a
+     site does not load that face. */
+  --font-sans: var(--font-inter, "Inter"), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: var(--font-playfair, Georgia), Georgia, serif;
+  --font-mono: var(--font-jetbrains, ui-monospace), ui-monospace, "SFMono-Regular", Consolas, monospace;
+  --font-body: var(--font-sans);
+  --font-display: var(--brand-display-family, var(--font-serif));
+
+  /* Type scale */
+  --text-eyebrow: 0.7rem;
+  --text-small: 0.875rem;
+  --text-body: 1rem;
+  --text-lead: clamp(1.05rem, 1.5vw, 1.45rem);
+  --text-h3: clamp(1.25rem, 2vw, 1.5rem);
+  --text-h2: clamp(2rem, 3.5vw, 3.8rem);
+  --text-display: clamp(2.7rem, 5.1vw, 5.7rem);
+  --leading-display: 1.04;
+  --leading-heading: 1.15;
+  --leading-body: 1.6;
+  --tracking-display: var(--brand-display-tracking, -0.025em);
+  --tracking-heading: -0.015em;
+  --tracking-eyebrow: 0.14em;
+  --weight-display: 700;
+
+  /* Space (fluid) */
+  --space-xs: clamp(0.5rem, 1vw, 0.75rem);
+  --space-sm: clamp(0.75rem, 2vw, 1rem);
+  --space-md: clamp(1rem, 3vw, 1.5rem);
+  --space-lg: clamp(1.5rem, 4vw, 2.5rem);
+  --space-xl: clamp(2rem, 6vw, 4rem);
+  --space-2xl: clamp(3rem, 8vw, 6rem);
+  --space-section: clamp(4.5rem, 7vw, 8rem);
+  --measure: 42rem;
+  --container: 1440px;
+
+  /* Shape */
+  --radius-sharp: 2px;       /* buttons, fields, tags */
+  --radius-control: 0.35rem;
+  --radius-panel: 0.75rem;
+  --radius-pill: 999px;      /* status badges */
+  --rule-hairline: 1px;
+  --rule-accent: 1.5px;      /* eyebrow dash, inline link */
+  --rule-heavy: 3px;         /* stat block, pillar top */
+
+  /* Depth */
+  --color-shadow: var(--maison-shadow);
+  --shadow-card: 0 12px 36px -22px var(--maison-shadow);
+  --shadow-card-hover: 0 22px 46px -22px var(--maison-shadow);
+  --shadow-float: 0 24px 60px -38px var(--maison-shadow);
+  --shadow-editorial: 0 24px 70px -42px rgba(27, 23, 20, 0.34);
+  --shadow-accent: 0 18px 45px -30px rgba(212, 131, 31, 0.7);
+  --shadow-offset: 4px 4px 0 0 var(--maison-ink);       /* button hover */
+  --shadow-offset-rest: 2px 2px 0 0 var(--maison-brass-soft);
+
+  /* Motion */
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);  /* entrances */
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);       /* state changes */
+  --duration-fast: 200ms;
+  --duration-base: 250ms;
+  --motion-duration: 650ms;
+  --motion-distance: 24px;
+  --motion-section-duration: 820ms;
+  --motion-section-distance: 32px;
+
+  /* Focus */
+  --focus-ring-color: var(--maison-brass-deep);
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+}
+
+/* 3. Brand themes ------------------------------------------------------------
+   Same house, two voices. The personal brand speaks in a serif (authored,
+   human); the studio speaks in the sans (built, technical). Everything else,
+   palette, spacing, shape, motion and focus, is shared. */
+[data-brand="anthony-paquet"] {
+  --brand-display-family: var(--font-serif);
+  --brand-display-tracking: -0.025em;
+}
+
+[data-brand="scaleforged"] {
+  --brand-display-family: var(--font-sans);
+  --brand-display-tracking: -0.045em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root,
+  [data-brand] {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+    --motion-duration: 0ms;
+    --motion-distance: 0px;
+    --motion-section-duration: 0ms;
+    --motion-section-distance: 0px;
+  }
+}
