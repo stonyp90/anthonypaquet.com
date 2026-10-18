@@ -263,3 +263,55 @@ BROWSER_ARTIFACT_DIR=tmp/live node tests/browser/portfolio.mjs
 PORTFOLIO_URL=https://www.anthonypaquet.com node tmp/cta-shot.mjs
 npx wrangler deployments list
 ```
+
+## Canonical product marks and one mark grammar shipped (2026-10-17 to 18)
+
+Each project card now carries the product's own brand file, copied byte for byte from its
+repository at a pinned commit; the redrawn marks this site had drawn for the products are
+deleted, and `BrandMark` is the personal monogram alone. Provenance is a gate rather than a
+document: `scripts/sync-product-logos.mjs --check` re-extracts all six pinned files with
+`git show` and fails on drift, and `tests/projects.test.mjs` refuses a card visual that is
+not a byte-identical copy pinned to a 40-hex commit. Owner decisions of 2026-10-17: canonical
+mark only per card, byte-exact copies including raster PNGs where the adopted canonical is
+raster, ScaleForge's strike-F adopted over the retired bars.
+
+One shared height then made the studio's own card the weakest in the set: the strike-F is
+drawn 106×210 against four square marks, so it rendered 36×72 beside four 72×72. The band now
+caps both axes, which equalises optical area without stretching anything (72×72, or 51.1×101.3
+for the portrait: 5184, 5184, 5184, 5176, 5184 px² measured in the browser, each centred to
+0px on both axes), and the band drops 13rem to 11rem so the mark fills it with intent. The rule
+is guarded where it is observable, at 1440 and 390, in `tests/browser/visual-backgrounds.mjs`.
+
+The `Deploy to Cloudflare` workflow still skips its deploy job for a missing
+`CLOUDFLARE_API_TOKEN` secret, so `wrangler` remains the deploy route on this machine.
+Rollback point captured beforehand: version
+`4dcc0e9d-7cb4-48a1-b323-ac4d6dc31d5f` (deployment
+`ffbf13fa-5da5-499e-9b37-fda411a6facb`, annotated "Qualified clean main 9e482de").
+This deploy: version `8d67807a-4609-4e2d-9f4b-a5a84db91ba4`, from a clean tree whose release
+stamp read `090b6dffdb3bfe699ae647f0252904718db6ffed`.
+
+```sh
+git status --short && npm run check          # 85 tests green, static export built
+npm run logos:check                          # 6 pinned marks, 0 red
+npm run build                                # release: must print the deployed commit
+npx wrangler deployments list --json         # capture the rollback version id first
+npx wrangler deploy
+for f in ursly-mark.svg tablix-mark.svg scaleforge-mark.svg nota-mark.png lunorive-mark.png tablix-mark.png; do
+  printf '%-22s live=%s disk=%s\n' "$f" \
+    "$(curl -s "https://www.anthonypaquet.com/images/logos/$f" | shasum -a 256 | cut -c1-16)" \
+    "$(shasum -a 256 "public/images/logos/$f" | cut -c1-16)"
+done
+for f in gonota.svg scaleforged.svg lunorive-wordmark.svg tablix-personal.svg tablix-og.png; do
+  printf '%-24s %s\n' "$f" "$(curl -s -o /dev/null -w '%{http_code}' "https://www.anthonypaquet.com/images/logos/$f")"
+done
+for f in $(curl -s https://www.anthonypaquet.com/ | grep -o '/_next/static/css/[a-z0-9]*\.css' | sort -u); do
+  curl -s "https://www.anthonypaquet.com$f" | grep -oE '\.project-(logo|visual)\{[^}]{0,160}'
+done
+PORTFOLIO_URL=https://www.anthonypaquet.com \
+PLAYWRIGHT_MODULE=/Users/tony/Github/nota/node_modules/playwright/index.mjs \
+BROWSER_CHANNEL=chromium node tests/browser/visual-backgrounds.mjs
+```
+
+Live at the time of writing: all six marks byte-identical to disk, the five retired paths 404,
+the served CSS carrying `height:11rem` and `max-height:6.33rem`, and the browser guard passing
+against production at both widths.
