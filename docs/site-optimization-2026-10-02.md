@@ -289,6 +289,10 @@ Rollback point captured beforehand: version
 `ffbf13fa-5da5-499e-9b37-fda411a6facb`, annotated "Qualified clean main 9e482de").
 This deploy: version `8d67807a-4609-4e2d-9f4b-a5a84db91ba4`, from a clean tree whose release
 stamp read `090b6dffdb3bfe699ae647f0252904718db6ffed`.
+A follow-up deploy shipped the same tree plus this record (docs-only, so nothing in the export
+changed but the release stamp): rollback point `8d67807a-4609-4e2d-9f4b-a5a84db91ba4`, live
+version `23492e64-ce95-4950-9335-30f9d23ac43f` at commit `ace87171db266a60ac315658b3207ef9f5f6ebf9`.
+Which version is live is a question for `npx wrangler deployments list --json`, not for this line.
 
 ```sh
 git status --short && npm run check          # 85 tests green, static export built
