@@ -81,6 +81,26 @@ Allow: /
 User-agent: Diffbot
 Allow: /
 
+# ── Chinese AI and search crawlers (published user agents) ──
+# Baidu, Sogou, 360, Shenma, Huawei Petal Search
+User-agent: Baiduspider
+Allow: /
+
+User-agent: Baiduspider-image
+Allow: /
+
+User-agent: Sogou web spider
+Allow: /
+
+User-agent: 360Spider
+Allow: /
+
+User-agent: YisouSpider
+Allow: /
+
+User-agent: PetalBot
+Allow: /
+
 # Sitemap
 Sitemap: https://www.anthonypaquet.com/sitemap.xml
 

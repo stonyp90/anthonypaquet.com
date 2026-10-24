@@ -66,6 +66,7 @@ const SHIPPED = [
   'lib/data.ts',
   'lib/content/en.ts',
   'lib/content/fr.ts',
+  'lib/content/mission.ts',
   'lib/projects.ts',
 ]
 

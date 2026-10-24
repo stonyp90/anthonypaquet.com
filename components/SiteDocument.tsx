@@ -262,6 +262,15 @@ const personSchema = {
     addressRegion: 'Quebec',
     addressCountry: 'Canada',
   },
+  // The published mission statement, in the owner's own words. Other pages
+  // link to it from there, so the entity and the statement stay connected.
+  subjectOf: {
+    '@type': 'WebPage',
+    '@id': 'https://www.anthonypaquet.com/mission/#page',
+    url: 'https://www.anthonypaquet.com/mission/',
+    name: 'Mission: AI, data and peace',
+    inLanguage: ['en-CA', 'fr-CA', 'zh-CN'],
+  },
 }
 
 // Professional Service Schema - for service discovery
@@ -501,7 +510,7 @@ export default function SiteDocument({
   lang,
 }: {
   children: React.ReactNode
-  lang: 'en' | 'fr'
+  lang: 'en' | 'fr' | 'zh-CN'
 }) {
   return (
     <html lang={lang} data-brand="anthony-paquet" className={`${inter.variable} ${playfair.variable} ${jetbrains.variable}`}>

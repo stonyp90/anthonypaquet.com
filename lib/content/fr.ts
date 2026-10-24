@@ -516,6 +516,8 @@ export const fr: SiteContent = {
     footer: {
       tagline: 'Bâtisseur et leader en ingénierie.',
       blurb: 'J’aide les équipes à livrer plus vite, réduire les coûts et devenir conformes.',
+      missionLink: 'Lire la mission',
+      missionHref: '/fr/mission/',
       contactCta: 'Écrivez-moi',
       exploreTitle: 'Explorer',
       connectTitle: 'Contact',

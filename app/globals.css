@@ -58,6 +58,12 @@ body {
 }
 
 ::selection { background-color: var(--color-accent-text); color: var(--color-paper); text-shadow: none; }
+
+/* The mission page also ships in Simplified Chinese. Playfair and Inter carry
+   no CJK glyphs, so name the system faces instead of letting the browser pick. */
+html[lang="zh-CN"] body {
+  font-family: var(--font-body), "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+}
 img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; text-decoration: none; }
 section { position: relative; z-index: 1; }

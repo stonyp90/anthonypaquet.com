@@ -88,6 +88,29 @@ test('a nested page is listed under its own locale group', () => {
   }
 })
 
+test('a third locale groups under one canonical path with its own language tag', () => {
+  const root = fixture([
+    'mission/index.html',
+    'fr/mission/index.html',
+    'zh/mission/index.html',
+  ])
+  try {
+    assert.equal(run(root).status, 0)
+    const xml = readFileSync(path.join(root, 'sitemap.xml'), 'utf8')
+    assert.deepEqual(locsOf(xml).sort(), [
+      'https://example.test/fr/mission/',
+      'https://example.test/mission/',
+      'https://example.test/zh/mission/',
+    ])
+    for (const block of xml.split('<url>').slice(1)) {
+      const hreflangs = [...block.matchAll(/hreflang="([^"]+)"/g)].map(([, v]) => v).sort()
+      assert.deepEqual(hreflangs, ['en-CA', 'fr-CA', 'x-default', 'zh-CN'])
+    }
+  } finally {
+    rmSync(root, { recursive: true, force: true })
+  }
+})
+
 test('pages marked noindex stay out of the sitemap', () => {
   const root = fixture(['index.html', 'brand/index.html'])
   try {

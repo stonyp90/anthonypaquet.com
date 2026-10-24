@@ -6,7 +6,7 @@ import path from 'node:path'
 
 const ROOT = process.argv[2] ?? 'out'
 const SITE_URL = (process.env.SITE_URL ?? 'https://www.anthonypaquet.com').replace(/\/+$/, '')
-const LOCALIZED_PREFIXES = ['fr']
+const LOCALIZED_PREFIXES = ['fr', 'zh']
 
 function htmlFiles(dir, base = '') {
   const found = []
@@ -64,7 +64,10 @@ for (const page of pages) {
 }
 
 const urlFor = (urlPath) => SITE_URL + urlPath
-const hreflang = (locale) => (locale === 'en' ? 'en-CA' : `${locale}-CA`)
+// Chinese is zh-CN, not a Canadian locale: the country suffix is a language
+// tag here, not a market claim.
+const HREFLANG = { en: 'en-CA', fr: 'fr-CA', zh: 'zh-CN' }
+const hreflang = (locale) => HREFLANG[locale] ?? `${locale}-CA`
 
 const blocks = []
 for (const [key, group] of [...groups.entries()].sort((a, b) => a[0].localeCompare(b[0]))) {

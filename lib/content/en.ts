@@ -172,6 +172,8 @@ export const en = {
     footer: {
       tagline: 'Builder and engineering leader.',
       blurb: 'I help teams ship faster, cut costs, and become compliant.',
+      missionLink: 'Read the mission',
+      missionHref: '/mission/',
       contactCta: 'Email me',
       exploreTitle: 'Explore',
       connectTitle: 'Connect',

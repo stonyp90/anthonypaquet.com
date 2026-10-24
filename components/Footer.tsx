@@ -39,6 +39,14 @@ export default function Footer() {
               <FaEnvelope aria-hidden="true" />
               {c.ui.footer.contactCta}
             </a>
+            <div>
+              <Link
+                href={c.ui.footer.missionHref}
+                className="link-arrow mt-4 inline-flex text-sm"
+              >
+                {c.ui.footer.missionLink}
+              </Link>
+            </div>
           </div>
 
           {/* Quick Links */}
