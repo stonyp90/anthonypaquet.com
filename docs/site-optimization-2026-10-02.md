@@ -361,3 +361,45 @@ Live at the time of writing: the three mission pages, both portfolios and both b
 return 200, the mission canonical and all four alternates match, the mark and the served CSS
 bundle hash equal to disk, `/does-not-exist/` returns 404, and the browser guard passes against
 production at 1440 and 390. Rollback: `npx wrangler rollback 23492e64-ce95-4950-9335-30f9d23ac43f`.
+
+## ScaleForge portfolio mark at card optical size (2026-10-24)
+
+The Quebec F card now pins `public/brand/quebec-mark-portfolio.svg` from `scaleforged-website`
+at `6bf80a0`, a portfolio-only derivative of the canonical symbol: the group transform is
+scaled 1.1707x about the ink centre so the province fills 96% of the unchanged 512 x 512 canvas
+instead of the app icon's 82%. Path data, mask, fill and viewBox are byte-identical, so the
+byte-for-byte rule and the 512 square hold. SHA-256
+`8085883040f11a670433bff7edeeaa6ac9e115cc69a0775a27a62d97245785f4`, 4696 bytes. The
+canonical app-icon and social contracts keep 82%.
+
+The visible silhouette moved from 45 x 59 px to 52 x 70 px inside the same 72 x 72 element,
+22.8% to 33.6% ink coverage, which puts it at the optical weight of the four tiles beside it.
+`docs/project-brand-evidence-2026-10-24.md` records the finding, the variant derivation and the
+measurements.
+
+Rollback point captured beforehand: version `51f7a707-60f9-4dc2-885a-e51ae7e0853d`
+(deployment `619818a1-27f3-475f-9717-60881d1201b5`, annotated "Qualified clean main e8d122c").
+This deploy: deployment `58476773-9575-4ea3-beca-afa0d17e4991`, version
+`e340fa4d-3766-4488-851b-231640c5a23f`, from a clean tree whose release stamp read
+`93604da1f03202d45abe58c68f10831dcf011859`.
+
+```sh
+node scripts/sync-product-logos.mjs --check    # 6 pinned marks, 0 red, 0 skipped
+npm run check                                  # 98 tests green, static export built
+npm run build                                  # release: 93604da, dirty false
+npx wrangler deployments list --json           # capture the rollback version
+npx wrangler deploy --message "Qualified clean main 93604da1f03202d45abe58c68f10831dcf011859"
+curl -s https://www.anthonypaquet.com/release.json
+curl -s https://www.anthonypaquet.com/images/logos/scaleforge-mark.svg | shasum -a 256
+for p in / /fr/ /mission/ /fr/mission/ /zh/mission/ /brand/ /fr/brand/; do
+  printf '%-14s %s\n' "$p" "$(curl -s -o /dev/null -w '%{http_code}' "https://www.anthonypaquet.com$p")"
+done
+PORTFOLIO_URL=https://www.anthonypaquet.com \
+PLAYWRIGHT_MODULE=/Users/tony/Github/nota/node_modules/playwright/index.mjs \
+node tests/browser/visual-backgrounds.mjs
+```
+
+Live at the time of writing: release stamp `93604da`, the served mark hashes equal to disk
+(`80858830...`), all seven routes return 200, `/does-not-exist/` returns 404, and the browser
+guard passes against production at 1440 and 390 with every mark measuring 72 x 72, centre
+offset 0,0, 0% area spread. Rollback: `npx wrangler rollback 51f7a707-60f9-4dc2-885a-e51ae7e0853d`.
