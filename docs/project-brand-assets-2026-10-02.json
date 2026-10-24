@@ -80,23 +80,23 @@
       "outputBytes": 3186
     },
     {
-      "checkedAt": "2026-10-17",
+      "checkedAt": "2026-10-24",
       "product": "ScaleForge",
       "remote": "stonyp90/scaleforged-website",
       "repo": "/Users/tony/Github/scaleforged-website",
-      "commit": "1db1bb132d809534e4683b4f47d346a69177571b",
-      "source": "/Users/tony/Github/scaleforged-website/public/brand/strike-mark.svg",
+      "commit": "44c6b49c9a71ba85635465f989e2cf02871fbab5",
+      "source": "/Users/tony/Github/scaleforged-website/public/brand/quebec-mark.svg",
       "output": "public/images/logos/scaleforge-mark.svg",
       "transformation": "Byte-identical copy",
-      "width": 106,
-      "height": 210,
+      "width": 512,
+      "height": 512,
       "alpha": true,
       "usage": "Active personal-project symbol",
-      "decision": "Owner, 2026-10-17: scaleforged-website docs/brand/strike-identity.md. The strike-F replaces the anvil identity, which itself replaced the cream/brass three bars; iron #1A1A1A and brass #D9892A are the shared studio colours.",
-      "sourceSha256": "7cd3d0a9e72dc2f19ba61938bc710cf26952a91ab20824fd3a7f8cf2037cd0f2",
-      "outputSha256": "7cd3d0a9e72dc2f19ba61938bc710cf26952a91ab20824fd3a7f8cf2037cd0f2",
-      "sourceBytes": 400,
-      "outputBytes": 400
+      "decision": "Owner-directed Québec F identity, revision 3 (scaleforged-website docs/brand/quebec-identity.md). The Québec silhouette takes the capital F position with a transparent F counterform; the light-surface fill is #24457F. It replaced the strike-F, retired 2026-10-19, and matches the mark live on scaleforged.io.",
+      "sourceSha256": "dca1a606d6b87578f42160228879bb3a52b7343f942bd01e79f168f0047ea8b6",
+      "outputSha256": "dca1a606d6b87578f42160228879bb3a52b7343f942bd01e79f168f0047ea8b6",
+      "sourceBytes": 4690,
+      "outputBytes": 4690
     },
     {
       "checkedAt": "2026-10-17",

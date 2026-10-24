@@ -55,7 +55,7 @@ const visuals = {
   gonota: { src: '/images/logos/nota-mark.png', width: 512, height: 512 },
   tablix: { src: '/images/logos/tablix-mark.svg', width: 512, height: 512 },
   ursly: { src: '/images/logos/ursly-mark.svg', width: 1024, height: 1024 },
-  scaleforged: { src: '/images/logos/scaleforge-mark.svg', width: 106, height: 210 },
+  scaleforged: { src: '/images/logos/scaleforge-mark.svg', width: 512, height: 512 },
   lunorive: { src: '/images/logos/lunorive-mark.png', width: 256, height: 256 },
 } as const
 
@@ -85,7 +85,7 @@ const projects: Record<Locale, readonly PersonalProject[]> = {
       id: 'scaleforged', name: 'ScaleForge', url: 'https://scaleforged.io',
       socialLinks: [{ label: 'ScaleForge on LinkedIn', href: 'https://www.linkedin.com/company/scaleforged/' }],
       category: 'Independent venture studio',
-      description: 'An independent studio building vertical SaaS platforms on a shared technical foundation.',
+      description: 'A venture studio in Québec. It designs and builds useful software with the people who use it, and each product keeps its own brand and audience.',
       visual: visuals.scaleforged,
     },
     {
@@ -120,7 +120,7 @@ const projects: Record<Locale, readonly PersonalProject[]> = {
       id: 'scaleforged', name: 'ScaleForge', url: 'https://scaleforged.io',
       socialLinks: [{ label: 'ScaleForge sur LinkedIn', href: 'https://www.linkedin.com/company/scaleforged/' }],
       category: 'Studio venture indépendant',
-      description: 'Un studio indépendant qui construit des plateformes SaaS verticales sur un socle technique commun.',
+      description: 'Un studio d’entreprises à Québec. Il conçoit et bâtit des logiciels utiles avec les gens qui les utilisent, et chaque produit garde sa propre marque et son public.',
       visual: visuals.scaleforged,
     },
     {

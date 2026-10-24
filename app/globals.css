@@ -518,11 +518,10 @@ section { position: relative; z-index: 1; }
 .projects-heading > p { max-width: 42rem; color: var(--color-ink-soft); font-size: 1.05rem; }
 .projects-index .reveal-trigger { padding-top: 1.35rem; padding-bottom: 1.35rem; }
 .projects-index .reveal-title { font-size: clamp(1.6rem, 3.2vw, 2.5rem); letter-spacing: -0.01em; }
-/* Marks carry equal optical area, not equal height: a square fills the width
-   cap, ScaleForge's 106×210 strike-F fills the height cap at 4.5rem × √(210/106),
-   so the portrait mark neither shrinks beside the squares nor gets stretched. */
+/* Every product mark ships square, so one 4.5rem cap bounds both axes and the
+   five marks hold the same area without stretching. */
 .project-visual { display: flex; align-items: center; justify-content: center; height: 11rem; padding: 1.75rem; border: 1px solid var(--color-border); border-radius: 0.5rem; background: var(--color-paper-soft); }
-.project-logo { width: auto; height: auto; max-width: 4.5rem; max-height: 6.33rem; object-fit: contain; }
+.project-logo { width: auto; height: auto; max-width: 4.5rem; max-height: 4.5rem; object-fit: contain; }
 .project-description { max-width: 60ch; margin: 1.5rem 0 0; color: var(--color-ink-soft); font-size: 1.05rem; line-height: 1.65; }
 .project-slogan { display: flex; flex-wrap: wrap; gap: 0.35rem 1rem; margin: 1rem 0 0; font-size: 1rem; font-weight: 500; color: var(--color-ink); }
 .project-link { display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 1.5rem; padding: 0.5rem 0; font-size: 0.9rem; font-weight: 500; border-bottom: 1px solid var(--color-border-strong); color: var(--color-accent-text); transition: color 200ms var(--ease-smooth), border-color 200ms var(--ease-smooth); }
