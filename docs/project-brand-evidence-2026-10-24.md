@@ -58,3 +58,49 @@ The Québec file keeps its own transparent margins. Its silhouette occupies
 whole file, as the byte-exact brand rule requires, so the visible silhouette is
 about 45 × 59 px inside the 72 × 72 element. Enlarging it would break the equal
 area rule shared by all five cards.
+
+## Portfolio derivative: 96% occupancy
+
+Status: implemented and verified locally; deployed with the record below.
+
+### Finding
+
+The canonical symbol deliberately occupies 82% of its square because it doubles
+as an app icon and social avatar with safe margin. At the card's 72 px it left
+the province as a 45 × 59 px silhouette, 22.8% ink coverage, beside four marks
+that fill their tiles. A tighter crop here was not an option: it would produce a
+non-square file, break the equal-area rule and adapt another brand inside this
+repository.
+
+### Decision
+
+AI brand and engineering judgment, reversible by the owner:
+
+- The product publishes a portfolio-only derivative,
+  `public/brand/quebec-mark-portfolio.svg`, at
+  `6bf80a0e7817c6edbda11c8f8c322cbbb234a111`. SHA-256
+  `8085883040f11a670433bff7edeeaa6ac9e115cc69a0775a27a62d97245785f4`,
+  4696 bytes.
+- The derivative changes exactly one value: the group transform, scaled 1.1707×
+  about the silhouette's ink centre so the province fills 96% of the unchanged
+  512 × 512 canvas. Path data, mask, fill and viewBox are identical to the
+  canonical symbol. The product's `docs/brand/quebec-identity.md` records the
+  derivation; the canonical app-icon and social contracts keep 82%.
+- This card now pins the derivative instead of `quebec-mark.svg`. The copy stays
+  byte-identical, so the brand rule holds; the 512 × 512 geometry and the CSS
+  caps are unchanged.
+
+### Verification
+
+| Check | Result |
+| --- | --- |
+| `npm run logos:check` | pass: 6 pinned marks, 0 red, 0 skipped |
+| `npm run check` | pass: lint, typecheck, 98 tests, static build, 10 pages |
+| Exported `out/images/logos/scaleforge-mark.svg` | SHA-256 and 4696 bytes match the pin |
+| Rendered at 1440 × 1000 | mark 72 × 72, area 5184, centre offset 0,0; ink 52 × 70, centred, 33.6% coverage, no spill |
+| Rendered at 390 × 844 | mark 72 × 72, area 5184, centre offset 0,0; ink 52 × 70, centred, 33.6% coverage, no spill |
+| Five-mark area spread at both widths | 0% |
+| Five marks at 72 px, side by side | the province now reads at the same optical weight as the four tiles |
+
+The change trades 14% of the canvas's safe margin for legibility at card size;
+the ink still leaves at least 1 px on every edge at 72 px.
