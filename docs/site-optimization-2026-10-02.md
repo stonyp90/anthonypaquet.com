@@ -319,3 +319,45 @@ BROWSER_CHANNEL=chromium node tests/browser/visual-backgrounds.mjs
 Live at the time of writing: all six marks byte-identical to disk, the five retired paths 404,
 the served CSS carrying `height:11rem` and `max-height:6.33rem`, and the browser guard passing
 against production at both widths.
+
+## Mission page in three languages and the Quebec F mark shipped (2026-10-24)
+
+The mission statement now has its own page at `/mission/`, `/fr/mission/` and `/zh/mission/`:
+the owner's English quote is the one canonical wording, French and Chinese carry labelled
+translations, each page exposes WebPage and Quotation structured data with all four alternates,
+and the footer, `llms.txt`, `robots.txt` and the sitemap point at it. The feature was already in
+the working tree from a prior peer session; it was committed unchanged after the full suite
+passed.
+
+The ScaleForge card had pinned the strike-F retired by the product repository on 2026-10-19. It
+now ships the live Quebec F, copied byte for byte from `scaleforged-website` at `44c6b49`
+(SHA-256 `dca1a606d6b87578f42160228879bb3a52b7343f942bd01e79f168f0047ea8b6`, 512x512), with
+`docs/project-brand-assets-2026-10-02.json` repinned to that commit and the studio copy rewritten
+in both locales. Five square marks now share one 4.5rem cap on both axes.
+
+Rollback point captured beforehand: version `23492e64-ce95-4950-9335-30f9d23ac43f`
+(deployment `941c6df5-b8d3-4943-86a2-d72855d14ee7`, annotated "Qualified clean main ace8717").
+This deploy: deployment `619818a1-27f3-475f-9717-60881d1201b5`, version
+`51f7a707-60f9-4dc2-885a-e51ae7e0853d`, from a clean tree whose release stamp read
+`e8d122cf335f4d945dd76539248d67e750f5b398`.
+
+```sh
+git status --short && npm run check          # 98 tests green, static export built
+npm run build                                # release: e8d122c, dirty false
+npx wrangler deployments list --json         # sort by created_on, capture the rollback version
+npx wrangler deploy --message "Qualified clean main e8d122cf335f4d945dd76539248d67e750f5b398"
+curl -s https://www.anthonypaquet.com/release.json
+for p in / /fr/ /mission/ /fr/mission/ /zh/mission/; do
+  printf '%-14s %s\n' "$p" "$(curl -s -o /dev/null -w '%{http_code}' "https://www.anthonypaquet.com$p")"
+done
+curl -s https://www.anthonypaquet.com/images/logos/scaleforge-mark.svg | shasum -a 256
+shasum -a 256 public/images/logos/scaleforge-mark.svg
+PORTFOLIO_URL=https://www.anthonypaquet.com \
+PLAYWRIGHT_MODULE=/Users/tony/Github/nota/node_modules/playwright/index.mjs \
+node tests/browser/visual-backgrounds.mjs
+```
+
+Live at the time of writing: the three mission pages, both portfolios and both brand pages
+return 200, the mission canonical and all four alternates match, the mark and the served CSS
+bundle hash equal to disk, `/does-not-exist/` returns 404, and the browser guard passes against
+production at 1440 and 390. Rollback: `npx wrangler rollback 23492e64-ce95-4950-9335-30f9d23ac43f`.
