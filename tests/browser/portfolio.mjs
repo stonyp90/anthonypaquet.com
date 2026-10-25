@@ -10,7 +10,7 @@ const browser = await chromium.launch({ headless: true, channel: process.env.BRO
 // Expected project destinations come from the catalog itself, so adding a
 // verified link updates this contract instead of breaking a hard-coded count.
 const catalogSource = await readFile(new URL('../../lib/projects.ts', import.meta.url), 'utf8')
-const { getPersonalProjects, getStudio, personalProjectCopy } = await import(`data:text/javascript;base64,${Buffer.from(ts.transpileModule(catalogSource, {
+const { getPersonalProjects, getStudio } = await import(`data:text/javascript;base64,${Buffer.from(ts.transpileModule(catalogSource, {
   compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 },
 }).outputText).toString('base64')}`)
 const projectHrefs = locale => getPersonalProjects(locale).map(({ url }) => url).filter(Boolean)
@@ -42,7 +42,9 @@ try {
     assert.equal(await staticPage.locator('section#personal-projects, .studio-feature, .venture-card').count(), 0, 'No standalone studio or product-card section remains')
     assert.equal(await staticPage.locator('.role-project-list > li.role-project').count(), 5, 'All five products are exported inside the current role')
     assert.deepEqual(await staticPage.locator('.role-project-name').allTextContents(), getPersonalProjects(locale).map(({ name }) => name))
-    assert.equal(await staticPage.locator('#offer-jewel img, #offer-jewel a[href^="https://"]').count(), 0, 'No invented Offer Jewel mark or destination')
+    assert.equal(await staticPage.locator('#offerduel img').count(), 0, 'No unverified OfferDuel logo is invented')
+    assert.equal(await staticPage.locator('#offerduel .role-project-link').getAttribute('href'), 'https://offerduel.io', 'OfferDuel uses its verified destination')
+    assert.equal(await staticPage.locator('#offerduel #offer-jewel[aria-hidden="true"]').count(), 1, 'Previous fragment resolves inside OfferDuel')
     assert.equal(await staticPage.locator('#control-craft #lunorive[aria-hidden="true"]').count(), 1, 'Legacy fragment resolves inside Control Craft')
     assert.equal(await staticPage.locator('.role-project-list').getAttribute('aria-labelledby'), 'role-projects-heading')
     assert.equal(await staticPage.locator('.site-nav a[href="#personal-projects"]').count(), 0, 'Navigation has no dedicated projects section')
@@ -103,13 +105,9 @@ try {
       )
       assert.equal(await page.locator('.role-project-list > .role-project').count(), 5)
       assert.equal(await studioPanel.locator('a[href*="/pitch/"]').count(), 0, 'Pending pitch remains gated')
-      assert.equal(
-        await page.locator('#offer-jewel a').getAttribute('href'),
-        `mailto:me@anthonypaquet.com?subject=${encodeURIComponent(personalProjectCopy[locale].contactSubject)}`,
-        'Offer Jewel provides a contact action without a fabricated website'
-      )
-      assert.equal(await page.locator('#offer-jewel .role-project-summary').textContent(), personalProjectCopy[locale].development)
-      assert.equal(await page.locator('#offer-jewel img').count(), 0)
+      assert.equal(await page.locator('#offerduel .role-project-name').textContent(), 'OfferDuel')
+      assert.equal(await page.locator('#offerduel .role-project-link').getAttribute('href'), 'https://offerduel.io')
+      assert.equal(await page.locator('#offerduel img').count(), 0, 'No unverified OfferDuel logo is invented')
       for (const brand of [getStudio(locale), ...getPersonalProjects(locale)]) {
         const container = brand.id === 'scaleforged' ? studioPanel : page.locator(`#${brand.id}`)
         await container.scrollIntoViewIfNeeded()
@@ -150,10 +148,10 @@ try {
       }
       if (await roles.nth(1).getAttribute('aria-expanded') !== 'true') await roles.nth(1).click()
       assert.equal(await roles.nth(1).getAttribute('aria-expanded'), 'true')
-      for (const fragment of ['control-craft', 'lunorive', 'personal-projects']) {
+      for (const fragment of ['control-craft', 'lunorive', 'offerduel', 'offer-jewel', 'personal-projects']) {
         await page.evaluate(fragment => { window.location.hash = fragment }, fragment)
         await page.waitForFunction(() => document.querySelector('#scaleforged .reveal-trigger')?.getAttribute('aria-expanded') === 'true')
-        assert.equal(await page.locator('#control-craft').isVisible(), true, `#${fragment} reopens the parent studio role`)
+        assert.equal(await page.locator(fragment.startsWith('offer') ? '#offerduel' : '#control-craft').isVisible(), true, `#${fragment} reopens the parent studio role`)
         await roles.nth(1).click()
       }
       assert.equal(errors.length, 0, errors.join('\n'))

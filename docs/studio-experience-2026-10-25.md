@@ -4,7 +4,7 @@
 
 On October 25, 2026, the owner asked to place ScaleForge in the Experience
 section as the latest role, with the title **Builder** and duration **2 years**.
-GoNota, Tablix, Control Craft, Ursly, and Offer Jewel belong within that role.
+GoNota, Tablix, Control Craft, Ursly, and OfferDuel belong within that role.
 The former standalone studio and products section is superseded by this
 composition.
 
@@ -22,7 +22,7 @@ wordmark retains its original **SCALEFORGED** lettering.
 | Location | Québec, Canada |
 | Studio website | https://scaleforged.io |
 | Approved logo | `/images/logos/scaleforge-empreinte.svg` |
-| Products in the role | GoNota, Tablix, Control Craft, Ursly, Offer Jewel |
+| Products in the role | GoNota, Tablix, Control Craft, Ursly, OfferDuel |
 
 The experience data is maintained in `lib/data.ts`; localized presentation copy
 is in `lib/content/en.ts` and `lib/content/fr.ts`. Product names, descriptions,
@@ -42,9 +42,30 @@ identify the same current role.
   inspired by places, events, and memories without asserting checkout readiness.
 - **Ursly** links to `https://ursly.io` and retains its exploratory interface
   positioning.
-- **Offer Jewel** is included using the owner’s exact name as a studio project
-  in development. No public URL, product capability, or equivalence to OfferDuel
-  is asserted without additional evidence.
+- **OfferDuel** uses the spelling confirmed by the owner’s subsequent verbal
+  correction and the current `stonyp90/offerduel` repository. Its canonical
+  destination is `https://offerduel.io`. The product is presented as explorable
+  3D industry worlds with local negotiation demonstrations. No ordering,
+  payment, or merchant-contact capability is asserted. No logo is added because
+  a canonical brand asset has not been verified.
+
+### OfferDuel identity evidence
+
+Checked against `stonyp90/offerduel` default-branch commit
+`d60970cfc638ae1dfc5ee79e5c948c0ffc45b107`:
+
+- [`README.md`](https://github.com/stonyp90/offerduel/blob/d60970cfc638ae1dfc5ee79e5c948c0ffc45b107/README.md)
+  names the application **OfferDuel / Le Salon Worlds** and describes industry
+  worlds and a local negotiation demonstration.
+- [`site.config.json`](https://github.com/stonyp90/offerduel/blob/d60970cfc638ae1dfc5ee79e5c948c0ffc45b107/site.config.json)
+  sets `canonicalHost` to `offerduel.io`.
+- [`docs/RUNBOOK.md`](https://github.com/stonyp90/offerduel/blob/d60970cfc638ae1dfc5ee79e5c948c0ffc45b107/docs/RUNBOOK.md)
+  documents the canonical public host and the public adapter’s demonstration
+  boundary. Site availability was not independently verified during this copy
+  correction because the web fetch was unavailable.
+
+The canonical product ID is `offerduel`. The current experience composition,
+ScaleForge identity, and other product entries are unchanged by this correction.
 
 ## Metadata and documentation changes
 

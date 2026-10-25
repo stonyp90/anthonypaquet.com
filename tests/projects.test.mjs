@@ -21,9 +21,9 @@ test('each locale supplies the same studio and five distinct products for the Ex
     assert.equal(studio.id, 'scaleforged')
     assert.equal(studio.name, 'ScaleForge')
     assert.equal(studio.url, 'https://scaleforged.io')
-    assert.deepEqual(projects.map(({ name }) => name), ['GoNota', 'Tablix', 'Control Craft', 'Ursly', 'Offer Jewel'])
+    assert.deepEqual(projects.map(({ name }) => name), ['GoNota', 'Tablix', 'Control Craft', 'Ursly', 'OfferDuel'])
     assert.deepEqual(projects.map(({ url }) => url), [
-      'https://gonota.ca', 'https://tablix.ca', 'https://controlcraft.io', 'https://ursly.io', undefined,
+      'https://gonota.ca', 'https://tablix.ca', 'https://controlcraft.io', 'https://ursly.io', 'https://offerduel.io',
     ])
     assert.equal(new Set(visibleBrands(locale).map(({ id }) => id)).size, 6)
     assert.ok(!projects.some(({ id }) => id === studio.id), 'The studio is not another product card')
@@ -31,18 +31,19 @@ test('each locale supplies the same studio and five distinct products for the Ex
   }
 })
 
-test('Offer Jewel is included without an invented destination, logo or feature claim', () => {
+test('OfferDuel uses its verified name, destination and category without an invented logo', async () => {
+  const categories = { en: '3D commerce experiences', fr: 'Expériences commerciales en 3D' }
   for (const locale of locales) {
-    const project = getPersonalProjects(locale).find(({ id }) => id === 'offer-jewel')
+    const project = getPersonalProjects(locale).find(({ id }) => id === 'offerduel')
     assert.ok(project)
-    assert.equal(project.inDevelopment, true)
-    assert.equal(project.url, undefined)
-    assert.equal(project.visual, undefined)
-    assert.deepEqual(project.focus, [])
-    assert.doesNotMatch(project.description, /jewel(?:lery|ry)|negotiat|marketplace|OfferDuel|Le Salon/i)
-    assert.ok(personalProjectCopy[locale].development)
-    assert.ok(personalProjectCopy[locale].contactSubject.includes('Offer Jewel'))
+    assert.equal(project.name, 'OfferDuel')
+    assert.equal(project.url, 'https://offerduel.io')
+    assert.equal(project.category, categories[locale])
+    assert.equal(project.visual, undefined, 'No unverified OfferDuel mark is invented')
+    assert.doesNotMatch(JSON.stringify(visibleBrands(locale)), /Offer Jewel|offer-jewel|jewel(?:lery|ry)/i)
   }
+  const component = await readFile(new URL('../components/ExperienceProjects.tsx', import.meta.url), 'utf8')
+  assert.match(component, /id="offer-jewel"[^>]*aria-hidden="true"/, 'Retain the previous fragment without displaying the incorrect project name')
 })
 
 test('Control Craft replaces the retired product identity while old fragment links resolve', async () => {

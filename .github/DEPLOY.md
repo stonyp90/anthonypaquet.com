@@ -21,7 +21,7 @@ GitHub Actions (push to main) ── wrangler deploy ─▶ Worker "anthonypaque
 
 ## Configuration
 
-Set at `https://github.com/stonyp90/stonyp90/settings/secrets/actions`.
+Set at `https://github.com/stonyp90/anthonypaquet.com/settings/secrets/actions`.
 
 **Secrets**
 - `CLOUDFLARE_API_TOKEN` — API token from the *Edit Cloudflare Workers* template, scoped to this account and the `anthonypaquet.com` zone

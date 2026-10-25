@@ -4,7 +4,7 @@ export type ProjectVisual = { src: string; width: number; height: number }
 export type ProjectSocialLink = { label: string; href: `https://${string}` }
 
 export type PersonalProject = {
-  id: 'gonota' | 'tablix' | 'control-craft' | 'ursly' | 'offer-jewel'
+  id: 'gonota' | 'tablix' | 'control-craft' | 'ursly' | 'offerduel'
   name: string
   category: string
   description: string
@@ -35,7 +35,7 @@ export const personalProjectCopy = {
     newTab: 'opens in a new tab',
     development: 'In development',
     contact: 'Talk about this project',
-    contactSubject: 'Let’s talk about Offer Jewel',
+    contactSubject: 'Let’s talk about OfferDuel',
   },
   fr: {
     productsLabel: 'Les projets que je développe',
@@ -43,7 +43,7 @@ export const personalProjectCopy = {
     newTab: 's’ouvre dans un nouvel onglet',
     development: 'En développement',
     contact: 'Parlons de ce projet',
-    contactSubject: 'Parlons d’Offer Jewel',
+    contactSubject: 'Parlons d’OfferDuel',
   },
 } satisfies Record<Locale, Record<string, string>>
 
@@ -115,10 +115,10 @@ const projects: Record<Locale, readonly PersonalProject[]> = {
       visual: visuals.ursly,
     },
     {
-      id: 'offer-jewel', name: 'Offer Jewel',
-      category: 'A new studio project',
-      description: 'A new product taking shape within ScaleForge. More about the project as it develops.',
-      focus: [],
+      id: 'offerduel', name: 'OfferDuel', url: 'https://offerduel.io',
+      category: '3D commerce experiences',
+      description: 'Explorable 3D industry worlds and local negotiation demonstrations.',
+      focus: ['3D experiences', 'Negotiation demos'],
       inDevelopment: true,
     },
   ],
@@ -154,10 +154,10 @@ const projects: Record<Locale, readonly PersonalProject[]> = {
       visual: visuals.ursly,
     },
     {
-      id: 'offer-jewel', name: 'Offer Jewel',
-      category: 'Un nouveau projet du studio',
-      description: 'Un nouveau produit prend forme au sein de ScaleForge. Le projet se dévoilera au fil de son développement.',
-      focus: [],
+      id: 'offerduel', name: 'OfferDuel', url: 'https://offerduel.io',
+      category: 'Expériences commerciales en 3D',
+      description: 'Des univers 3D par secteur et des démonstrations locales de négociation.',
+      focus: ['Expériences 3D', 'Démos de négociation'],
       inDevelopment: true,
     },
   ],

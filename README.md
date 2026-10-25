@@ -143,7 +143,7 @@ and a distinct identity and audience for each one.
 | **Tablix** | Legal document intelligence and structured data | [tablix.ca](https://tablix.ca) |
 | **Control Craft** | Art prints inspired by places, events and memories | [controlcraft.io](https://controlcraft.io) |
 | **Ursly** | Research into natural interfaces through voice, movement and the senses | [ursly.io](https://ursly.io) |
-| **Offer Jewel** | A studio project in development | Public destination not yet confirmed |
+| **OfferDuel** | Explorable 3D industry worlds and local negotiation demonstrations | [offerduel.io](https://offerduel.io) |
 
 [Visit ScaleForge](https://scaleforged.io)
 
@@ -206,7 +206,7 @@ Led engineering for enterprise-grade cloud solutions in the creative industry:
 const currentFocus = {
   role: "Builder at ScaleForge",
   duration: "2 years",
-  projects: ["GoNota", "Tablix", "Control Craft", "Ursly", "Offer Jewel"],
+  projects: ["GoNota", "Tablix", "Control Craft", "Ursly", "OfferDuel"],
   learning: ["Advanced LLM integration", "AI agents", "Multi-agent systems"],
   interests: ["FinOps optimization", "DevSecOps automation", "Cloud-native architecture"],
   openTo: ["Technical leadership roles", "Cloud architecture consulting", "AI/ML projects"]

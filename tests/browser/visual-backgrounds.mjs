@@ -92,9 +92,9 @@ try {
       assert.equal(geometry.contained, true, `${brand.id} mark fits its own container at ${width}px`)
       assert.equal(geometry.overflow, false, `${brand.id} identity container does not overflow at ${width}px`)
     }
-    assert.equal(await page.locator('#experience #offer-jewel').count(), 1, 'Offer Jewel is included within the current role')
-    assert.equal(await page.locator('#offer-jewel img').count(), 0, 'No unverified Offer Jewel logo is invented')
-    assert.equal(await page.locator('#offer-jewel a[href^="https://"]').count(), 0, 'No unverified Offer Jewel destination is invented')
+    assert.equal(await page.locator('#experience li#offerduel').count(), 1, 'OfferDuel is included within the current role')
+    assert.equal(await page.locator('#offerduel img').count(), 0, 'No unverified OfferDuel logo is invented')
+    assert.equal(await page.locator('#offerduel .role-project-link').getAttribute('href'), 'https://offerduel.io', 'OfferDuel links to its verified public destination')
     await studioPanel.screenshot({ path: `tmp/browser/fr-${width}-scaleforge-experience.png` })
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false)
     await page.close()

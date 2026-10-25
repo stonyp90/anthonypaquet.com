@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     default: 'Anthony Paquet | AI & Cloud Architect | Engineering Leader',
     template: '%s | Anthony Paquet',
   },
-  description: 'Builder at ScaleForge for 2 years. Based in Québec, Anthony Paquet builds GoNota, Tablix, Control Craft, Ursly, and Offer Jewel through the studio, alongside cloud architecture and engineering leadership work.',
+  description: 'Builder at ScaleForge for 2 years. Based in Québec, Anthony Paquet builds GoNota, Tablix, Control Craft, Ursly, and OfferDuel through the studio, alongside cloud architecture and engineering leadership work.',
   icons: {
     icon: [
       { url: '/favicon.ico?v=2', sizes: 'any' },
@@ -92,7 +92,7 @@ export const metadata: Metadata = {
     'GoNota',
     'Control Craft',
     'Ursly',
-    'Offer Jewel',
+    'OfferDuel',
     'Tablix',
     'Tablix RDPRM',
     'RDPRM extraction software',
@@ -129,7 +129,7 @@ export const metadata: Metadata = {
     alternateLocale: 'fr_CA',
     url: 'https://www.anthonypaquet.com',
     title: 'Anthony Paquet | Builder at ScaleForge | AI & Cloud Architect',
-    description: 'Builder at ScaleForge for 2 years. Explore the experience behind GoNota, Tablix, Control Craft, Ursly, and Offer Jewel, alongside cloud architecture and engineering leadership.',
+    description: 'Builder at ScaleForge for 2 years. Explore the experience behind GoNota, Tablix, Control Craft, Ursly, and OfferDuel, alongside cloud architecture and engineering leadership.',
     siteName: 'Anthony Paquet | Builder at ScaleForge',
     images: [
       {
@@ -144,7 +144,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Anthony Paquet | Builder at ScaleForge | AI & Cloud Architect',
-    description: 'Builder at ScaleForge for 2 years, bringing GoNota, Tablix, Control Craft, Ursly, and Offer Jewel to life in Québec.',
+    description: 'Builder at ScaleForge for 2 years, bringing GoNota, Tablix, Control Craft, Ursly, and OfferDuel to life in Québec.',
     images: {
       url: '/og-image.png',
       alt: 'Anthony Paquet, Builder at ScaleForge and AI & Cloud Architect',
@@ -176,7 +176,7 @@ const personSchema = {
   url: 'https://www.anthonypaquet.com',
   image: portraitUrl,
   jobTitle: 'Builder',
-  description: 'Builder at ScaleForge for 2 years, developing GoNota, Tablix, Control Craft, Ursly, and Offer Jewel within the Québec venture studio. Independent AI & Cloud Architect specializing in FinOps, compliance, infrastructure security, and disaster recovery. Previously engaged with Bespoke Labs.',
+  description: 'Builder at ScaleForge for 2 years, developing GoNota, Tablix, Control Craft, Ursly, and OfferDuel within the Québec venture studio. Independent AI & Cloud Architect specializing in FinOps, compliance, infrastructure security, and disaster recovery. Previously engaged with Bespoke Labs.',
   sameAs: [
     'https://linkedin.com/in/anthony-paquet-94a31085',
     'https://github.com/stonyp90',
@@ -230,7 +230,7 @@ const personSchema = {
       name: 'ScaleForge',
       url: 'https://scaleforged.io',
       logo: 'https://www.anthonypaquet.com/images/logos/scaleforge-empreinte.svg',
-      description: 'Independent venture studio in Québec building GoNota, Tablix, Control Craft, Ursly, and Offer Jewel. The studio brings product design, engineering, and AI into short feedback loops while each product keeps its own brand and audience.',
+      description: 'Independent venture studio in Québec building GoNota, Tablix, Control Craft, Ursly, and OfferDuel. The studio brings product design, engineering, and AI into short feedback loops while each product keeps its own brand and audience.',
       brand: [
         { '@type': 'Brand', name: 'GoNota', url: 'https://gonota.ca' },
         { '@type': 'Brand', name: 'Tablix', url: 'https://tablix.ca' },
@@ -242,7 +242,7 @@ const personSchema = {
           description: 'Art prints inspired by meaningful places, live events, and personal memories.',
         },
         { '@type': 'Brand', name: 'Ursly', url: 'https://ursly.io' },
-        { '@type': 'Brand', name: 'Offer Jewel', description: 'A studio project in development within ScaleForge.' },
+        { '@type': 'Brand', name: 'OfferDuel', url: 'https://offerduel.io', description: 'Explorable 3D industry worlds and local negotiation demonstrations, developed within ScaleForge.' },
       ],
       areaServed: {
         '@type': 'Place',
@@ -518,7 +518,7 @@ const websiteSchema = {
   '@id': 'https://www.anthonypaquet.com/#website',
   url: 'https://www.anthonypaquet.com',
   name: 'Anthony Paquet',
-  description: 'Anthony Paquet’s experience as Builder at ScaleForge for 2 years, developing GoNota, Tablix, Control Craft, Ursly, and Offer Jewel. AI and cloud architecture, engineering leadership, FinOps, and security consulting.',
+  description: 'Anthony Paquet’s experience as Builder at ScaleForge for 2 years, developing GoNota, Tablix, Control Craft, Ursly, and OfferDuel. AI and cloud architecture, engineering leadership, FinOps, and security consulting.',
   inLanguage: ['en-CA', 'fr-CA'],
   publisher: { '@id': 'https://www.anthonypaquet.com/#person' },
   about: { '@id': 'https://www.anthonypaquet.com/#person' },

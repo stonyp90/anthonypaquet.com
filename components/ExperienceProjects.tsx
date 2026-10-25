@@ -16,6 +16,7 @@ export default function ExperienceProjects() {
         {getPersonalProjects(locale).map((project) => (
           <li id={project.id} key={project.id} className="role-project">
             {project.id === 'control-craft' && <span id="lunorive" className="legacy-project-anchor" aria-hidden="true" />}
+            {project.id === 'offerduel' && <span id="offer-jewel" className="legacy-project-anchor" aria-hidden="true" />}
             <a
               href={project.url ?? `mailto:me@anthonypaquet.com?subject=${encodeURIComponent(copy.contactSubject)}`}
               target={project.url ? '_blank' : undefined}
