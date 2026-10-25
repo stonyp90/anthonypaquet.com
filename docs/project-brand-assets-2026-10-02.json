@@ -1,7 +1,7 @@
 {
-  "checkedAt": "2026-10-17",
+  "checkedAt": "2026-10-25",
   "sharpVersion": "0.34.5",
-  "rule": "Every personal-project card shows the product's own canonical mark, copied byte for byte from that product's repository at a pinned commit. No mark is redrawn, retightened or recoloured here: an adaptation is a defect. node scripts/sync-product-logos.mjs reproduces the copies and --check fails on drift.",
+  "rule": "The studio feature and product cards show each brand's own canonical mark, copied byte for byte from its repository at a pinned commit. No mark is redrawn, retightened or recoloured here. Projects without a verified mark or public destination use their name and an honest development label. node scripts/sync-product-logos.mjs reproduces the pinned copies and --check fails on drift. Superseded entries are retained as history, never selected by the current catalog.",
   "assets": [
     {
       "checkedAt": "2026-10-17",
@@ -91,7 +91,7 @@
       "width": 512,
       "height": 512,
       "alpha": true,
-      "usage": "Active personal-project symbol",
+      "usage": "Superseded 2026-10-25 by scaleforge-empreinte.svg. Retained as historical source evidence; the owner explicitly requested the approved yellow Empreinte identity.",
       "decision": "Owner-directed Québec F identity, revision 3 (scaleforged-website docs/brand/quebec-identity.md). The Québec silhouette takes the capital F position with a transparent F counterform; the light-surface fill is #24457F. It replaced the strike-F, retired 2026-10-19. The product publishes a portfolio-only derivative, quebec-mark-portfolio.svg, that scales the same paths about the ink centre so the province fills 96% of the 512 x 512 canvas instead of an app icon's 82%, which read undersized beside wordmark-led marks at 72 px. Only the group transform differs; the canonical symbol keeps 82% for app-icon and social use on scaleforged.io.",
       "sourceSha256": "8085883040f11a670433bff7edeeaa6ac9e115cc69a0775a27a62d97245785f4",
       "outputSha256": "8085883040f11a670433bff7edeeaa6ac9e115cc69a0775a27a62d97245785f4",
@@ -110,7 +110,7 @@
       "width": 256,
       "height": 256,
       "alpha": false,
-      "usage": "Active personal-project symbol",
+      "usage": "Superseded 2026-10-25 by control-craft.svg. Retained as historical source evidence; the product is now Control Craft.",
       "decision": "Owner, 2026-10-15: lunorive dist/data/brand.json, identity gallery-2026, status owner_selected_direction_production_assets. The gallery symbol is the production mark; the folder's vector studies are exploratory and not adopted.",
       "sourceSha256": "8bcd7c3112b3bb1d1778a8e41c734e5fa88fa1bfd9ce7599e724decd56ca79f1",
       "outputSha256": "8bcd7c3112b3bb1d1778a8e41c734e5fa88fa1bfd9ce7599e724decd56ca79f1",
@@ -212,6 +212,48 @@
       "outputSha256": "dbcb8951f378ac266dcdf5f26492e546d83dea2ddd8313e37689873d5d2d7fe9",
       "sourceBytes": 1112573,
       "outputBytes": 72252
+    },
+    {
+      "product": "ScaleForge",
+      "remote": "stonyp90/scaleforged-website",
+      "repo": "/Users/tony/Github/scaleforged-website",
+      "commit": "3c702833f4de69a0dc967586c303a78c8e98813d",
+      "source": "/Users/tony/Github/scaleforged-website/public/brand/empreinte-wordmark.svg",
+      "output": "public/images/logos/scaleforge-empreinte.svg",
+      "width": 1000,
+      "height": 386.68,
+      "usage": "Active studio feature wordmark",
+      "decision": "Owner, 2026-10-25: use the approved yellow ScaleForge identity and present the studio above its products. The approved Empreinte package records stacked SCALE / FORGED lettering, vivid #FFD438 paper and #151714 ink. This is the existing transparent ink vector master, rendered without modification on the studio yellow surface. Brand/provenance.json in the source repository records the approved 2026-10-22 artwork and the 2026-10-24 vector trace. The final D in the canonical artwork is preserved.",
+      "sourceGitBlobSha": "3df2fc4fb80e0d3e1f7b61e0d839fe0f42fcc38a",
+      "checkedAt": "2026-10-25",
+      "transformation": "Byte-identical copy",
+      "alpha": true,
+      "sourceSha256": "5aa278d16ce455192279bb947213b7cf2671a1b81e084544944567a92d5aa244",
+      "outputSha256": "5aa278d16ce455192279bb947213b7cf2671a1b81e084544944567a92d5aa244",
+      "sourceBytes": 5940,
+      "outputBytes": 5940,
+      "sourceUrl": "https://github.com/stonyp90/scaleforged-website/blob/3c702833f4de69a0dc967586c303a78c8e98813d/public/brand/empreinte-wordmark.svg"
+    },
+    {
+      "product": "Control Craft",
+      "remote": "stonyp90/controlcraft-website",
+      "repo": "/Users/tony/Github/controlcraft-website",
+      "commit": "77f5952c50c71400ba9ec22dfe70998538cada6d",
+      "source": "/Users/tony/Github/controlcraft-website/public/brand-cadrage/cadrage-stacked-light.svg",
+      "output": "public/images/logos/control-craft.svg",
+      "width": 3775,
+      "height": 1640,
+      "usage": "Active product card wordmark",
+      "decision": "Owner, 2026-10-25: replace Lunar Rave / Lunorive with Control Craft. Use the product repository’s existing Cadrage stacked light-surface wordmark, preserving its original lettering, palette and proportions, and link to the confirmed https://controlcraft.io destination. The old #lunorive page fragment is retained only as an invisible compatibility anchor.",
+      "sourceGitBlobSha": "32ba18db45eb714b0ed02982ea85537e6c20f74e",
+      "checkedAt": "2026-10-25",
+      "transformation": "Byte-identical copy",
+      "alpha": true,
+      "sourceSha256": "cdbdb6cbe81a719d82396c4a229eb4e75045287ecb511cb25b4dc032fb1533a6",
+      "outputSha256": "cdbdb6cbe81a719d82396c4a229eb4e75045287ecb511cb25b4dc032fb1533a6",
+      "sourceBytes": 3426,
+      "outputBytes": 3426,
+      "sourceUrl": "https://github.com/stonyp90/controlcraft-website/blob/77f5952c50c71400ba9ec22dfe70998538cada6d/public/brand-cadrage/cadrage-stacked-light.svg"
     }
   ]
 }

@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     default: 'Anthony Paquet | AI & Cloud Architect | Engineering Leader',
     template: '%s | Anthony Paquet',
   },
-  description: 'AI & Cloud Architect for Series A AI labs and growth-stage companies. Cut cloud costs 30 to 60%, achieve SOC 2 / HIPAA in weeks, scale 0→1 to enterprise. Previously with Bespoke Labs (Series A RL lab) and founder of Tablix (Quebec legal-tech SaaS for RDPRM, REQ, and hypothèque extraction). AWS, Azure, GCP.',
+  description: 'AI & Cloud Architect and engineering leader in Québec. Cloud architecture, FinOps, and security consulting. Founder of ScaleForge, the venture studio building GoNota, Tablix, Control Craft, Ursly, and Offer Jewel.',
   icons: {
     icon: [
       { url: '/favicon.ico?v=2', sizes: 'any' },
@@ -86,7 +86,13 @@ export const metadata: Metadata = {
     'RL Lab Cloud Architect',
     'RL Lab Security',
     'AI Startup SOC 2 Series A',
-    // Owned product
+    // Studio and products
+    'ScaleForge',
+    'Quebec venture studio',
+    'GoNota',
+    'Control Craft',
+    'Ursly',
+    'Offer Jewel',
     'Tablix',
     'Tablix RDPRM',
     'RDPRM extraction software',
@@ -123,7 +129,7 @@ export const metadata: Metadata = {
     alternateLocale: 'fr_CA',
     url: 'https://www.anthonypaquet.com',
     title: 'Anthony Paquet | AI & Cloud Security Architect | Bespoke Labs · Tablix',
-    description: 'AI & Cloud Architect for Series A AI labs and growth-stage companies. Cloud cost reduction 30 to 60%, SOC 2 / HIPAA in weeks, infrastructure security. Previously with Bespoke Labs (Series A RL lab) and founder of Tablix (Quebec legal-tech SaaS).',
+    description: 'Engineering leadership, cloud architecture, and ScaleForge: a Québec venture studio building GoNota, Tablix, Control Craft, Ursly, and Offer Jewel.',
     siteName: 'Anthony Paquet, AI & Cloud Architect | Bespoke Labs · Tablix Founder',
     images: [
       {
@@ -138,7 +144,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Anthony Paquet | AI & Cloud Architect | Bespoke Labs · Tablix',
-    description: 'AI & Cloud Architect for Series A AI labs. Cloud cost 30 to 60%, SOC 2 / HIPAA in weeks. Previously with Bespoke Labs · founder of Tablix (Quebec legal-tech).',
+    description: 'AI & Cloud Architect, engineering leader, and founder of ScaleForge. Explore the studio and the products we are building in Québec.',
     images: {
       url: '/og-image.png',
       alt: 'Anthony Paquet, AI & Cloud Architect | Bespoke Labs and Tablix',
@@ -221,7 +227,21 @@ const personSchema = {
       '@id': 'https://scaleforged.io/#org',
       name: 'ScaleForge',
       url: 'https://scaleforged.io',
-      description: 'AI venture studio rooted in the Quebec City region. It designs, builds and improves digital products with people who know their industries, on short feedback loops. Each product keeps its own brand and audience.',
+      logo: 'https://www.anthonypaquet.com/images/logos/scaleforge-empreinte.svg',
+      description: 'Independent venture studio in Québec building GoNota, Tablix, Control Craft, Ursly, and Offer Jewel. The studio brings product design, engineering, and AI into short feedback loops while each product keeps its own brand and audience.',
+      brand: [
+        { '@type': 'Brand', name: 'GoNota', url: 'https://gonota.ca' },
+        { '@type': 'Brand', name: 'Tablix', url: 'https://tablix.ca' },
+        {
+          '@type': 'Brand',
+          name: 'Control Craft',
+          url: 'https://controlcraft.io',
+          slogan: 'From memory to art.',
+          description: 'Art prints inspired by meaningful places, live events, and personal memories.',
+        },
+        { '@type': 'Brand', name: 'Ursly', url: 'https://ursly.io' },
+        { '@type': 'Brand', name: 'Offer Jewel', description: 'A studio project in development within ScaleForge.' },
+      ],
       areaServed: {
         '@type': 'Place',
         name: 'Quebec, Canada',

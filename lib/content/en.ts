@@ -38,7 +38,7 @@ export const en = {
       skip: 'Skip to content',
       services: 'Services',
       experience: 'Experience',
-      projects: 'Personal projects',
+      projects: 'Studio & products',
     },
 
     hero: {
@@ -57,7 +57,7 @@ export const en = {
       ctaPrimary: 'Email me',
       ctaLinkedIn: 'LinkedIn',
       ctaResume: 'Resume',
-      ctaProjects: 'Explore my personal projects',
+      ctaProjects: 'Explore the studio and products',
     },
 
     about: {
@@ -93,9 +93,9 @@ export const en = {
       proof: {
         intro: 'The loop does not stop at code: it reaches real usage, then comes back with evidence.',
         title: 'Made by the loop',
-        name: 'Lunorive',
-        blurb: 'My newest product, created in this loop without human interaction: framed art prints of the places people love.',
-        cta: 'See Lunorive in my projects',
+        name: 'Control Craft',
+        blurb: 'A ScaleForge project shaped through this loop: art prints inspired by meaningful places, live events, and personal memories.',
+        cta: 'Explore Control Craft and the studio products',
       },
     },
 
@@ -182,7 +182,7 @@ export const en = {
         { href: '#about', label: 'About' },
         { href: '#experience', label: 'Experience' },
         { href: '#certifications', label: 'Certifications' },
-        { href: '#personal-projects', label: 'Personal projects' },
+        { href: '#personal-projects', label: 'Studio & products' },
       ],
       rights: 'All rights reserved.',
       builtWith: 'Built with Next.js, TypeScript & Tailwind CSS',

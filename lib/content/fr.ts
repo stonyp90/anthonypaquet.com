@@ -382,7 +382,7 @@ export const fr: SiteContent = {
       skip: 'Aller au contenu',
       services: 'Services',
       experience: 'Parcours',
-      projects: 'Projets perso',
+      projects: 'Studio et produits',
     },
 
     hero: {
@@ -401,7 +401,7 @@ export const fr: SiteContent = {
       ctaPrimary: 'Écrivez-moi',
       ctaLinkedIn: 'LinkedIn',
       ctaResume: 'CV',
-      ctaProjects: 'Découvrir mes projets personnels',
+      ctaProjects: 'Découvrir le studio et les produits',
     },
 
     about: {
@@ -437,9 +437,9 @@ export const fr: SiteContent = {
       proof: {
         intro: 'La boucle ne s’arrête pas au code : elle va jusqu’à l’usage réel, puis revient avec des preuves.',
         title: 'Fait par la boucle',
-        name: 'Lunorive',
-        blurb: 'Mon plus récent produit, créé dans cette boucle sans intervention humaine : des œuvres encadrées des lieux qu’on aime.',
-        cta: 'Voir Lunorive dans mes projets',
+        name: 'Control Craft',
+        blurb: 'Un projet ScaleForge développé avec cette boucle : des tirages d’art inspirés de lieux marquants, d’événements et de souvenirs personnels.',
+        cta: 'Découvrir Control Craft et les produits du studio',
       },
     },
 
@@ -526,7 +526,7 @@ export const fr: SiteContent = {
         { href: '#about', label: 'À propos' },
         { href: '#experience', label: 'Expérience' },
         { href: '#certifications', label: 'Certifications' },
-        { href: '#personal-projects', label: 'Projets personnels' },
+        { href: '#personal-projects', label: 'Studio et produits' },
       ],
       rights: 'Tous droits réservés.',
       builtWith: 'Conçu avec Next.js, TypeScript et Tailwind CSS',

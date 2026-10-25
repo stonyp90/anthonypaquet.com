@@ -38,34 +38,61 @@ try {
     })
     assert.match(await portrait.getAttribute('src'), /anthony-paquet-portrait\.webp$/, 'The actual face uses the unchanged original photograph')
     assert.equal(await page.locator('.hero-portrait-frame').count(), 0, 'No arch or photo frame')
-    assert.match(await page.locator('.project-card--tablix img').getAttribute('src'), /\.svg$/, 'Tablix uses a transparent native SVG')
+    assert.match(await page.locator('#tablix .venture-logo').getAttribute('src'), /\.svg$/, 'Tablix uses a transparent native SVG')
     await page.screenshot({ path: `tmp/browser/fr-${width}-transparent-hero.png` })
-    // One mark band, one grammar: every mark holds the same optical area and sits
-    // centred in its band, whatever proportions its own brand file is drawn at.
-    const areas = []
-    for (const project of ['gonota', 'tablix', 'ursly', 'scaleforged', 'lunorive']) {
-      // The index reveals one project at a time: open the entry before measuring it.
-      const trigger = page.locator(`#${project} .reveal-trigger`)
-      if (await trigger.getAttribute('aria-expanded') !== 'true') await trigger.click()
-      const box = await page.locator(`.project-card--${project} .project-logo`).evaluate((el) => {
-        const r = el.getBoundingClientRect()
-        const b = el.closest('.project-visual').getBoundingClientRect()
+    // The studio has a prominent yellow identity panel above the products.
+    // Each canonical mark keeps its own proportions and fits its own container;
+    // the studio wordmark and product logos intentionally have different sizes.
+    assert.equal(await page.locator('#scaleforged.studio-feature').count(), 1)
+    assert.equal(await page.locator('.studio-products > .venture-card').count(), 5)
+    assert.equal(await page.locator('#personal-projects .reveal-trigger').count(), 0, 'Products are visible without an accordion')
+    assert.equal(
+      await page.locator('.studio-identity').evaluate(element => getComputedStyle(element).backgroundColor),
+      'rgb(255, 212, 56)',
+      'The studio uses the approved vivid forge yellow'
+    )
+    const brands = [
+      { id: 'scaleforged', image: '.studio-wordmark', container: '.studio-identity', src: '/images/logos/scaleforge-empreinte.svg' },
+      { id: 'gonota', image: '.venture-logo', container: '.venture-card-top', src: '/images/logos/nota-mark.png' },
+      { id: 'tablix', image: '.venture-logo', container: '.venture-card-top', src: '/images/logos/tablix-mark.svg' },
+      { id: 'control-craft', image: '.venture-logo', container: '.venture-card-top', src: '/images/logos/control-craft.svg' },
+      { id: 'ursly', image: '.venture-logo', container: '.venture-card-top', src: '/images/logos/ursly-mark.svg' },
+    ]
+    for (const brand of brands) {
+      const panel = page.locator(`#${brand.id}`)
+      const image = panel.locator(brand.image)
+      await panel.scrollIntoViewIfNeeded()
+      assert.equal(await panel.isVisible(), true, `${brand.id} stays discoverable at ${width}px`)
+      assert.equal(await image.getAttribute('src'), brand.src, `${brand.id} uses the current canonical asset`)
+      const geometry = await image.evaluate(async (element, containerSelector) => {
+        try { await element.decode() } catch { /* readiness is measured below */ }
+        const imageBox = element.getBoundingClientRect()
+        const container = element.closest(containerSelector)
+        const containerBox = container.getBoundingClientRect()
+        const renderedRatio = imageBox.width / imageBox.height
+        const naturalRatio = element.naturalWidth / element.naturalHeight
         return {
-          area: r.width * r.height,
-          dx: b.left + b.width / 2 - (r.left + r.width / 2),
-          dy: b.top + b.height / 2 - (r.top + r.height / 2),
-          spills: r.height > b.height,
+          loaded: element.complete && element.naturalWidth > 0 && element.naturalHeight > 0,
+          visibleArea: imageBox.width * imageBox.height,
+          proportionError: Math.abs(renderedRatio - naturalRatio) / naturalRatio,
+          objectFit: getComputedStyle(element).objectFit,
+          contained: imageBox.left >= containerBox.left - 1 && imageBox.right <= containerBox.right + 1 &&
+            imageBox.top >= containerBox.top - 1 && imageBox.bottom <= containerBox.bottom + 1,
+          overflow: container.scrollWidth > container.clientWidth + 1,
         }
-      })
-      areas.push(box.area)
-      assert.ok(Math.abs(box.dx) < 1 && Math.abs(box.dy) < 1, `${project} mark is centred in its band at ${width}px`)
-      assert.equal(box.spills, false, `${project} mark stays inside its band at ${width}px`)
-      await page.locator(`.project-card--${project}`).screenshot({ path: `tmp/browser/fr-${width}-${project}-transparent.png` })
+      }, brand.container)
+      assert.equal(geometry.loaded, true, `${brand.id} image loads at ${width}px`)
+      assert.ok(geometry.visibleArea > 0, `${brand.id} mark has a visible size at ${width}px`)
+      assert.ok(geometry.proportionError < 0.02 || geometry.objectFit === 'contain', `${brand.id} retains its natural proportions at ${width}px`)
+      assert.equal(geometry.contained, true, `${brand.id} mark fits its own container at ${width}px`)
+      assert.equal(geometry.overflow, false, `${brand.id} identity container does not overflow at ${width}px`)
+      await panel.screenshot({ path: `tmp/browser/fr-${width}-${brand.id}-transparent.png` })
     }
-    const spread = (Math.max(...areas) - Math.min(...areas)) / Math.min(...areas)
-    assert.ok(spread < 0.03, `The five marks keep equal optical area at ${width}px (spread ${(spread * 100).toFixed(1)}%)`)
+    assert.equal(await page.locator('#offer-jewel').count(), 1, 'Offer Jewel is included')
+    assert.equal(await page.locator('#offer-jewel img').count(), 0, 'No unverified Offer Jewel logo is invented')
+    assert.equal(await page.locator('#offer-jewel a[href^="https://"]').count(), 0, 'No unverified Offer Jewel destination is invented')
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false)
     await page.close()
   }
-  console.log('Transparent portrait and native brand assets: desktop/mobile checks passed')
+  console.log('Transparent portrait, yellow studio identity and canonical product proportions: desktop/mobile checks passed')
 } finally { await browser.close() }

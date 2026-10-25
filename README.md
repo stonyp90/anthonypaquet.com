@@ -181,13 +181,27 @@ const currentFocus = {
 
 ---
 
-## 🌐 Cloud Consulting Services
+## 🌐 ScaleForge studio and products
 
-| Service | Description | Website |
-|---------|-------------|---------|
-| 🚀 **ScaleForged** | Enterprise cloud architecture for ambitious startups. FinOps-driven scaling to enterprise-grade. | [![Website](https://img.shields.io/badge/scaleforged.io-6366f1?style=flat-square&logo=google-chrome&logoColor=white)](https://scaleforged.io) |
-| 🛡️ **DisasterProof** | Multi-cloud disaster recovery for fintech & banking. 99.99% uptime guaranteed. | [![Website](https://img.shields.io/badge/disasterproof.io-2563eb?style=flat-square&logo=google-chrome&logoColor=white)](https://disasterproof.io) |
-| ✅ **ControlCraft** | Compliance implementation for Vanta, Drata & Scrut. SOC 2, ISO 27001, HIPAA in 8 weeks. | [![Website](https://img.shields.io/badge/controlcraft.io-14b8a6?style=flat-square&logo=google-chrome&logoColor=white)](https://controlcraft.io) |
+ScaleForge is our independent venture studio in Québec. It brings design,
+engineering and shared learning together while each product keeps its own
+identity and audience. The portfolio uses the approved yellow Empreinte identity.
+
+| Studio or product | Focus | Website |
+| --- | --- | --- |
+| **ScaleForge** | The venture studio behind the products | [scaleforged.io](https://scaleforged.io) |
+| **GoNota** | A public calendar connecting clients with notaries across Québec | [gonota.ca](https://gonota.ca) |
+| **Tablix** | Legal document intelligence and structured data | [tablix.ca](https://tablix.ca) |
+| **Control Craft** | Art prints inspired by places, events and memories | [controlcraft.io](https://controlcraft.io) |
+| **Ursly** | Research into natural interfaces through voice, movement and the senses | [ursly.io](https://ursly.io) |
+| **Offer Jewel** | A studio project in development | Public destination not yet confirmed |
+
+The current product names, copy and studio relationship are maintained in
+`lib/projects.ts`. Brand assets are pinned in
+`docs/project-brand-assets-2026-10-02.json`. See
+`docs/project-brand-evidence-2026-10-25.md` for the approved identity and release
+scope. Historical identity evidence is retained for provenance, not as a current
+brand selection.
 
 ---
 

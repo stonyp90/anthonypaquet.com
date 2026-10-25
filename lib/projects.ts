@@ -1,136 +1,190 @@
 import type { Locale } from '@/lib/content'
 
-export type ProjectSocialLink = {
-  label: string
-  /** Shipped only after the social audit verified ownership of the profile. */
-  href: `https://${string}`
-}
+export type ProjectVisual = { src: string; width: number; height: number }
+export type ProjectSocialLink = { label: string; href: `https://${string}` }
 
 export type PersonalProject = {
-  id: 'gonota' | 'tablix' | 'ursly' | 'scaleforged' | 'lunorive'
+  id: 'gonota' | 'tablix' | 'control-craft' | 'ursly' | 'offer-jewel'
   name: string
-  /** Official destination. Absent until the product has a confirmed public URL. */
-  url?: `https://${string}`
-  /** Verified company social profiles. Only audited, owner-administered pages ship. */
-  socialLinks?: readonly ProjectSocialLink[]
   category: string
   description: string
+  focus: readonly string[]
+  /** Only confirmed public destinations and canonical brand files are published. */
+  url?: `https://${string}`
+  visual?: ProjectVisual
   slogan?: readonly string[]
-  visual: {
-    src: string
-    width: number
-    height: number
-  }
+  inDevelopment?: boolean
 }
 
-type ProjectSectionCopy = {
-  label: string
-  heading: string
-  lead: string
-  visit: string
-  newTab: string
+export type Studio = {
+  id: 'scaleforged'
+  name: string
+  url: `https://${string}`
+  category: string
+  description: string
+  principles: readonly string[]
+  signature: string
+  visual: ProjectVisual
+  socialLinks: readonly ProjectSocialLink[]
 }
 
-export const personalProjectCopy: Record<Locale, ProjectSectionCopy> = {
+export const personalProjectCopy = {
   en: {
-    label: 'Personal projects',
-    heading: 'Ideas I build into products.',
-    lead: 'Independent projects at the intersection of useful software, human interaction, and entrepreneurship.',
-    visit: 'Explore the project',
+    label: 'Studio & products',
+    heading: 'One studio. Many possibilities.',
+    lead: 'ScaleForge is our venture studio in Québec. We bring ideas to life as distinct products, each built around the people who use it.',
+    studioLabel: 'The studio behind the products',
+    studioHeading: 'Built here. Built to last.',
+    studioVisit: 'Explore ScaleForge',
+    location: 'Québec, Canada',
+    productsLabel: 'Built within ScaleForge',
+    productsHeading: 'Different ideas. Shared foundations.',
+    productsLead: 'Legal technology, art and new ways to interact. Each product has its own purpose, identity and audience.',
+    visit: 'Explore the product',
     newTab: 'opens in a new tab',
+    development: 'In development',
+    next: 'Taking shape in the studio',
+    contact: 'Talk about this project',
+    contactSubject: 'Let’s talk about Offer Jewel',
   },
   fr: {
-    label: 'Projets personnels',
-    heading: 'Des idées qui deviennent des produits.',
-    lead: 'Des projets indépendants à la croisée du logiciel utile, de l’interaction humaine et de l’entrepreneuriat.',
-    visit: 'Découvrir le projet',
+    label: 'Studio et produits',
+    heading: 'Un studio. Plusieurs possibles.',
+    lead: 'ScaleForge est notre studio d’entreprises à Québec. Nous donnons vie aux idées sous forme de produits distincts, conçus autour des gens qui les utilisent.',
+    studioLabel: 'Le studio derrière les produits',
+    studioHeading: 'Forgé ici. Bâti pour durer.',
+    studioVisit: 'Découvrir ScaleForge',
+    location: 'Québec, Canada',
+    productsLabel: 'Développés au sein de ScaleForge',
+    productsHeading: 'Des idées distinctes. Une base commune.',
+    productsLead: 'Technologie juridique, art et nouvelles façons d’interagir. Chaque produit a sa raison d’être, son identité et son public.',
+    visit: 'Découvrir le produit',
     newTab: 's’ouvre dans un nouvel onglet',
+    development: 'En développement',
+    next: 'Prend forme au studio',
+    contact: 'Parlons de ce projet',
+    contactSubject: 'Parlons d’Offer Jewel',
+  },
+} satisfies Record<Locale, Record<string, string>>
+
+/* These are the products' own files, copied byte for byte from pinned source
+   commits. The provenance manifest records which identity is current. */
+const visuals = {
+  studio: { src: '/images/logos/scaleforge-empreinte.svg', width: 1000, height: 386.68 },
+  gonota: { src: '/images/logos/nota-mark.png', width: 512, height: 512 },
+  tablix: { src: '/images/logos/tablix-mark.svg', width: 512, height: 512 },
+  controlCraft: { src: '/images/logos/control-craft.svg', width: 3775, height: 1640 },
+  ursly: { src: '/images/logos/ursly-mark.svg', width: 1024, height: 1024 },
+} as const
+
+const studio: Record<Locale, Studio> = {
+  en: {
+    id: 'scaleforged',
+    name: 'ScaleForge',
+    url: 'https://scaleforged.io',
+    category: 'Independent venture studio',
+    description: 'We design, build and develop useful products with the people who need them. ScaleForge brings the work together, sharing engineering, design and what we learn while giving every product room to build its own identity.',
+    principles: ['People first', 'Shared expertise', 'Distinct product brands'],
+    signature: 'Built here. Built to last.',
+    visual: visuals.studio,
+    socialLinks: [{ label: 'ScaleForge on LinkedIn', href: 'https://www.linkedin.com/company/scaleforged/' }],
+  },
+  fr: {
+    id: 'scaleforged',
+    name: 'ScaleForge',
+    url: 'https://scaleforged.io',
+    category: 'Studio d’entreprises indépendant',
+    description: 'Nous concevons et développons des produits utiles avec les gens qui en ont besoin. ScaleForge rassemble le travail et partage l’ingénierie, le design et les apprentissages, tout en laissant à chaque produit sa propre identité.',
+    principles: ['L’humain d’abord', 'L’expertise en commun', 'Des marques distinctes'],
+    signature: 'Forgé ici. Bâti pour durer.',
+    visual: visuals.studio,
+    socialLinks: [{ label: 'ScaleForge sur LinkedIn', href: 'https://www.linkedin.com/company/scaleforged/' }],
   },
 }
 
-/* Each card carries that product's own canonical mark, copied byte for byte from
-   the product repository at a pinned commit. See
-   docs/project-brand-assets-2026-10-02.json and scripts/sync-product-logos.mjs. */
-const visuals = {
-  gonota: { src: '/images/logos/nota-mark.png', width: 512, height: 512 },
-  tablix: { src: '/images/logos/tablix-mark.svg', width: 512, height: 512 },
-  ursly: { src: '/images/logos/ursly-mark.svg', width: 1024, height: 1024 },
-  scaleforged: { src: '/images/logos/scaleforge-mark.svg', width: 512, height: 512 },
-  lunorive: { src: '/images/logos/lunorive-mark.png', width: 256, height: 256 },
-} as const
-
-/** Independent product data; presentation and external navigation stay in adapters. */
 const projects: Record<Locale, readonly PersonalProject[]> = {
   en: [
     {
       id: 'gonota', name: 'GoNota', url: 'https://gonota.ca',
       category: 'Notarial technology',
-      description: 'A public calendar where clients across Québec post their notarial act, date and price, and notaries pick the requests that fit.',
+      description: 'A public calendar where clients across Québec post their notarial act, date and price, and notaries choose the requests that fit their schedule.',
+      focus: ['Notarial services', 'Québec'],
       visual: visuals.gonota,
     },
     {
       id: 'tablix', name: 'Tablix', url: 'https://tablix.ca',
       category: 'Document intelligence',
-      description: 'Document intelligence for structuring Québec legal searches into useful, exportable data.',
+      description: 'Turning complex Québec legal searches into structured, useful data. Built to make repetitive document work easier to review and export.',
+      focus: ['Legal workflows', 'Structured data'],
       visual: visuals.tablix,
+    },
+    {
+      id: 'control-craft', name: 'Control Craft', url: 'https://controlcraft.io',
+      category: 'Art from memories',
+      description: 'Art prints inspired by meaningful places, live events and personal passions. A way to give the memories that matter a place in everyday life.',
+      focus: ['Art prints', 'Places and memories'],
+      slogan: ['From memory to art.'],
+      visual: visuals.controlCraft,
     },
     {
       id: 'ursly', name: 'Ursly', url: 'https://ursly.io',
       category: 'Human and technology interface',
-      description: 'Exploring a new interface between people and technology through voice, movement, and our senses.',
+      description: 'Exploring a new interface between people and technology through voice, movement and our senses. A more natural way to interact with the digital world.',
+      focus: ['Human interfaces', 'Research'],
       slogan: ['Your senses.', 'Your data.', 'Your choice.'],
       visual: visuals.ursly,
     },
     {
-      id: 'scaleforged', name: 'ScaleForge', url: 'https://scaleforged.io',
-      socialLinks: [{ label: 'ScaleForge on LinkedIn', href: 'https://www.linkedin.com/company/scaleforged/' }],
-      category: 'Independent venture studio',
-      description: 'A venture studio in Québec. It designs and builds useful software with the people who use it, and each product keeps its own brand and audience.',
-      visual: visuals.scaleforged,
-    },
-    {
-      id: 'lunorive', name: 'Lunorive',
-      category: 'Art prints made by the agent loop',
-      description: 'Framed art prints of the places people love, from bridges and mountains to lakes and coastlines, drawn from real data. My agent loop creates the shop without human interaction, with checkout hosted by Stripe.',
-      slogan: ['Keep the world close.'],
-      visual: visuals.lunorive,
+      id: 'offer-jewel', name: 'Offer Jewel',
+      category: 'A new studio project',
+      description: 'A new product taking shape within ScaleForge. More about the project as it develops.',
+      focus: [],
+      inDevelopment: true,
     },
   ],
   fr: [
     {
       id: 'gonota', name: 'GoNota', url: 'https://gonota.ca',
       category: 'Technologie notariale',
-      description: 'Un calendrier public où les clients de partout au Québec publient leur acte notarié, leur date et leur prix, et où les notaires choisissent les demandes qui leur conviennent.',
+      description: 'Un calendrier public où les clients de partout au Québec publient leur acte notarié, leur date et leur prix. Les notaires choisissent les demandes qui conviennent à leur horaire.',
+      focus: ['Services notariaux', 'Québec'],
       visual: visuals.gonota,
     },
     {
       id: 'tablix', name: 'Tablix', url: 'https://tablix.ca',
       category: 'Intelligence documentaire',
-      description: 'L’intelligence documentaire pour transformer les recherches juridiques québécoises en données structurées et exportables.',
+      description: 'Des recherches juridiques québécoises complexes transformées en données structurées et utiles. Pour simplifier le travail documentaire répétitif, sa révision et son exportation.',
+      focus: ['Workflows juridiques', 'Données structurées'],
       visual: visuals.tablix,
+    },
+    {
+      id: 'control-craft', name: 'Control Craft', url: 'https://controlcraft.io',
+      category: 'L’art à partir des souvenirs',
+      description: 'Des tirages d’art inspirés des lieux, des événements et des passions qui nous marquent. Une façon de donner aux souvenirs qui comptent une place dans le quotidien.',
+      focus: ['Tirages d’art', 'Lieux et souvenirs'],
+      slogan: ['Du souvenir à l’art.'],
+      visual: visuals.controlCraft,
     },
     {
       id: 'ursly', name: 'Ursly', url: 'https://ursly.io',
       category: 'Interface entre l’humain et la technologie',
-      description: 'Une nouvelle interface entre l’humain et la technologie, explorée à travers la voix, le mouvement et nos sens.',
+      description: 'Une nouvelle interface entre l’humain et la technologie, explorée à travers la voix, le mouvement et nos sens. Pour interagir plus naturellement avec le monde numérique.',
+      focus: ['Interfaces humaines', 'Recherche'],
       slogan: ['Vos sens.', 'Vos données.', 'Votre choix.'],
       visual: visuals.ursly,
     },
     {
-      id: 'scaleforged', name: 'ScaleForge', url: 'https://scaleforged.io',
-      socialLinks: [{ label: 'ScaleForge sur LinkedIn', href: 'https://www.linkedin.com/company/scaleforged/' }],
-      category: 'Studio venture indépendant',
-      description: 'Un studio d’entreprises à Québec. Il conçoit et bâtit des logiciels utiles avec les gens qui les utilisent, et chaque produit garde sa propre marque et son public.',
-      visual: visuals.scaleforged,
-    },
-    {
-      id: 'lunorive', name: 'Lunorive',
-      category: 'Œuvres d’art créées par la boucle d’agents',
-      description: 'Des œuvres encadrées des lieux qu’on aime, des ponts et des montagnes aux lacs et aux côtes, tracées à partir de vraies données. Ma boucle d’agents crée la boutique sans intervention humaine, avec un paiement hébergé par Stripe.',
-      slogan: ['Le monde, près de vous.'],
-      visual: visuals.lunorive,
+      id: 'offer-jewel', name: 'Offer Jewel',
+      category: 'Un nouveau projet du studio',
+      description: 'Un nouveau produit prend forme au sein de ScaleForge. Le projet se dévoilera au fil de son développement.',
+      focus: [],
+      inDevelopment: true,
     },
   ],
+}
+
+export function getStudio(locale: Locale): Studio {
+  return studio[locale]
 }
 
 export function getPersonalProjects(locale: Locale): readonly PersonalProject[] {
