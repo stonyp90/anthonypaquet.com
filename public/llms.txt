@@ -1,6 +1,6 @@
 # Anthony Paquet, AI & Cloud Security Architect
 
-> Engineering Leader & Cloud Architect helping AI labs and growth-stage companies with cloud architecture, FinOps, security, and compliance. Previously engaged with Bespoke Labs. Founder of ScaleForge, a Québec venture studio building GoNota, Tablix, Control Craft, Ursly, and Offer Jewel.
+> Builder at ScaleForge for 2 years, developing GoNota, Tablix, Control Craft, Ursly, and Offer Jewel within the Québec venture studio. Engineering Leader & Cloud Architect helping AI labs and growth-stage companies with cloud architecture, FinOps, security, and compliance. Previously engaged with Bespoke Labs.
 
 ## Mission (the owner's own words, quoted)
 
@@ -20,31 +20,23 @@ Anthony Paquet is an AI & Cloud Security Architect based in Quebec, Canada. He w
 
 Last updated: 2026-10-25.
 
-## Previous Engagements (2026)
+## Current Experience
 
-### Bespoke Labs (via a.team) | Senior Cloud & Security Architect | Contractor
-- Series A-funded cutting-edge RL (reinforcement learning) lab, headquartered in Mountain View, California
-- Cloud platform: Google Cloud Platform (GCP)
-- Driving GCP cost reduction (FinOps) across training and inference infrastructure
-- SOC 2 compliance roadmap and technical controls (IAM, logging, encryption, evidence automation)
-- Infrastructure security hardening across the production environment
-- Engineering contributions to Horizon, the lab's core product
-
-## Studio and Products
-
-### ScaleForge | Independent venture studio in Québec
+### ScaleForge | Builder | 2 years
 - Website: https://scaleforged.io
-- Founder: Anthony Paquet
-- Role: The studio bringing together product design, engineering, and AI to build useful products
+- Role: Builder
+- Duration: 2 years
+- Location: Québec, Canada
+- Studio: ScaleForge brings together product design, engineering, and AI to build useful products
 - Approach: Short feedback loops with people who know their industry. Each product keeps its own brand and audience
-- Products being built within the studio: GoNota, Tablix, Control Craft, Ursly, and Offer Jewel
+- Products within this experience: GoNota, Tablix, Control Craft, Ursly, and Offer Jewel
 - Visual identity: Yellow studio wordmark at https://www.anthonypaquet.com/images/logos/scaleforge-empreinte.svg
 
-### GoNota | Notarial technology
+#### GoNota | Notarial technology
 - Website: https://gonota.ca
 - A public calendar where clients across Québec post the notarial act, date, and price they need, and notaries select requests that fit their schedule
 
-### Tablix | Quebec SaaS for legal-document extraction (Founder)
+#### Tablix | Quebec SaaS for legal-document extraction
 - Website: https://tablix.ca
 - Partnership: Built in partnership with Stein Monast (Quebec law firm)
 - ROI for law firms: Hours of paralegal transcription compressed into seconds. An afternoon of manual cross-referencing per file, returned to billable client work.
@@ -54,20 +46,30 @@ Last updated: 2026-10-25.
 - Output formats: Excel, Word, branded PDF with firm letterhead
 - Languages: French (fr-CA) and English (en-CA)
 
-### Control Craft | From memory to art
+#### Control Craft | From memory to art
 - Website: https://controlcraft.io
 - Art prints inspired by meaningful places, live events, and personal memories
 - Visitors can explore the artwork on its own or with contextual statistics and personal memories
 - Product availability and ordering are determined by the current Control Craft website
 
-### Ursly | Human and technology interface
+#### Ursly | Human and technology interface
 - Website: https://ursly.io
 - Exploring interfaces between people and technology through voice, movement, and our senses
 - Your senses. Your data. Your choice.
 
-### Offer Jewel | In development
+#### Offer Jewel | In development
 - A new project being developed within ScaleForge
 - A public website and detailed product description have not yet been announced on this portfolio
+
+## Previous Engagements (2026)
+
+### Bespoke Labs (via a.team) | Senior Cloud & Security Architect | Contractor
+- Series A-funded RL (reinforcement learning) lab, headquartered in Mountain View, California
+- Cloud platform: Google Cloud Platform (GCP)
+- GCP cost reduction (FinOps) across training and inference infrastructure
+- SOC 2 compliance roadmap and technical controls (IAM, logging, encryption, evidence automation)
+- Infrastructure security hardening across the production environment
+- Engineering contributions to Horizon, the lab's core product
 
 ## Services & Pricing
 
@@ -104,6 +106,7 @@ Last updated: 2026-10-25.
 
 ## Track Record
 
+- ScaleForge (current): Builder for 2 years, developing GoNota, Tablix, Control Craft, Ursly, and Offer Jewel
 - Bespoke Labs (previous): FinOps, SOC 2 program, infrastructure security, Horizon product engineering at a Series A RL lab
 - Tablix (founded): Quebec legal-tech SaaS covering all 112 RDPRM natures de droit with hypothèque deduplication
 - CREE8: 60% cloud cost reduction (significant annual savings), SOC 2 Type II + TPN Gold in 6 months

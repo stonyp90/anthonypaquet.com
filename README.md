@@ -13,7 +13,8 @@
 
 I'm a **Visionary Engineering Leader** operating where **data meets context**, accelerating innovation and business impact through **AI-powered transformation**. I design and scale secure, cost-optimized, and highly available systems that drive real outcomes.
 
-- 🏢 **Senior Cloud & Security Architect** at Bespoke Labs (via a.team) | FinOps, SOC 2 and eval infrastructure for a Series A RL lab
+- 🏢 **Builder** at **ScaleForge** | 2 years building products within our Québec venture studio
+- ☁️ Previously **Senior Cloud & Security Architect** at Bespoke Labs (via a.team) | FinOps, SOC 2 and eval infrastructure for a Series A RL lab
 - 🚀 Taking products from **0→1 to enterprise scale**
 - 💰 **FinOps Expert** | Achieved 60% cost reduction across AWS, GCP, and Azure
 - 🔒 **DevSecOps** mindset | SOC 2 Type II & TPN Gold certified in 6 months
@@ -128,10 +129,42 @@ const achievements = {
 
 ## 💼 Professional Experience
 
-### 🚀 **Head of Engineering** @ CREE8
-*Dec 2023 to present | California, United States*
+### **Builder** @ ScaleForge
 
-Leading engineering for enterprise-grade cloud solutions in the creative industry:
+*Current | 2 years | Québec, Canada*
+
+ScaleForge is our independent venture studio in Québec. I bring product design,
+engineering, and AI together to build useful products, with short feedback loops
+and a distinct identity and audience for each one.
+
+| Products within this experience | Focus | Website |
+| --- | --- | --- |
+| **GoNota** | A public calendar connecting clients with notaries across Québec | [gonota.ca](https://gonota.ca) |
+| **Tablix** | Legal document intelligence and structured data | [tablix.ca](https://tablix.ca) |
+| **Control Craft** | Art prints inspired by places, events and memories | [controlcraft.io](https://controlcraft.io) |
+| **Ursly** | Research into natural interfaces through voice, movement and the senses | [ursly.io](https://ursly.io) |
+| **Offer Jewel** | A studio project in development | Public destination not yet confirmed |
+
+[Visit ScaleForge](https://scaleforged.io)
+
+The portfolio presents this as the latest Experience entry with the approved
+yellow Empreinte identity. The role data lives in `lib/data.ts`; product names
+and descriptions live in `lib/projects.ts`. Brand assets are pinned in
+`docs/project-brand-assets-2026-10-02.json`. See
+`docs/studio-experience-2026-10-25.md` for the current presentation contract and
+`docs/project-brand-evidence-2026-10-25.md` for identity provenance.
+
+### **Senior Cloud & Security Architect** @ Bespoke Labs
+
+*Previous engagement | via a.team | Mountain View, California*
+
+FinOps, SOC 2, platform security, evaluation infrastructure, and engineering
+contributions to Horizon, the lab’s core product.
+
+### 🚀 **Head of Engineering** @ CREE8
+*Previous role | California, United States*
+
+Led engineering for enterprise-grade cloud solutions in the creative industry:
 - Built team of 10 senior SREs, DevOps & Full-Stack engineers
 - Implemented AI-driven compliance automation (SOC 2, TPN Gold)
 - Optimized multi-cloud operations (60% cost reduction)
@@ -171,37 +204,14 @@ Leading engineering for enterprise-grade cloud solutions in the creative industr
 
 ```typescript
 const currentFocus = {
-  role: "Building enterprise-grade cloud solutions at CREE8",
-  projects: ["AI Agent Orchestrator", "Camera-to-Cloud workflows"],
+  role: "Builder at ScaleForge",
+  duration: "2 years",
+  projects: ["GoNota", "Tablix", "Control Craft", "Ursly", "Offer Jewel"],
   learning: ["Advanced LLM integration", "AI agents", "Multi-agent systems"],
   interests: ["FinOps optimization", "DevSecOps automation", "Cloud-native architecture"],
   openTo: ["Technical leadership roles", "Cloud architecture consulting", "AI/ML projects"]
 }
 ```
-
----
-
-## 🌐 ScaleForge studio and products
-
-ScaleForge is our independent venture studio in Québec. It brings design,
-engineering and shared learning together while each product keeps its own
-identity and audience. The portfolio uses the approved yellow Empreinte identity.
-
-| Studio or product | Focus | Website |
-| --- | --- | --- |
-| **ScaleForge** | The venture studio behind the products | [scaleforged.io](https://scaleforged.io) |
-| **GoNota** | A public calendar connecting clients with notaries across Québec | [gonota.ca](https://gonota.ca) |
-| **Tablix** | Legal document intelligence and structured data | [tablix.ca](https://tablix.ca) |
-| **Control Craft** | Art prints inspired by places, events and memories | [controlcraft.io](https://controlcraft.io) |
-| **Ursly** | Research into natural interfaces through voice, movement and the senses | [ursly.io](https://ursly.io) |
-| **Offer Jewel** | A studio project in development | Public destination not yet confirmed |
-
-The current product names, copy and studio relationship are maintained in
-`lib/projects.ts`. Brand assets are pinned in
-`docs/project-brand-assets-2026-10-02.json`. See
-`docs/project-brand-evidence-2026-10-25.md` for the approved identity and release
-scope. Historical identity evidence is retained for provenance, not as a current
-brand selection.
 
 ---
 

@@ -91,7 +91,15 @@ export function RevealIndex({
     const list = anchors.split(' ')
     const openFromHash = () => {
       const target = window.location.hash.slice(1)
-      const index = target ? list.indexOf(target) : -1
+      let index = target ? list.indexOf(target) : -1
+      // Project fragments now live inside the ScaleForge experience. Open the
+      // containing role even if another role was selected before following it.
+      if (index < 0 && target) {
+        const panel = document.getElementById(target)?.closest('.reveal-panel')
+        if (panel && root.current?.contains(panel)) {
+          index = Array.from(root.current.querySelectorAll(':scope > .reveal-panel')).indexOf(panel)
+        }
+      }
       if (index < 0) return
       setActive(index)
       // Side by side, show the whole index so the details beside it are in view

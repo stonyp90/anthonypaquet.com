@@ -38,7 +38,6 @@ export const en = {
       skip: 'Skip to content',
       services: 'Services',
       experience: 'Experience',
-      projects: 'Studio & products',
     },
 
     hero: {
@@ -57,7 +56,7 @@ export const en = {
       ctaPrimary: 'Email me',
       ctaLinkedIn: 'LinkedIn',
       ctaResume: 'Resume',
-      ctaProjects: 'Explore the studio and products',
+      ctaProjects: 'See what I’m building',
     },
 
     about: {
@@ -152,7 +151,7 @@ export const en = {
     experience: {
       label: 'Track Record',
       heading: 'Experience',
-      lead: 'Proven outcomes across cloud, security, and infrastructure.',
+      lead: 'Building products and leading engineering across cloud, security and infrastructure.',
       current: 'Current',
       founder: 'Founder',
       via: 'via',
@@ -182,7 +181,6 @@ export const en = {
         { href: '#about', label: 'About' },
         { href: '#experience', label: 'Experience' },
         { href: '#certifications', label: 'Certifications' },
-        { href: '#personal-projects', label: 'Studio & products' },
       ],
       rights: 'All rights reserved.',
       builtWith: 'Built with Next.js, TypeScript & Tailwind CSS',

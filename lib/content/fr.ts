@@ -83,6 +83,7 @@ type ExpFr = {
   key: string
   position: string
   location: string
+  duration?: string
   description: string
   outcomes: { metric: string; description: string }[]
   achievements: string[]
@@ -90,20 +91,14 @@ type ExpFr = {
 
 const expFr: ExpFr[] = [
   {
-    key: 'Nota::Founder & AI Orchestrator',
-    position: 'Fondateur et orchestrateur IA',
+    key: 'ScaleForge::Builder',
+    position: 'Bâtisseur',
     location: 'Québec, Canada',
+    duration: '2 ans',
     description:
-      'Nota est une place de marché pour les actes notariés partout au Québec. Le client publie l’acte dont il a besoin, la date de signature voulue et le prix qu’il offre. Chaque demande apparaît sur un calendrier public, et les notaires retiennent celles qui cadrent avec leur horaire. Afficher sa date est gratuit.',
-    outcomes: [
-      { metric: 'Un agent IA par département', description: 'Marketing, mise en marché, ventes et ingénierie' },
-      { metric: 'Opérateur solo', description: 'Chaque fonction, orchestrée avec l’IA' },
-    ],
-    achievements: [
-      'Fondé Nota pour moderniser l’industrie notariale québécoise, un marché mal servi, axé sur le papier, qui attendait un logiciel conçu autour du travail réel des notaires.',
-      'Assure chaque fonction de l’entreprise comme seul opérateur, en orchestrant des agents IA bâtis sur les derniers modèles d’Anthropic (Claude), d’OpenAI et de xAI.',
-      'Chaque département, du marketing à la mise en marché, aux ventes et à l’ingénierie, a son propre agent IA, que j’orchestre.',
-    ],
+      'Je développe des produits chez ScaleForge, mon studio d’entreprises à Québec, de l’idée au lancement, en passant par le design et l’ingénierie.',
+    outcomes: [],
+    achievements: [],
   },
   {
     key: 'Bespoke Labs::Senior Cloud & Security Architect',
@@ -321,6 +316,7 @@ const experiences = en.experiences.map((e) => {
     ...(e.via ? { via: viaFr[e.via] ?? e.via } : {}),
     position: fr.position,
     location: fr.location,
+    ...(fr.duration ? { duration: fr.duration } : {}),
     description: fr.description,
     outcomes: fr.outcomes,
     achievements: fr.achievements,
@@ -382,7 +378,6 @@ export const fr: SiteContent = {
       skip: 'Aller au contenu',
       services: 'Services',
       experience: 'Parcours',
-      projects: 'Studio et produits',
     },
 
     hero: {
@@ -401,7 +396,7 @@ export const fr: SiteContent = {
       ctaPrimary: 'Écrivez-moi',
       ctaLinkedIn: 'LinkedIn',
       ctaResume: 'CV',
-      ctaProjects: 'Découvrir le studio et les produits',
+      ctaProjects: 'Voir les projets que je développe',
     },
 
     about: {
@@ -496,7 +491,7 @@ export const fr: SiteContent = {
     experience: {
       label: 'Parcours',
       heading: 'Expérience',
-      lead: 'Des résultats concrets en cloud, sécurité et infrastructure.',
+      lead: 'Développement de produits et leadership en ingénierie, cloud, sécurité et infrastructure.',
       current: 'Actuel',
       founder: 'Fondateur',
       via: 'via',
@@ -526,7 +521,6 @@ export const fr: SiteContent = {
         { href: '#about', label: 'À propos' },
         { href: '#experience', label: 'Expérience' },
         { href: '#certifications', label: 'Certifications' },
-        { href: '#personal-projects', label: 'Studio et produits' },
       ],
       rights: 'Tous droits réservés.',
       builtWith: 'Conçu avec Next.js, TypeScript et Tailwind CSS',

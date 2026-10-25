@@ -13,9 +13,8 @@ const catalogSource = await readFile(new URL('../../lib/projects.ts', import.met
 const { getPersonalProjects, getStudio, personalProjectCopy } = await import(`data:text/javascript;base64,${Buffer.from(ts.transpileModule(catalogSource, {
   compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 },
 }).outputText).toString('base64')}`)
-const projectHrefs = locale => [getStudio(locale), ...getPersonalProjects(locale)]
-  .flatMap(({ url, socialLinks = [] }) => [url, ...socialLinks.map(({ href }) => href)])
-  .filter(Boolean)
+const projectHrefs = locale => getPersonalProjects(locale).map(({ url }) => url).filter(Boolean)
+const studioRole = locale => ({ title: locale === 'en' ? 'Builder' : 'Bâtisseur', duration: locale === 'en' ? '2 years' : '2 ans', current: locale === 'en' ? 'Current' : 'Actuel' })
 const failures = []
 const checks = []
 
@@ -29,15 +28,25 @@ try {
     assert.equal(await staticPage.locator('#about > div').evaluate(el => getComputedStyle(el).opacity), '1', 'About must remain readable without JavaScript')
     const hiddenServices = await staticPage.locator('#services [style]').evaluateAll(elements => elements.filter(el => getComputedStyle(el).opacity === '0').length)
     assert.equal(hiddenServices, 0, 'Services must remain readable without JavaScript')
-    assert.equal(await staticPage.locator('#personal-projects').count(), 1, 'One studio and products section')
-    assert.equal(await staticPage.locator('#personal-projects .studio-feature').count(), 1, 'One parent studio in exported HTML')
-    assert.equal(await staticPage.locator('.studio-products > .venture-card').count(), 5, 'All five products are present without JavaScript')
-    assert.equal(await staticPage.locator('#scaleforged .studio-wordmark').getAttribute('src'), '/images/logos/scaleforge-empreinte.svg')
-    assert.deepEqual(await staticPage.locator('.venture-card h4').allTextContents(), getPersonalProjects(locale).map(({ name }) => name))
+    const expectedRole = studioRole(locale)
+    const staticStudioHead = staticPage.locator('#experience .reveal-head').first()
+    const staticStudioPanel = staticPage.locator('#experience .reveal-panel').first()
+    assert.equal(await staticStudioHead.getAttribute('id'), 'scaleforged', 'ScaleForge is the first Experience role')
+    assert.equal(await staticStudioHead.locator('.reveal-title').textContent(), 'ScaleForge')
+    assert.ok((await staticStudioHead.locator('.reveal-sub').textContent()).includes(expectedRole.title))
+    assert.ok((await staticStudioHead.locator('.role-duration').textContent()).includes(expectedRole.duration))
+    assert.equal(await staticStudioHead.locator('.reveal-flag').textContent(), expectedRole.current)
+    assert.equal(await staticStudioHead.locator('.reveal-trigger').getAttribute('aria-expanded'), 'true', 'Current role opens by default')
+    assert.equal(await staticStudioPanel.locator('.role-studio-logo').getAttribute('src'), '/images/logos/scaleforge-empreinte.svg')
+    assert.equal(await staticPage.locator('#experience #personal-projects.role-projects').count(), 1, 'Projects live inside Experience')
+    assert.equal(await staticPage.locator('section#personal-projects, .studio-feature, .venture-card').count(), 0, 'No standalone studio or product-card section remains')
+    assert.equal(await staticPage.locator('.role-project-list > li.role-project').count(), 5, 'All five products are exported inside the current role')
+    assert.deepEqual(await staticPage.locator('.role-project-name').allTextContents(), getPersonalProjects(locale).map(({ name }) => name))
     assert.equal(await staticPage.locator('#offer-jewel img, #offer-jewel a[href^="https://"]').count(), 0, 'No invented Offer Jewel mark or destination')
     assert.equal(await staticPage.locator('#control-craft #lunorive[aria-hidden="true"]').count(), 1, 'Legacy fragment resolves inside Control Craft')
-    assert.equal(await staticPage.locator('.studio-feature').evaluate(element => Boolean(element.compareDocumentPosition(document.querySelector('.studio-products')) & Node.DOCUMENT_POSITION_FOLLOWING)), true, 'Studio precedes its product collection')
-    assert.equal(await staticPage.locator('.studio-products').getAttribute('role'), 'list', 'Product collection has list semantics')
+    assert.equal(await staticPage.locator('.role-project-list').getAttribute('aria-labelledby'), 'role-projects-heading')
+    assert.equal(await staticPage.locator('.site-nav a[href="#personal-projects"]').count(), 0, 'Navigation has no dedicated projects section')
+    assert.equal(await staticPage.locator('.hero-project-link').getAttribute('href'), '#scaleforged', 'Hero opens the current studio role')
     // Contact is by email. The exported document must carry the inbox and no
     // third-party booking page.
     const hrefs = await staticPage.locator('a[href]').evaluateAll(links => links.map(l => l.getAttribute('href')))
@@ -66,56 +75,65 @@ try {
       assert.equal(overflow, false, `No page overflow at ${width}px`)
       assert.match(await page.locator('#top img').getAttribute('src'), /anthony-paquet-portrait\.webp/)
       assert.equal(await page.locator('#top img').evaluate(img => img.complete && img.naturalWidth > 0), true)
-      // Personal-project names belong to #personal-projects only. The company
-      // "Nota" legitimately heads #experience, so match its project card name.
-      assert.doesNotMatch(await page.locator('#experience').textContent(), /GoNota|Tablix|Ursly|ScaleForge|Control Craft|Offer Jewel/)
-      // The lifecycle remains one standalone section, as requested after the
-      // earlier Lunorive callout was removed.
+      const expectedRole = studioRole(locale)
+      const studioHead = page.locator('#experience .reveal-head').first()
+      const studioTrigger = studioHead.locator('.reveal-trigger')
+      const studioPanel = page.locator('#experience .reveal-panel').first()
+      assert.equal(await studioHead.getAttribute('id'), 'scaleforged')
+      assert.equal(await studioHead.locator('.reveal-title').textContent(), 'ScaleForge')
+      assert.ok((await studioHead.locator('.reveal-sub').textContent()).includes(expectedRole.title))
+      assert.ok((await studioHead.locator('.role-duration').textContent()).includes(expectedRole.duration))
+      assert.equal(await studioHead.locator('.reveal-flag').textContent(), expectedRole.current)
+      assert.equal(await studioTrigger.getAttribute('aria-expanded'), 'true')
+      assert.equal(await page.locator('section#personal-projects, .studio-feature, .venture-card').count(), 0)
       assert.equal(await page.locator('#how-i-work').count(), 1)
       assert.equal(await page.locator('#how-i-work a[href="#lunorive"]').count(), 0)
-      await page.locator('.site-nav a[href="#personal-projects"]').click()
-      await page.locator('#personal-projects').scrollIntoViewIfNeeded()
-      assert.equal(await page.locator('#personal-projects').evaluate(el => getComputedStyle(el.parentElement).opacity), '1')
-      // The studio is separate from its products. All verified destinations are
-      // visible at once; Offer Jewel has a contact link until its URL is confirmed.
+      assert.equal(await page.locator('.site-nav a[href="#personal-projects"]').count(), 0)
+      assert.equal(await page.locator('.site-nav a[href="#experience"]').isVisible(), true, 'Experience remains accessible on phones')
+      await page.locator('.hero-project-link').click()
+      await studioHead.scrollIntoViewIfNeeded()
+      assert.equal(await studioPanel.isVisible(), true, 'Hero opens the ScaleForge role')
+      assert.equal(await studioPanel.locator('.role-title').textContent(), expectedRole.title)
+      assert.equal(await studioPanel.locator('.role-company a').getAttribute('href'), getStudio(locale).url)
+      assert.equal(await studioPanel.locator('#personal-projects').count(), 1)
       assert.deepEqual(
-        await page.locator('#personal-projects a[href^="https://"]').evaluateAll(links => links.map(link => link.getAttribute('href'))),
+        await studioPanel.locator('.role-project-link[href^="https://"]').evaluateAll(links => links.map(link => link.getAttribute('href'))),
         projectHrefs(locale),
-        'Studio and product destinations match the verified catalog'
+        'Compact project destinations match the verified catalog'
       )
-      assert.equal(await page.locator('#personal-projects .reveal-trigger').count(), 0, 'Product discovery requires no accordion clicks')
-      assert.equal(await page.locator('#personal-projects .venture-card').count(), 5)
-      assert.equal(await page.locator('#personal-projects a[href*="/pitch/"]').count(), 0, 'Pending pitch remains gated')
+      assert.equal(await page.locator('.role-project-list > .role-project').count(), 5)
+      assert.equal(await studioPanel.locator('a[href*="/pitch/"]').count(), 0, 'Pending pitch remains gated')
       assert.equal(
         await page.locator('#offer-jewel a').getAttribute('href'),
         `mailto:me@anthonypaquet.com?subject=${encodeURIComponent(personalProjectCopy[locale].contactSubject)}`,
-        'Offer Jewel provides an honest contact action'
+        'Offer Jewel provides a contact action without a fabricated website'
       )
-      assert.equal(await page.locator('#offer-jewel .venture-category').textContent(), personalProjectCopy[locale].development)
-      assert.equal(await page.locator('#offer-jewel img').count(), 0, 'No fabricated project logo')
+      assert.equal(await page.locator('#offer-jewel .role-project-summary').textContent(), personalProjectCopy[locale].development)
+      assert.equal(await page.locator('#offer-jewel img').count(), 0)
       for (const brand of [getStudio(locale), ...getPersonalProjects(locale)]) {
-        const panel = page.locator(`#${brand.id}`)
-        await panel.scrollIntoViewIfNeeded()
-        assert.equal(await panel.isVisible(), true, `${brand.name} is visible without toggles`)
+        const container = brand.id === 'scaleforged' ? studioPanel : page.locator(`#${brand.id}`)
+        await container.scrollIntoViewIfNeeded()
+        assert.equal(await container.isVisible(), true, `${brand.name} is visible in the current role`)
         if (brand.visual) {
-          const image = panel.locator('img')
-          const loaded = await image.evaluate(async (img) => {
+          const image = brand.id === 'scaleforged' ? container.locator('.role-studio-logo') : container.locator('.role-project-logo')
+          const geometry = await image.evaluate(async (img) => {
             try { await img.decode() } catch { /* measured below */ }
-            return img.complete && img.naturalWidth > 0
-          })
-          assert.equal(loaded, true, `Brand image loaded: ${brand.visual.src}`)
-          const proportions = await image.evaluate(img => {
             const bounds = img.getBoundingClientRect()
-            return { rendered: bounds.width / bounds.height, natural: img.naturalWidth / img.naturalHeight }
+            return {
+              loaded: img.complete && img.naturalWidth > 0 && img.naturalHeight > 0,
+              rendered: bounds.width / bounds.height,
+              natural: img.naturalWidth / img.naturalHeight,
+              objectFit: getComputedStyle(img).objectFit,
+            }
           })
-          assert.ok(Math.abs(proportions.rendered - proportions.natural) / proportions.natural < 0.02, `${brand.name} is not stretched`)
+          assert.equal(geometry.loaded, true, `Brand image loaded: ${brand.visual.src}`)
+          assert.ok(Math.abs(geometry.rendered - geometry.natural) / geometry.natural < 0.02 || geometry.objectFit === 'contain', `${brand.name} retains its canonical proportions`)
         }
-        const action = panel.locator('a').first()
+        const action = container.locator('a').first()
         await action.focus()
         assert.equal(await action.evaluate(element => element === document.activeElement), true, `${brand.name} action is keyboard-focusable`)
-        await panel.screenshot({ path: `${artifactDir}/${locale}-${width}-${brand.id}.png` })
       }
-      await page.screenshot({ path: `${artifactDir}/${locale}-${width}-projects.png` })
+      await studioPanel.screenshot({ path: `${artifactDir}/${locale}-${width}-scaleforge-experience.png` })
       await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }))
       await page.screenshot({ path: `${artifactDir}/${locale}-${width}-hero.png` })
       // Side by side, the arrow keys move through the index and reveal as they
@@ -130,8 +148,16 @@ try {
         await roles.first().press('Enter')
         assert.notEqual(await roles.first().getAttribute('aria-expanded'), previous, 'Experience works with keyboard')
       }
+      if (await roles.nth(1).getAttribute('aria-expanded') !== 'true') await roles.nth(1).click()
+      assert.equal(await roles.nth(1).getAttribute('aria-expanded'), 'true')
+      for (const fragment of ['control-craft', 'lunorive', 'personal-projects']) {
+        await page.evaluate(fragment => { window.location.hash = fragment }, fragment)
+        await page.waitForFunction(() => document.querySelector('#scaleforged .reveal-trigger')?.getAttribute('aria-expanded') === 'true')
+        assert.equal(await page.locator('#control-craft').isVisible(), true, `#${fragment} reopens the parent studio role`)
+        await roles.nth(1).click()
+      }
       assert.equal(errors.length, 0, errors.join('\n'))
-      checks.push(`${locale}: ${width}px, reduced motion, studio hierarchy, product links/images, keyboard, no console errors`)
+      checks.push(`${locale}: ${width}px, reduced motion, current studio role, compact project links/images, keyboard, no console errors`)
       await context.close()
     }
   }
@@ -151,9 +177,9 @@ try {
   const beforeOrbit = JSON.stringify(await orbitCoordinates())
   await page.waitForFunction(before => JSON.stringify([...document.querySelectorAll('#how-i-work svg[viewBox] circle')].map(circle => [circle.getAttribute('cx'), circle.getAttribute('cy')])) !== before, beforeOrbit)
   checks.push('normal motion: twelve stations, pin/release and moving orbit')
-  await page.locator('#personal-projects').scrollIntoViewIfNeeded()
-  await page.waitForFunction(() => getComputedStyle(document.querySelector('#personal-projects').parentElement).opacity === '1')
-  assert.equal(await page.locator('.reveal-pending #personal-projects').count(), 0)
+  await page.locator('#experience').scrollIntoViewIfNeeded()
+  await page.waitForFunction(() => getComputedStyle(document.querySelector('#experience').parentElement).opacity === '1')
+  assert.equal(await page.locator('.reveal-pending #experience').count(), 0)
   await page.emulateMedia({ reducedMotion: 'reduce' })
   await page.waitForFunction(() => document.querySelectorAll('.reveal-pending').length === 0)
   await page.waitForFunction(() => document.querySelector('#how-i-work ol') !== null)

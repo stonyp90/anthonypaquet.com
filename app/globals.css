@@ -27,8 +27,6 @@
   /* Owner-approved Empreinte identity, scoped to the studio feature. */
   --color-studio-yellow: #ffd438;
   --color-studio-ink: #151714;
-  --color-studio-muted: #cbc9c0;
-  --color-studio-line: #ffffff30;
   --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   /* The personal AP monogram, drawn from these by components/BrandMark.tsx and
@@ -644,6 +642,7 @@ section { position: relative; z-index: 1; }
 }
 .experience-index .reveal-panel {
   position: relative;
+  top: 0;
   padding-top: clamp(1.25rem, 2.5vw, 2rem);
   background: transparent;
   border-left: 0;
@@ -836,7 +835,6 @@ body { overflow-x: clip; }
   .hero-actions .btn-primary { max-width: 100%; }
 }
 @media (max-width: 600px) {
-  .nav-experience { display: none; }
   .site-header-inner { gap: 0.5rem; }
   .site-nav { gap: 1rem; font-size: 0.875rem; }
   .site-wordmark { font-size: 1.35rem; }
@@ -852,98 +850,29 @@ body { overflow-x: clip; }
   .hero-copy, .hero-portrait { animation: none; }
 }
 
-/* Studio and product collection. Product identities stay intact on the
-   personal site's shared paper surface; yellow belongs to the studio. */
-.studio-collection { padding-block: clamp(4rem, 7vw, 7rem); }
-.studio-collection .projects-shell { max-width: 1256px; }
-.studio-collection .projects-heading { margin-bottom: 3rem; }
-.studio-collection .projects-heading h2 { max-width: 24ch; font-size: clamp(2.4rem, 4.6vw, 3.8rem); letter-spacing: -0.035em; }
-.studio-collection .projects-heading > p { max-width: 48rem; font-size: 1.1rem; }
-.studio-feature { display: grid; grid-template-columns: minmax(0, 0.87fr) minmax(0, 1.13fr); background: var(--color-studio-ink); color: var(--color-paper); scroll-margin-top: 6rem; }
-.studio-identity { display: flex; flex-direction: column; justify-content: space-between; gap: 3rem; min-width: 0; padding: clamp(1.75rem, 3.6vw, 3rem); color: var(--color-studio-ink); background: var(--color-studio-yellow); }
-.studio-identity-meta, .studio-identity-footer, .studio-eyebrow { font-family: var(--font-mono); font-size: 0.68rem; line-height: 1.6; letter-spacing: 0.1em; text-transform: uppercase; }
-.studio-wordmark { width: 100%; height: auto; margin-block: 1.5rem; }
-.studio-identity-footer { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding-top: 1rem; border-top: 1px solid currentColor; }
-.studio-identity-footer > span:last-child { font-family: var(--font-body); font-size: 1.5rem; }
-.studio-story { display: flex; flex-direction: column; min-width: 0; padding: clamp(1.75rem, 3.6vw, 3rem); }
-.studio-eyebrow { color: var(--color-studio-yellow); }
-.studio-story h3 { margin-top: 1.2rem; max-width: 13ch; font-family: var(--font-display); font-weight: 500; font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1.13; letter-spacing: -0.025em; color: var(--color-paper); }
-.studio-description { margin-top: 1.25rem; color: var(--color-studio-muted); font-size: 0.98rem; line-height: 1.75; }
-.studio-principles { display: flex; flex-wrap: wrap; gap: 0.5rem 1.1rem; list-style: none; margin-top: 1.5rem; padding: 1rem 0; border-block: 1px solid var(--color-studio-line); }
-.studio-principles li { display: flex; align-items: center; gap: 0.5rem; font-size: 0.73rem; }
-.studio-principles li::before { content: ''; width: 3px; height: 3px; background: var(--color-studio-yellow); }
-.studio-links { display: flex; flex-wrap: wrap; gap: 0.65rem 1.6rem; margin-top: 1.3rem; }
-.studio-links a { display: inline-flex; align-items: center; justify-content: space-between; gap: 0.7rem; min-height: 44px; padding-block: 0.4rem; font-size: 0.87rem; border-bottom: 1px solid var(--color-studio-line); transition: border-color var(--duration-fast) ease; }
-.studio-links a:hover { border-color: var(--color-studio-yellow); }
-.studio-links a:focus-visible { outline: 2px solid var(--color-studio-yellow); outline-offset: 5px; }
-.studio-links a > span { color: var(--color-studio-yellow); }
-.studio-products-heading { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 2rem; align-items: end; margin: 3.5rem 0 2rem; }
-.studio-products-heading .editorial-eyebrow { color: var(--color-accent-text); }
-.studio-products-heading h3 { margin-top: 0.75rem; max-width: 23ch; font-family: var(--font-display); font-size: clamp(1.75rem, 3vw, 2.3rem); font-weight: 600; line-height: 1.2; letter-spacing: -0.025em; }
-.studio-products-heading > p { max-width: 40ch; color: var(--color-ink-soft); font-size: 0.9rem; line-height: 1.7; }
-.studio-products { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 3rem; }
-.venture-card { position: relative; min-width: 0; display: flex; flex-direction: column; padding: 2rem 0 2.4rem; border-top: 1px solid var(--line-strong); scroll-margin-top: 6rem; }
-.venture-card::before { content: ''; position: absolute; inset: -1px auto auto 0; width: 0; height: 2px; background: var(--color-accent); transition: width var(--duration-base) ease; }
-.venture-card:focus-within::before, .venture-card:hover::before { width: 4rem; }
-.venture-card-top { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 0.8rem; align-items: start; min-height: 5rem; }
-.venture-number { padding-top: 0.1rem; font-family: var(--font-mono); font-size: 0.68rem; color: var(--color-accent-text); }
-.venture-category { max-width: 23ch; font-size: 0.74rem; line-height: 1.5; color: var(--color-ink-soft); }
-.venture-logo { width: 3.7rem; height: 3.7rem; object-fit: contain; object-position: top right; }
-.venture-logo--wide { width: 9.5rem; height: 4.1rem; }
-.venture-content h4 { font-family: var(--font-display); font-size: 2.1rem; line-height: 1.2; letter-spacing: -0.02em; font-weight: 600; }
-.venture-description { max-width: 48ch; margin-top: 0.85rem; color: var(--color-ink-soft); font-size: 0.95rem; line-height: 1.75; }
-.venture-slogan { margin-top: 0.65rem; font-size: 0.85rem; font-weight: 500; color: var(--color-ink); }
-.venture-card-bottom { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 0.8rem 1.2rem; padding-top: 1.5rem; margin-top: auto; }
-.venture-focus { display: flex; flex-wrap: wrap; gap: 0.35rem 0.85rem; list-style: none; color: var(--color-ink-soft); font-size: 0.7rem; }
-.venture-focus li + li { border-left: 1px solid var(--line-strong); padding-left: 0.85rem; }
-.venture-link { display: inline-flex; align-items: center; justify-content: space-between; gap: 0.8rem; min-height: 44px; padding-block: 0.4rem; border-bottom: 1px solid var(--line-strong); color: var(--color-accent-text); font-size: 0.82rem; font-weight: 500; }
-.venture-link:hover { color: var(--color-ink); border-color: var(--color-ink); }
-.venture-link:focus-visible { outline: 2px solid var(--color-accent-text); outline-offset: 5px; }
-.venture-card--upcoming { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 0.5fr) minmax(0, 1.5fr) auto; align-items: center; gap: 2rem; margin-top: 0.25rem; border-bottom: 1px solid var(--line-strong); }
-.venture-card--upcoming .venture-card-top { display: flex; align-items: center; min-height: 0; }
-.venture-card--upcoming .venture-content .editorial-eyebrow { margin-bottom: 0.65rem; }
-.venture-card--upcoming .venture-content h4 { font-size: 1.85rem; }
-.venture-card--upcoming .venture-card-bottom { padding-top: 0; margin-top: 0; }
+/* Current ScaleForge role: the brand and products stay within Experience. */
+.role-duration { white-space: nowrap; color: var(--color-gray); }
+.role-intro--studio { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.role-intro--studio > div:first-child { min-width: 0; }
+.role-studio-mark { flex: 0 0 auto; width: 9rem; padding: 0.85rem 0.75rem; background: var(--color-studio-yellow); }
+.role-studio-logo { display: block; width: 100%; height: auto; }
+.role-projects { margin-top: 1.65rem; scroll-margin-top: 6rem; }
+.role-projects h4 { margin-bottom: 0.65rem; font-size: 0.8rem; font-weight: 600; color: var(--color-ink-soft); }
+.role-project-list { margin: 0; padding: 0; list-style: none; }
+.role-project { position: relative; border-top: 1px solid var(--line-subtle); scroll-margin-top: 6rem; }
+.role-project:last-child { border-bottom: 1px solid var(--line-subtle); }
+.role-project-link { display: grid; grid-template-columns: 3.5rem minmax(0, 1fr) auto; align-items: center; gap: 0.8rem; min-height: 4.4rem; padding: 0.65rem 0.1rem; color: var(--color-ink); }
+.role-project-visual { display: flex; align-items: center; justify-content: center; }
+.role-project-logo { width: 2rem; height: 2rem; object-fit: contain; }
+.role-project-logo--wide { width: 3.5rem; height: auto; }
+.role-project-copy { min-width: 0; }
+.role-project-name { display: block; font-size: 0.98rem; font-weight: 600; line-height: 1.4; }
+.role-project-summary { display: block; margin-top: 0.15rem; font-size: 0.78rem; line-height: 1.4; color: var(--color-gray); }
+.role-project-arrow { color: var(--color-accent-text); }
+.role-project-link:hover .role-project-name { color: var(--color-accent-text); text-decoration: underline; text-underline-offset: 0.2em; }
+.role-project-link:focus-visible { outline: 2px solid var(--color-accent-text); outline-offset: 3px; }
 .legacy-project-anchor { position: absolute; top: 0; scroll-margin-top: 6rem; }
-
-@media (max-width: 1000px) {
-  .studio-products { gap: 0 2rem; }
-  .venture-card-top { grid-template-columns: auto minmax(0, 1fr) auto; gap: 0.6rem; min-height: 6rem; }
-  .venture-logo--wide { width: 7.5rem; height: 3.3rem; }
-  .venture-card--upcoming { grid-template-columns: minmax(0, 1fr) auto; }
-  .venture-card--upcoming .venture-card-top { grid-column: 1 / -1; }
-}
-@media (max-width: 760px) {
-  .studio-feature { grid-template-columns: 1fr; }
-  .studio-identity { min-height: 18rem; gap: 1.5rem; }
-  .studio-wordmark { max-width: 23rem; margin: 1rem auto; }
-  .studio-story h3 { max-width: 22ch; }
-  .studio-products-heading { grid-template-columns: 1fr; gap: 1rem; margin-top: 2.7rem; }
-  .studio-products-heading > p { max-width: 50ch; }
-  .studio-products { gap: 0 1.5rem; }
-  .venture-card-top { min-height: 7rem; grid-template-columns: auto 1fr; }
-  .venture-logo { grid-column: 2; justify-self: start; width: 2.7rem; height: 2.7rem; }
-  .venture-logo--wide { width: 7rem; height: 3rem; }
-  .venture-content h4 { font-size: 1.7rem; }
-  .venture-card--upcoming { grid-template-columns: 1fr; gap: 1.1rem; }
-  .venture-card--upcoming .venture-card-top { min-height: 0; }
-}
 @media (max-width: 520px) {
-  .studio-collection .projects-shell { padding-inline: 1.25rem; }
-  .studio-collection .projects-heading h2 { font-size: clamp(2.2rem, 10vw, 3rem); }
-  .studio-identity, .studio-story { padding: 1.5rem; }
-  .studio-identity { min-height: 16rem; }
-  .studio-identity-meta { max-width: 26ch; }
-  .studio-story h3 { font-size: 2.15rem; }
-  .studio-products { grid-template-columns: 1fr; }
-  .venture-card { padding-block: 1.7rem 2rem; }
-  .venture-card-top { grid-template-columns: auto minmax(0, 1fr) auto; min-height: 4.8rem; }
-  .venture-logo { grid-column: auto; justify-self: end; width: 3.2rem; height: 3.2rem; }
-  .venture-logo--wide { width: 7.8rem; height: 3.4rem; }
-  .venture-content h4 { font-size: 2rem; }
-  .venture-card-bottom { align-items: start; flex-direction: column; gap: 1rem; }
-  .venture-card--upcoming .venture-card-top { display: flex; min-height: 0; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .venture-card::before, .studio-links a { transition: none; }
+  .role-studio-mark { width: 7rem; padding: 0.75rem 0.6rem; }
+  .role-project-link { gap: 0.65rem; }
 }

@@ -14,8 +14,7 @@ export default function SiteNavigation() {
         <a href="#top" className="site-wordmark" aria-label={c.personalInfo.name}>AP<span aria-hidden="true">.</span></a>
         <nav className="site-nav" aria-label={c.ui.navigation.label}>
           <a href="#services">{c.ui.navigation.services}</a>
-          <a href="#experience" className="nav-experience">{c.ui.navigation.experience}</a>
-          <a href="#personal-projects">{c.ui.navigation.projects}</a>
+          <a href="#experience">{c.ui.navigation.experience}</a>
         </nav>
         <div className="locale-switch">
           <span aria-current="true">{locale.label}</span>

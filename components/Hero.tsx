@@ -36,7 +36,7 @@ export default function Hero() {
               <FaFileDownload aria-hidden="true" />{c.ui.hero.ctaResume}
             </a>
           </div>
-          <a href="#personal-projects" className="hero-project-link">{c.ui.hero.ctaProjects}<span aria-hidden="true">↘</span></a>
+          <a href="#scaleforged" className="hero-project-link">{c.ui.hero.ctaProjects}<span aria-hidden="true">↘</span></a>
         </div>
         <figure className="hero-portrait">
           <Image

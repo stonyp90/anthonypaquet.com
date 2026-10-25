@@ -14,7 +14,7 @@ const { getPersonalProjects, getStudio, personalProjectCopy } = await import(
 const locales = ['en', 'fr']
 const visibleBrands = (locale) => [getStudio(locale), ...getPersonalProjects(locale)]
 
-test('each locale presents one parent studio and the same five distinct products', () => {
+test('each locale supplies the same studio and five distinct products for the Experience role', () => {
   for (const locale of locales) {
     const studio = getStudio(locale)
     const projects = getPersonalProjects(locale)
@@ -27,8 +27,7 @@ test('each locale presents one parent studio and the same five distinct products
     ])
     assert.equal(new Set(visibleBrands(locale).map(({ id }) => id)).size, 6)
     assert.ok(!projects.some(({ id }) => id === studio.id), 'The studio is not another product card')
-    assert.ok(personalProjectCopy[locale].heading)
-    assert.ok(personalProjectCopy[locale].productsHeading)
+    assert.ok(personalProjectCopy[locale].productsLabel)
   }
 })
 
@@ -54,7 +53,7 @@ test('Control Craft replaces the retired product identity while old fragment lin
     assert.equal(project.visual.src, '/images/logos/control-craft.svg')
     assert.doesNotMatch(JSON.stringify(visibleBrands(locale)), /Lunorive|Lunarive|Lunar Rave/i)
   }
-  const component = await readFile(new URL('../components/PersonalProjects.tsx', import.meta.url), 'utf8')
+  const component = await readFile(new URL('../components/ExperienceProjects.tsx', import.meta.url), 'utf8')
   assert.match(component, /id="lunorive"[^>]*aria-hidden="true"/, 'Retain the old page fragment without displaying the retired name')
 })
 
@@ -88,7 +87,7 @@ test('French descriptions, categories and studio positioning are localized', () 
     assert.notEqual(english[index].description, french[index].description)
     assert.notEqual(english[index].category, french[index].category)
   }
-  assert.notEqual(personalProjectCopy.en.productsHeading, personalProjectCopy.fr.productsHeading)
+  assert.notEqual(personalProjectCopy.en.productsLabel, personalProjectCopy.fr.productsLabel)
 })
 
 // The manifest is an executable provenance gate. It covers both the studio and

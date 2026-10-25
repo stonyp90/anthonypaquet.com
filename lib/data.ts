@@ -324,22 +324,16 @@ export const industries = [
 
 export const experiences = [
   {
-    company: 'Nota',
-    url: 'https://gonota.ca',
-    position: 'Founder & AI Orchestrator',
-    location: 'Quebec, Canada',
+    company: 'ScaleForge',
+    url: 'https://scaleforged.io',
+    position: 'Builder',
+    location: 'Québec, Canada',
     period: 'Current',
-    description: 'Nota is a marketplace for notarial acts across Québec. Clients post the act they need, the date they want to sign and the price they offer. Every request appears on a public calendar, and notaries take the ones that fit their schedule. Posting a date is free.',
-    outcomes: [
-      { metric: 'One AI agent per department', description: 'Marketing, go-to-market, sales and engineering' },
-      { metric: 'Solo operator', description: 'Every function, orchestrated with AI' },
-    ],
-    achievements: [
-      'Founded Nota to modernize the Quebec notary industry, an underserved, paper-heavy space overdue for software built around how notaries actually work.',
-      'Run every function of the company as its sole operator, orchestrating AI agents built on the latest models from Anthropic (Claude), OpenAI and xAI.',
-      'Each department has its own AI agent for marketing, go-to-market, sales and engineering, coordinated through my orchestration.',
-    ],
-    tags: ['Legal Tech', 'Notary Tech', 'Quebec', 'Founder', 'AI Agents', '0→1'],
+    duration: '2 years',
+    description: 'I build products at ScaleForge, my venture studio in Québec, from idea through design, engineering and launch.',
+    outcomes: [],
+    achievements: [],
+    tags: [],
   },
   {
     company: 'Bespoke Labs',

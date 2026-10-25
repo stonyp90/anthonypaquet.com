@@ -38,31 +38,36 @@ try {
     })
     assert.match(await portrait.getAttribute('src'), /anthony-paquet-portrait\.webp$/, 'The actual face uses the unchanged original photograph')
     assert.equal(await page.locator('.hero-portrait-frame').count(), 0, 'No arch or photo frame')
-    assert.match(await page.locator('#tablix .venture-logo').getAttribute('src'), /\.svg$/, 'Tablix uses a transparent native SVG')
+    assert.match(await page.locator('#tablix .role-project-logo').getAttribute('src'), /\.svg$/, 'Tablix uses a transparent native SVG')
     await page.screenshot({ path: `tmp/browser/fr-${width}-transparent-hero.png` })
-    // The studio has a prominent yellow identity panel above the products.
-    // Each canonical mark keeps its own proportions and fits its own container;
-    // the studio wordmark and product logos intentionally have different sizes.
-    assert.equal(await page.locator('#scaleforged.studio-feature').count(), 1)
-    assert.equal(await page.locator('.studio-products > .venture-card').count(), 5)
-    assert.equal(await page.locator('#personal-projects .reveal-trigger').count(), 0, 'Products are visible without an accordion')
+    // The current Experience role contains a small yellow studio mark and a
+    // compact project list. Each canonical mark retains its own proportions.
+    const studioHead = page.locator('#experience .reveal-head').first()
+    const studioPanel = page.locator('#experience .reveal-panel').first()
+    assert.equal(await studioHead.getAttribute('id'), 'scaleforged')
+    assert.equal(await studioHead.locator('.reveal-title').textContent(), 'ScaleForge')
+    assert.equal(await studioHead.locator('.reveal-trigger').getAttribute('aria-expanded'), 'true')
+    assert.equal(await studioPanel.locator('.role-title').textContent(), 'Bâtisseur')
+    assert.ok((await studioHead.locator('.role-duration').textContent()).includes('2 ans'))
+    assert.equal(await page.locator('.role-project-list > li.role-project').count(), 5)
+    assert.equal(await page.locator('section#personal-projects, .studio-feature, .venture-card').count(), 0, 'Products are integrated into the CV')
     assert.equal(
-      await page.locator('.studio-identity').evaluate(element => getComputedStyle(element).backgroundColor),
+      await studioPanel.locator('.role-studio-mark').evaluate(element => getComputedStyle(element).backgroundColor),
       'rgb(255, 212, 56)',
-      'The studio uses the approved vivid forge yellow'
+      'The small studio mark uses the approved vivid forge yellow'
     )
     const brands = [
-      { id: 'scaleforged', image: '.studio-wordmark', container: '.studio-identity', src: '/images/logos/scaleforge-empreinte.svg' },
-      { id: 'gonota', image: '.venture-logo', container: '.venture-card-top', src: '/images/logos/nota-mark.png' },
-      { id: 'tablix', image: '.venture-logo', container: '.venture-card-top', src: '/images/logos/tablix-mark.svg' },
-      { id: 'control-craft', image: '.venture-logo', container: '.venture-card-top', src: '/images/logos/control-craft.svg' },
-      { id: 'ursly', image: '.venture-logo', container: '.venture-card-top', src: '/images/logos/ursly-mark.svg' },
+      { id: 'scaleforged', image: '.role-studio-logo', container: '.role-studio-mark', src: '/images/logos/scaleforge-empreinte.svg' },
+      { id: 'gonota', image: '.role-project-logo', container: '.role-project-visual', src: '/images/logos/nota-mark.png' },
+      { id: 'tablix', image: '.role-project-logo', container: '.role-project-visual', src: '/images/logos/tablix-mark.svg' },
+      { id: 'control-craft', image: '.role-project-logo', container: '.role-project-visual', src: '/images/logos/control-craft.svg' },
+      { id: 'ursly', image: '.role-project-logo', container: '.role-project-visual', src: '/images/logos/ursly-mark.svg' },
     ]
     for (const brand of brands) {
-      const panel = page.locator(`#${brand.id}`)
+      const panel = brand.id === 'scaleforged' ? studioPanel : page.locator(`#${brand.id}`)
       const image = panel.locator(brand.image)
       await panel.scrollIntoViewIfNeeded()
-      assert.equal(await panel.isVisible(), true, `${brand.id} stays discoverable at ${width}px`)
+      assert.equal(await panel.isVisible(), true, `${brand.id} stays discoverable inside Experience at ${width}px`)
       assert.equal(await image.getAttribute('src'), brand.src, `${brand.id} uses the current canonical asset`)
       const geometry = await image.evaluate(async (element, containerSelector) => {
         try { await element.decode() } catch { /* readiness is measured below */ }
@@ -86,13 +91,13 @@ try {
       assert.ok(geometry.proportionError < 0.02 || geometry.objectFit === 'contain', `${brand.id} retains its natural proportions at ${width}px`)
       assert.equal(geometry.contained, true, `${brand.id} mark fits its own container at ${width}px`)
       assert.equal(geometry.overflow, false, `${brand.id} identity container does not overflow at ${width}px`)
-      await panel.screenshot({ path: `tmp/browser/fr-${width}-${brand.id}-transparent.png` })
     }
-    assert.equal(await page.locator('#offer-jewel').count(), 1, 'Offer Jewel is included')
+    assert.equal(await page.locator('#experience #offer-jewel').count(), 1, 'Offer Jewel is included within the current role')
     assert.equal(await page.locator('#offer-jewel img').count(), 0, 'No unverified Offer Jewel logo is invented')
     assert.equal(await page.locator('#offer-jewel a[href^="https://"]').count(), 0, 'No unverified Offer Jewel destination is invented')
+    await studioPanel.screenshot({ path: `tmp/browser/fr-${width}-scaleforge-experience.png` })
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false)
     await page.close()
   }
-  console.log('Transparent portrait, yellow studio identity and canonical product proportions: desktop/mobile checks passed')
+  console.log('Transparent portrait and compact ScaleForge Experience marks: desktop/mobile checks passed')
 } finally { await browser.close() }

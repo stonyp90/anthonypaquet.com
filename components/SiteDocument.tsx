@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     default: 'Anthony Paquet | AI & Cloud Architect | Engineering Leader',
     template: '%s | Anthony Paquet',
   },
-  description: 'AI & Cloud Architect and engineering leader in Québec. Cloud architecture, FinOps, and security consulting. Founder of ScaleForge, the venture studio building GoNota, Tablix, Control Craft, Ursly, and Offer Jewel.',
+  description: 'Builder at ScaleForge for 2 years. Based in Québec, Anthony Paquet builds GoNota, Tablix, Control Craft, Ursly, and Offer Jewel through the studio, alongside cloud architecture and engineering leadership work.',
   icons: {
     icon: [
       { url: '/favicon.ico?v=2', sizes: 'any' },
@@ -99,7 +99,7 @@ export const metadata: Metadata = {
     'Quebec Legal Tech',
     'Logiciel extraction RDPRM',
     'PDF data extraction lawyers Quebec',
-    // Current engagements
+    // Previous engagement
     'Bespoke Labs',
     'Horizon AI product',
     // Location
@@ -128,9 +128,9 @@ export const metadata: Metadata = {
     locale: 'en_US',
     alternateLocale: 'fr_CA',
     url: 'https://www.anthonypaquet.com',
-    title: 'Anthony Paquet | AI & Cloud Security Architect | Bespoke Labs · Tablix',
-    description: 'Engineering leadership, cloud architecture, and ScaleForge: a Québec venture studio building GoNota, Tablix, Control Craft, Ursly, and Offer Jewel.',
-    siteName: 'Anthony Paquet, AI & Cloud Architect | Bespoke Labs · Tablix Founder',
+    title: 'Anthony Paquet | Builder at ScaleForge | AI & Cloud Architect',
+    description: 'Builder at ScaleForge for 2 years. Explore the experience behind GoNota, Tablix, Control Craft, Ursly, and Offer Jewel, alongside cloud architecture and engineering leadership.',
+    siteName: 'Anthony Paquet | Builder at ScaleForge',
     images: [
       {
         url: '/og-image.png',
@@ -143,11 +143,11 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Anthony Paquet | AI & Cloud Architect | Bespoke Labs · Tablix',
-    description: 'AI & Cloud Architect, engineering leader, and founder of ScaleForge. Explore the studio and the products we are building in Québec.',
+    title: 'Anthony Paquet | Builder at ScaleForge | AI & Cloud Architect',
+    description: 'Builder at ScaleForge for 2 years, bringing GoNota, Tablix, Control Craft, Ursly, and Offer Jewel to life in Québec.',
     images: {
       url: '/og-image.png',
-      alt: 'Anthony Paquet, AI & Cloud Architect | Bespoke Labs and Tablix',
+      alt: 'Anthony Paquet, Builder at ScaleForge and AI & Cloud Architect',
     },
     site: '@anthonypaquet',
     creator: '@anthonypaquet',
@@ -175,8 +175,8 @@ const personSchema = {
   name: 'Anthony Paquet',
   url: 'https://www.anthonypaquet.com',
   image: portraitUrl,
-  jobTitle: 'AI & Cloud Security Architect',
-  description: 'Independent AI & Cloud Architect specializing in FinOps (30 to 60% cost reduction), compliance (SOC 2, HIPAA, PCI-DSS), infrastructure security, and disaster recovery for Series A AI labs and growth-stage companies. Previously engaged with Bespoke Labs (Series A RL lab) and founder of Tablix Inc., a Quebec SaaS for legal-document extraction.',
+  jobTitle: 'Builder',
+  description: 'Builder at ScaleForge for 2 years, developing GoNota, Tablix, Control Craft, Ursly, and Offer Jewel within the Québec venture studio. Independent AI & Cloud Architect specializing in FinOps, compliance, infrastructure security, and disaster recovery. Previously engaged with Bespoke Labs.',
   sameAs: [
     'https://linkedin.com/in/anthony-paquet-94a31085',
     'https://github.com/stonyp90',
@@ -218,8 +218,10 @@ const personSchema = {
   ],
   worksFor: {
     '@type': 'Organization',
-    name: 'Nota',
-    url: 'https://gonota.ca',
+    '@id': 'https://scaleforged.io/#org',
+    name: 'ScaleForge',
+    url: 'https://scaleforged.io',
+    logo: 'https://www.anthonypaquet.com/images/logos/scaleforge-empreinte.svg',
   },
   owns: [
     {
@@ -268,7 +270,7 @@ const personSchema = {
     {
       '@type': 'Organization',
       '@id': 'https://gonota.ca/#org',
-      name: 'Nota',
+      name: 'GoNota',
       url: 'https://gonota.ca',
       description: 'The modern notary experience for Quebec. Software designed around how notaries and their clients actually work, replacing a slow, paper-heavy process.',
       areaServed: {
@@ -516,7 +518,7 @@ const websiteSchema = {
   '@id': 'https://www.anthonypaquet.com/#website',
   url: 'https://www.anthonypaquet.com',
   name: 'Anthony Paquet',
-  description: 'AI & Cloud Security Architect. FinOps, SOC 2 / HIPAA compliance, infrastructure security, and disaster recovery for Series A AI labs and growth-stage companies.',
+  description: 'Anthony Paquet’s experience as Builder at ScaleForge for 2 years, developing GoNota, Tablix, Control Craft, Ursly, and Offer Jewel. AI and cloud architecture, engineering leadership, FinOps, and security consulting.',
   inLanguage: ['en-CA', 'fr-CA'],
   publisher: { '@id': 'https://www.anthonypaquet.com/#person' },
   about: { '@id': 'https://www.anthonypaquet.com/#person' },
