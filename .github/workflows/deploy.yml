@@ -67,7 +67,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: deploy worker/index.js
+          command: deploy ${{ github.workspace }}/worker/index.js --config ${{ github.workspace }}/wrangler.json --name anthonypaquet-com
 
       - name: Smoke check live site
         env:
