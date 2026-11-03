@@ -3,10 +3,11 @@
 import Image from 'next/image'
 import type { CSSProperties } from 'react'
 import { FaCheck, FaLinkedin, FaFileDownload, FaEnvelope } from 'react-icons/fa'
-import { useContent } from '@/components/LocaleProvider'
+import { useContent, useLocale } from '@/components/LocaleProvider'
 
 export default function Hero() {
   const c = useContent()
+  const locale = useLocale()
   return (
     <section className="paper-hero hero-section" id="top" aria-labelledby="hero-heading">
       <div className="hero-layout">
@@ -32,7 +33,7 @@ export default function Hero() {
             <a href={c.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="btn-ghost">
               <FaLinkedin aria-hidden="true" />{c.ui.hero.ctaLinkedIn}
             </a>
-            <a href="/AnthonyPaquet.pdf" download className="btn-ghost">
+            <a href={locale === 'fr' ? '/AnthonyPaquet-FR.pdf' : '/AnthonyPaquet.pdf'} download className="btn-ghost">
               <FaFileDownload aria-hidden="true" />{c.ui.hero.ctaResume}
             </a>
           </div>
