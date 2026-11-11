@@ -861,10 +861,17 @@ body { overflow-x: clip; }
 .role-project-list { margin: 0; padding: 0; list-style: none; }
 .role-project { position: relative; border-top: 1px solid var(--line-subtle); scroll-margin-top: 6rem; }
 .role-project:last-child { border-bottom: 1px solid var(--line-subtle); }
-.role-project-link { display: grid; grid-template-columns: 3.5rem minmax(0, 1fr) auto; align-items: center; gap: 0.8rem; min-height: 4.4rem; padding: 0.65rem 0.1rem; color: var(--color-ink); }
-.role-project-visual { display: flex; align-items: center; justify-content: center; }
-.role-project-logo { width: 2rem; height: 2rem; object-fit: contain; }
-.role-project-logo--wide { width: 3.5rem; height: auto; }
+.role-project-link { display: grid; grid-template-columns: 4rem minmax(0, 1fr) auto; align-items: center; gap: 0.8rem; min-height: 4.75rem; padding: 0.65rem 0.1rem; color: var(--color-ink); }
+.role-project-visual { display: flex; align-items: center; justify-content: flex-start; }
+.role-project-logo { width: 2.75rem; height: 2.75rem; object-fit: contain; }
+.role-project-link--wide { grid-template-columns: 9.5rem minmax(0, 1fr) auto; }
+.role-project-logo--wide { width: 100%; height: auto; max-height: 3.25rem; object-position: left center; }
+.role-project-visual--dark { align-self: stretch; display: flex; align-items: center; background: var(--surface-inverse); padding: 0.45rem 0.55rem; }
+.role-project-visual--dark .role-project-logo--wide { max-height: 2.9rem; }
+@media (max-width: 520px) {
+  .role-project-link--wide { grid-template-columns: 7.5rem minmax(0, 1fr) auto; }
+  .role-project-logo--wide { max-height: 2.75rem; }
+}
 .role-project-copy { min-width: 0; }
 .role-project-name { display: block; font-size: 0.98rem; font-weight: 600; line-height: 1.4; }
 .role-project-summary { display: block; margin-top: 0.15rem; font-size: 0.78rem; line-height: 1.4; color: var(--color-gray); }

@@ -14,48 +14,61 @@ const { getPersonalProjects, getStudio, personalProjectCopy } = await import(
 const locales = ['en', 'fr']
 const visibleBrands = (locale) => [getStudio(locale), ...getPersonalProjects(locale)]
 
-test('each locale supplies the same studio and five distinct products for the Experience role', () => {
+test('each locale supplies the same studio and six distinct products for the Experience role', () => {
   for (const locale of locales) {
     const studio = getStudio(locale)
     const projects = getPersonalProjects(locale)
     assert.equal(studio.id, 'scaleforged')
     assert.equal(studio.name, 'ScaleForge')
     assert.equal(studio.url, 'https://scaleforged.io')
-    assert.deepEqual(projects.map(({ name }) => name), ['GoNota', 'Tablix', 'Control Craft', 'Ursly', 'OfferDuel'])
+    assert.deepEqual(projects.map(({ name }) => name), ['GoNota', 'Tablix', 'Ursly', 'OfferDuel', 'Ralika', 'Mouvement Résilience'])
     assert.deepEqual(projects.map(({ url }) => url), [
-      'https://gonota.ca', 'https://tablix.ca', 'https://controlcraft.io', 'https://ursly.io', 'https://offerduel.io',
+      'https://gonota.ca', 'https://tablix.ca', 'https://ursly.io', 'https://offerduel.io', 'https://ralika.tech', 'https://mouvementresilience.ca',
     ])
-    assert.equal(new Set(visibleBrands(locale).map(({ id }) => id)).size, 6)
+    assert.equal(new Set(visibleBrands(locale).map(({ id }) => id)).size, 7)
     assert.ok(!projects.some(({ id }) => id === studio.id), 'The studio is not another product card')
     assert.ok(personalProjectCopy[locale].productsLabel)
   }
 })
 
-test('OfferDuel uses its verified name, destination and category without an invented logo', async () => {
-  const categories = { en: '3D commerce experiences', fr: 'Expériences commerciales en 3D' }
+test('OfferDuel uses its verified name, destination, category and the Devanture brand mark', async () => {
+  const categories = { en: 'Offers that duel in 3D', fr: 'Des offres qui s’affrontent en 3D' }
   for (const locale of locales) {
     const project = getPersonalProjects(locale).find(({ id }) => id === 'offerduel')
     assert.ok(project)
     assert.equal(project.name, 'OfferDuel')
     assert.equal(project.url, 'https://offerduel.io')
     assert.equal(project.category, categories[locale])
-    assert.equal(project.visual, undefined, 'No unverified OfferDuel mark is invented')
+    assert.equal(project.visual.src, '/images/logos/offerduel-mark.svg', 'The mark is copied byte for byte from the Devanture brand assets, never redrawn here')
     assert.doesNotMatch(JSON.stringify(visibleBrands(locale)), /Offer Jewel|offer-jewel|jewel(?:lery|ry)/i)
   }
   const component = await readFile(new URL('../components/ExperienceProjects.tsx', import.meta.url), 'utf8')
   assert.match(component, /id="offer-jewel"[^>]*aria-hidden="true"/, 'Retain the previous fragment without displaying the incorrect project name')
 })
 
-test('Control Craft replaces the retired product identity while old fragment links resolve', async () => {
+test('Control Craft is retired from the Experience catalogue (owner, 2026-11-10)', async () => {
   for (const locale of locales) {
-    const project = getPersonalProjects(locale).find(({ id }) => id === 'control-craft')
-    assert.equal(project.name, 'Control Craft')
-    assert.equal(project.url, 'https://controlcraft.io')
-    assert.equal(project.visual.src, '/images/logos/control-craft.svg')
-    assert.doesNotMatch(JSON.stringify(visibleBrands(locale)), /Lunorive|Lunarive|Lunar Rave/i)
+    assert.equal(getPersonalProjects(locale).some(({ id }) => id === 'control-craft'), false)
+    assert.doesNotMatch(JSON.stringify(visibleBrands(locale)), /Control Craft|Lunorive|Lunarive|Lunar Rave/i)
   }
-  const component = await readFile(new URL('../components/ExperienceProjects.tsx', import.meta.url), 'utf8')
-  assert.match(component, /id="lunorive"[^>]*aria-hidden="true"/, 'Retain the old page fragment without displaying the retired name')
+  const manifest = JSON.parse(
+    await readFile(new URL('../docs/project-brand-assets-2026-10-02.json', import.meta.url), 'utf8')
+  )
+  const entry = manifest.assets.find(({ output }) => output === 'public/images/logos/control-craft.svg')
+  assert.match(entry.usage, /^Superseded/, 'The retired mark stays in the manifest as history only')
+})
+
+test('Ralika and Mouvement Résilience close the catalogue with their own marks', () => {
+  for (const locale of locales) {
+    const ralika = getPersonalProjects(locale).find(({ id }) => id === 'ralika')
+    assert.equal(ralika.name, 'Ralika')
+    assert.equal(ralika.url, 'https://ralika.tech')
+    assert.equal(ralika.visual.src, '/images/logos/ralika-icon.png')
+    const resilience = getPersonalProjects(locale).find(({ id }) => id === 'mouvement-resilience')
+    assert.equal(resilience.name, 'Mouvement Résilience')
+    assert.equal(resilience.url, 'https://mouvementresilience.ca')
+    assert.equal(resilience.visual.src, '/images/logos/mouvement-resilience-medaillon.webp')
+  }
 })
 
 test('Ursly retains the three-part brand signature in each locale', () => {
@@ -69,7 +82,7 @@ test('Ursly retains the three-part brand signature in each locale', () => {
 
 test('verified local visuals exist and reserve their canonical proportions', async () => {
   const brands = visibleBrands('en').filter(({ visual }) => visual)
-  assert.equal(brands.length, 5, 'One studio and four products have verified brand files')
+  assert.equal(brands.length, 7, 'One studio and six products carry a brand file at the left of their entry')
   for (const brand of brands) {
     assert.ok(brand.visual.width > 0 && brand.visual.height > 0)
     assert.ok(brand.visual.src.startsWith('/images/logos/'), `${brand.name} uses its own mark`)

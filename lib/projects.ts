@@ -4,7 +4,7 @@ export type ProjectVisual = { src: string; width: number; height: number }
 export type ProjectSocialLink = { label: string; href: `https://${string}` }
 
 export type PersonalProject = {
-  id: 'gonota' | 'tablix' | 'control-craft' | 'ursly' | 'offerduel'
+  id: 'gonota' | 'tablix' | 'ursly' | 'offerduel' | 'ralika' | 'mouvement-resilience'
   name: string
   category: string
   description: string
@@ -12,6 +12,10 @@ export type PersonalProject = {
   /** Only confirmed public destinations and canonical brand files are published. */
   url?: `https://${string}`
   visual?: ProjectVisual
+  /** A full signature lockup (symbol + name) renders wide, like the studio's own mark. */
+  visualWide?: boolean
+  /** A lockup authored for dark surfaces sits on an ink tile, its native ground. */
+  visualDark?: boolean
   slogan?: readonly string[]
   inDevelopment?: boolean
 }
@@ -53,8 +57,10 @@ const visuals = {
   studio: { src: '/images/logos/scaleforge-empreinte.svg', width: 1000, height: 386.68 },
   gonota: { src: '/images/logos/nota-mark.png', width: 512, height: 512 },
   tablix: { src: '/images/logos/tablix-mark.svg', width: 512, height: 512 },
-  controlCraft: { src: '/images/logos/control-craft.svg', width: 3775, height: 1640 },
   ursly: { src: '/images/logos/ursly-mark.svg', width: 1024, height: 1024 },
+  offerduel: { src: '/images/logos/offerduel-mark.svg', width: 256, height: 256 },
+  ralika: { src: '/images/logos/ralika-icon.png', width: 512, height: 512 },
+  resilience: { src: '/images/logos/mouvement-resilience-medaillon.webp', width: 512, height: 512 },
 } as const
 
 const studio: Record<Locale, Studio> = {
@@ -86,29 +92,21 @@ const projects: Record<Locale, readonly PersonalProject[]> = {
   en: [
     {
       id: 'gonota', name: 'GoNota', url: 'https://gonota.ca',
-      category: 'Notarial technology',
+      category: 'A notary, even in a rush',
       description: 'A public calendar where clients across Québec post their notarial act, date and price, and notaries choose the requests that fit their schedule.',
       focus: ['Notarial services', 'Québec'],
       visual: visuals.gonota,
     },
     {
       id: 'tablix', name: 'Tablix', url: 'https://tablix.ca',
-      category: 'Document intelligence',
+      category: 'Your documents, as data',
       description: 'Turning complex Québec legal searches into structured, useful data. Built to make repetitive document work easier to review and export.',
       focus: ['Legal workflows', 'Structured data'],
       visual: visuals.tablix,
     },
     {
-      id: 'control-craft', name: 'Control Craft', url: 'https://controlcraft.io',
-      category: 'Art from memories',
-      description: 'Art prints inspired by meaningful places, live events and personal passions. A way to give the memories that matter a place in everyday life.',
-      focus: ['Art prints', 'Places and memories'],
-      slogan: ['From memory to art.'],
-      visual: visuals.controlCraft,
-    },
-    {
       id: 'ursly', name: 'Ursly', url: 'https://ursly.io',
-      category: 'Human and technology interface',
+      category: 'Humans and machines, connected',
       description: 'Exploring a new interface between people and technology through voice, movement and our senses. A more natural way to interact with the digital world.',
       focus: ['Human interfaces', 'Research'],
       slogan: ['Your senses.', 'Your data.', 'Your choice.'],
@@ -116,38 +114,44 @@ const projects: Record<Locale, readonly PersonalProject[]> = {
     },
     {
       id: 'offerduel', name: 'OfferDuel', url: 'https://offerduel.io',
-      category: '3D commerce experiences',
+      category: 'Offers that duel in 3D',
       description: 'Explorable 3D industry worlds and local negotiation demonstrations.',
       focus: ['3D experiences', 'Negotiation demos'],
-      inDevelopment: true,
+      visual: visuals.offerduel,
+    },
+    {
+      id: 'ralika', name: 'Ralika', url: 'https://ralika.tech',
+      category: 'The agent that sells for you',
+      description: 'Our go-to-market agent: it aims to automate content and campaigns, tailored to each product and its audience.',
+      focus: ['Go-to-market', 'Content and campaigns'],
+      visual: visuals.ralika,
+    },
+    {
+      id: 'mouvement-resilience', name: 'Mouvement Résilience', url: 'https://mouvementresilience.ca',
+      category: 'Helping everyone get back up',
+      description: 'A movement for resilience in all its forms, carried by art and rap. A hand extended, and the strength to get back up.',
+      focus: ['Resilience', 'Art and rap'],
+      visual: visuals.resilience,
     },
   ],
   fr: [
     {
       id: 'gonota', name: 'GoNota', url: 'https://gonota.ca',
-      category: 'Technologie notariale',
+      category: 'Un notaire, même en urgence',
       description: 'Un calendrier public où les clients de partout au Québec publient leur acte notarié, leur date et leur prix. Les notaires choisissent les demandes qui conviennent à leur horaire.',
       focus: ['Services notariaux', 'Québec'],
       visual: visuals.gonota,
     },
     {
       id: 'tablix', name: 'Tablix', url: 'https://tablix.ca',
-      category: 'Intelligence documentaire',
+      category: 'Vos documents, en données',
       description: 'Des recherches juridiques québécoises complexes transformées en données structurées et utiles. Pour simplifier le travail documentaire répétitif, sa révision et son exportation.',
       focus: ['Workflows juridiques', 'Données structurées'],
       visual: visuals.tablix,
     },
     {
-      id: 'control-craft', name: 'Control Craft', url: 'https://controlcraft.io',
-      category: 'L’art à partir des souvenirs',
-      description: 'Des tirages d’art inspirés des lieux, des événements et des passions qui nous marquent. Une façon de donner aux souvenirs qui comptent une place dans le quotidien.',
-      focus: ['Tirages d’art', 'Lieux et souvenirs'],
-      slogan: ['Du souvenir à l’art.'],
-      visual: visuals.controlCraft,
-    },
-    {
       id: 'ursly', name: 'Ursly', url: 'https://ursly.io',
-      category: 'Interface entre l’humain et la technologie',
+      category: 'L’humain et la machine, connectés',
       description: 'Une nouvelle interface entre l’humain et la technologie, explorée à travers la voix, le mouvement et nos sens. Pour interagir plus naturellement avec le monde numérique.',
       focus: ['Interfaces humaines', 'Recherche'],
       slogan: ['Vos sens.', 'Vos données.', 'Votre choix.'],
@@ -155,10 +159,24 @@ const projects: Record<Locale, readonly PersonalProject[]> = {
     },
     {
       id: 'offerduel', name: 'OfferDuel', url: 'https://offerduel.io',
-      category: 'Expériences commerciales en 3D',
+      category: 'Des offres qui s’affrontent en 3D',
       description: 'Des univers 3D par secteur et des démonstrations locales de négociation.',
       focus: ['Expériences 3D', 'Démos de négociation'],
-      inDevelopment: true,
+      visual: visuals.offerduel,
+    },
+    {
+      id: 'ralika', name: 'Ralika', url: 'https://ralika.tech',
+      category: 'L’agent qui vend pour vous',
+      description: 'Notre agent de mise en marché : il vise à automatiser contenus et campagnes, selon chaque produit et son public.',
+      focus: ['Mise en marché', 'Contenus et campagnes'],
+      visual: visuals.ralika,
+    },
+    {
+      id: 'mouvement-resilience', name: 'Mouvement Résilience', url: 'https://mouvementresilience.ca',
+      category: 'Aider chacun à se relever',
+      description: 'Un mouvement pour la résilience sous toutes ses formes, porté par l’art et le rap. Une main tendue, et la force de se relever.',
+      focus: ['Résilience', 'Art et rap'],
+      visual: visuals.resilience,
     },
   ],
 }
